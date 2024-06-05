@@ -73,7 +73,6 @@ class AdidasThread(threading.Thread):
         response = AdidasThread.request_to_url(AdidasThread.items_url, params=AdidasThread.params)
         if response.status_code != 200:
             return
-
         try:
             response_json = response.json()
             data = response_json["raw"]["itemList"]
@@ -89,8 +88,6 @@ class AdidasThread(threading.Thread):
                 file_contents = json.loads(f.read())
                 f.close()
             return file_contents
-
-    # hesamiks
 
     def save_data(self, data, file_name):
         loaded = {
