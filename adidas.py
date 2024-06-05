@@ -43,7 +43,7 @@ class AdidasThread(threading.Thread):
     model_product_objects = []
 
     # STATIC PROPERTIES
-    item_list = []
+    items = []
     items_per_page = 0
     items_count = 0
     start_from = 0
@@ -66,6 +66,22 @@ class AdidasThread(threading.Thread):
         self.type = t_type
         self.pages = []
         self.model_product_objects = []
+
+    @staticmethod
+    def retrieve_items_list():
+
+        response = AdidasThread.request_to_url(AdidasThread.items_url, params=AdidasThread.params)
+        if response.status_code != 200:
+            return
+
+        try:
+            response_json = response.json()
+            data = response_json["raw"]["itemList"]
+            AdidasThread.items_count = data["count"]
+            AdidasThread.items_per_page = data["viewSize"]
+            AdidasThread.items.extend(data["items"])
+        except:
+            return
 
     def read_file_contents(self, file_name):
         with lock:
@@ -132,27 +148,9 @@ class AdidasThread(threading.Thread):
     # hesamiks
 
     @staticmethod
-    def set_pages_item_list():
-
-        response = AdidasThread.request_to_url(AdidasThread.items_url, params=AdidasThread.params)
-        if response is None:
-            AdidasThread.set_pages_item_list()
-
-        response_json = response.json()
-        if "raw" not in list(response_json.keys()):
-            return
-        if "itemList" not in list(response_json["raw"].keys()):
-            return
-
-        AdidasThread.item_list = response_json["raw"]["itemList"]
-        # with (f1 := open("files/item_list.json", "wt")):
-        #     f1.write(json.dumps(AdidasThread.item_list))
-        # return response_json["raw"]["itemList"]
-
-    @staticmethod
     def set_pages():
         # print(AdidasThread.item_list)
-        item_list = AdidasThread.item_list
+        item_list = AdidasThread.items
         pages_count = item_list["count"] // item_list["viewSize"]
         pages = [i for i in range(1, pages_count + 1)]
         AdidasThread.pages = pages
@@ -221,10 +219,10 @@ class AdidasThread(threading.Thread):
 
     def run(self):
         if self.type == TYPES.ITEM_LIST:
-            AdidasThread.set_pages_item_list()
+            AdidasThread.retrieve_items_list()
 
         if self.type == TYPES.PRODUCTS:
-            if is_p_threads_done == False and len(AdidasThread.item_list) != 0:
+            if is_p_threads_done == False and len(AdidasThread.items) != 0:
                 self.generate_products_url()
 
         if self.type == TYPES.REVIEWS:
