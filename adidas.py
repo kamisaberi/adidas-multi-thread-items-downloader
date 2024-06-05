@@ -91,8 +91,6 @@ class AdidasThread(threading.Thread):
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
             return
-
-        response_json = response.json()
         data = response_json["raw"]["itemList"]
         AdidasThread.Settings.update_settings(data)
         AdidasThread.items.extend(data["items"])
