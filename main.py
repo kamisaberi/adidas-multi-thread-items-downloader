@@ -3,6 +3,7 @@ import sys
 import time
 
 if __name__ == "__main__":
+    ad.AdidasThread.load_settings()
     while True:
         pass
 

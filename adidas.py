@@ -28,37 +28,33 @@ def print_progress_bar(progress, total):
 
 class TYPES(enum.Enum):
     NONE = 0
-    PRODUCTS = 1
-    REVIEWS = 2
-    ITEM_LIST = 3
-    PAGES = 4
+    GET_ITEMS_LIST = 1
+    GET_REVIEWS = 2
 
 
 class AdidasThread(threading.Thread):
-    t_id = 0
-    type = TYPES.NONE
-    products_data = []
-    pages = []
-
-    model_product_objects = []
+    t_id: int = 0
+    type: TYPES = TYPES.NONE
+    products_data: list = []
+    pages: list = []
 
     # STATIC PROPERTIES
-    items = []
-    items_per_page = 0
-    items_count = 0
-    start_from = 0
-    params = {
+    items: list = []
+    model_product_objects: list = []
+    settings_file_path: str = "files/settings.json"
+    params: dict = {
         'query': 'all',
-        "start": start_from
+        "start": 0
     }
-    headers = {
+    headers: dict = {
         'authority': 'www.adidas.at',
         'accept': '*/*',
         'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
         'content-type': 'application/json',
         'user-agent': 'PostmanRuntime/7.35.0',
     }
-    items_url = "https://www.adidas.at/api/plp/content-engine/search?"
+    items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
+    reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
 
     def __init__(self, t_id, t_type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
@@ -66,21 +62,6 @@ class AdidasThread(threading.Thread):
         self.type = t_type
         self.pages = []
         self.model_product_objects = []
-
-    @staticmethod
-    def retrieve_items_list():
-
-        response = AdidasThread.request_to_url(AdidasThread.items_url, params=AdidasThread.params)
-        if response.status_code != 200:
-            return
-        try:
-            response_json = response.json()
-            data = response_json["raw"]["itemList"]
-            AdidasThread.items_count = data["count"]
-            AdidasThread.items_per_page = data["viewSize"]
-            AdidasThread.items.extend(data["items"])
-        except:
-            return
 
     def read_file_contents(self, file_name):
         with lock:
@@ -108,122 +89,85 @@ class AdidasThread(threading.Thread):
             return False
         return True
 
-    @staticmethod
-    def request_to_url(url, params=None):
-        try:
-            response = requests.get(url, headers=AdidasThread.headers, params=params)
-            if response.status_code != 200:
-                return
-            return response
-        except Exception as e:
-            # print(f"error {url} is {e}")
-            return
-
-    # hesamiks
-
     def paginate_reviews(self, product_id, model_id, limit=5, offset=0):
-        first_part = "https://www.adidas.at/api/models/"
-        second_part = "/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit="
         while True:
-            url = f"{first_part}{model_id}{second_part}{limit}&offset={offset}&sort=newest"
-            response = AdidasThread.request_to_url(url)
-            if response is None:
+            url = str.format(AdidasThread.reviews_url, model_id=model_id, limit=limit, offset=offset)
+            response = requests.get(url)
+            if response is None or "totalResults" not in (res := response.json()):
                 break
-            if "totalResults" not in list(response.json().keys()):
-                # print(f"this product with id {product_id} does not have totalResults")
+            if offset >= res["totalResults"]:
                 break
-            else:
-                if offset >= response.json()["totalResults"]:
-                    break
-                else:
-                    data = {"reviews": response.json()["reviews"], "product_id": product_id}
-                    self.save_data(data, "reviews.json")
-                    offset += limit
-
+            data = {"reviews": res["reviews"], "product_id": product_id}
+            self.save_data(data, "reviews.json")
+            offset += limit
         return
 
-    # hesamiks
-
-    @staticmethod
-    def set_pages():
-        # print(AdidasThread.item_list)
-        item_list = AdidasThread.items
-        pages_count = item_list["count"] // item_list["viewSize"]
-        pages = [i for i in range(1, pages_count + 1)]
-        AdidasThread.pages = pages
-
-    def get_products_reviews(self):
-        # total = AdidasThread.item_list["count"]
-        # print_progress_bar(params["start"], total)
-        print("man injammmamamamamammamamama")
-        print(self.model_product_objects)
-        print("ibjjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    def get_reviews(self):
         for item in self.model_product_objects:
-            print(self.t_id, item)
-            # self.paginate_reviews(product_id=item["product_id"], model_id=item["model_id"])
+            self.paginate_reviews(product_id=item["product_id"], model_id=item["model_id"])
 
-    # hesamiks
-
-    def get_products(self, params):
-        # total = AdidasThread.item_list["count"]
-        # print_progress_bar(params["start"], total)
-
-        params = {
-            'query': 'all',
-            "start": (self.t_id - 1) * 48
-        }
-
-        response = AdidasThread.request_to_url(AdidasThread.items_url, params=params)
-        # with (f1 := open("files/products.json", "wt")):
-        #     f1.write(json.dumps(response.json()))
-
-        if response is None:
+    def retrieve_items_list(self):
+        AdidasThread.params["start"] = AdidasThread.Settings.start_from
+        response = requests.get(
+            AdidasThread.items_url,
+            headers=AdidasThread.headers,
+            params=AdidasThread.params)
+        if response is None or response.status_code != 200:
             return
         response_json = response.json()
-        # TODO: (type error check,  try except)
         try:
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
             return
-            # if "raw" not in list(response_json.keys()):
-        #     return
-        # if "itemList" not in list(response_json["raw"].keys()):
-        #     return
-        # if "items" not in list(response_json["raw"]["itemList"].keys()):
-        #     return
 
-        # products = response_json["raw"]["itemList"]["items"]
+        response_json = response.json()
+        data = response_json["raw"]["itemList"]
+        AdidasThread.Settings.update_settings(data)
+        AdidasThread.items.extend(data["items"])
 
         for product in products:
-            # if self.is_id_exist(product) == False:
             obj = {
                 "product_id": product["productId"],
                 "model_id": product["modelId"]
             }
-            self.model_product_objects.append(obj)
-            # inja inj ai janadfsdfdsh
-            # print(self.model_product_objects)
-            self.save_data(AdidasThread.products_data, file_name="products.json")
-
-    def generate_products_url(self):
-        print(self.t_id)
-        params = {
-            'query': 'all',
-            "start": (self.t_id - 1) * 48
-        }
-        self.get_products(params)
-        # print(params)
+            AdidasThread.model_product_objects.append(obj)
+            # self.save_data(AdidasThread.products_data, file_name="products.json")
 
     def run(self):
-        if self.type == TYPES.ITEM_LIST:
-            AdidasThread.retrieve_items_list()
+        if self.type == TYPES.GET_ITEMS_LIST:
+            AdidasThread.retrieve_items_list(None)
 
-        if self.type == TYPES.PRODUCTS:
-            if is_p_threads_done == False and len(AdidasThread.items) != 0:
-                self.generate_products_url()
-
-        if self.type == TYPES.REVIEWS:
+        if self.type == TYPES.GET_REVIEWS:
             self.get_products_reviews()
 
-        if self.type == TYPES.PAGES:
-            AdidasThread.set_pages()
+    class Settings:
+        items_per_page = 0
+        items_count = 0
+        start_from = 0
+        reminder_from_last_check = 0
+
+        @staticmethod
+        def load_settings():
+            with open(AdidasThread.settings_file_path, "rt") as f1:
+                settings = json.loads(f1.read())
+                AdidasThread.Settings.items_per_page = settings["items_per_page"]
+                AdidasThread.Settings.items_count = settings["items_count"]
+                AdidasThread.Settings.start_from = settings["start_from"]
+                AdidasThread.Settings.reminder_from_last_check = settings["reminder_from_last_check"]
+
+        @staticmethod
+        def update_settings(data):
+            AdidasThread.Settings.items_count = data["count"]
+            AdidasThread.Settings.reminder_from_last_check = data["count"] - AdidasThread.Settings.items_count
+            AdidasThread.Settings.items_per_page = data["viewSize"]
+
+        @staticmethod
+        def save_settings(data):
+            with open(AdidasThread.settings_file_path, "wt") as f1:
+                settings = {
+                    "start_from": AdidasThread.Settings.start_from,
+                    "items_per_page": AdidasThread.Settings.items_per_page,
+                    "items_count": AdidasThread.Settings.items_count,
+                    "reminder_from_last_check": AdidasThread.Settings.reminder_from_last_check
+                }
+                f1.write(json.dumps(settings))
