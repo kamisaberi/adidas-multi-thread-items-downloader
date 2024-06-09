@@ -28,17 +28,15 @@ class AdidasThread(threading.Thread):
     t_id: int = 0
     type: TYPES = TYPES.NONE
     products_data: list = []
-    pages: list = []
 
     # STATIC PROPERTIES
-    items: list = []
-    model_product_objects: list = []
+    items: list = [dict]
+    model_product_objects: list = [dict]
 
     def __init__(self, t_id, t_type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.t_id = t_id
         self.type = t_type
-        self.pages = []
         self.model_product_objects = []
 
     def read_file_contents(self, file_name):
