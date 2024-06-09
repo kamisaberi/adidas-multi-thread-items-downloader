@@ -10,12 +10,12 @@ if __name__ == "__main__":
     threads: [threading.Thread] = []
     while True:
         if len(ad.AdidasThread.items) < ad.AdidasThread.Settings.items_count:
-            thread = ad.AdidasThread(len(threads) + 1, ad.TYPES.GET_ITEMS_LIST)
+            thread = ad.AdidasThread(len(threads) + 1, ad.TYPES.GET_ITEMS_LIST, daemon=True)
             thread.start()
             thread.join(0.1)
             threads.append(thread)
         if len(ad.AdidasThread.model_product_objects) > 0:
-            thread = ad.AdidasThread(len(threads) + 1, ad.TYPES.GET_REVIEWS)
+            thread = ad.AdidasThread(len(threads) + 1, ad.TYPES.GET_REVIEWS, daemon=True)
             thread.start()
             thread.join(0.1)
             threads.append(thread)

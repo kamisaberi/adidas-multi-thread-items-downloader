@@ -25,7 +25,7 @@ class TYPES(enum.Enum):
 
 
 class AdidasThread(threading.Thread):
-    t_id: int = 0
+    id: int = 0
     type: TYPES = TYPES.NONE
     products_data: list[dict] = []
     # board : list[list[Piece]] = []
@@ -34,15 +34,15 @@ class AdidasThread(threading.Thread):
     items: list[dict] = []
     model_product_objects: set[tuple[str, str]] = set()
 
-    def __init__(self, t_id, t_type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
+    def __init__(self, id, type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
-        self.t_id = t_id
-        self.type = t_type
+        self.id = id
+        self.type = type
         self.model_product_objects = set()
 
     def read_file_contents(self, file_name):
         with lock:
-            with open(str(self.t_id) + file_name, "r") as f:
+            with open(str(self.id) + file_name, "r") as f:
                 file_contents = json.loads(f.read())
                 f.close()
             return file_contents
@@ -56,7 +56,7 @@ class AdidasThread(threading.Thread):
             loaded["items"].extend(file_contents["items"])
         loaded["items"].append(data)
         with lock:
-            with open(str(self.t_id) + file_name, "w") as f:
+            with open(str(self.id) + file_name, "w") as f:
                 json.dump(loaded, f)
         return
 
@@ -97,19 +97,22 @@ class AdidasThread(threading.Thread):
         # print(AdidasThread.items)
 
         with threading.Lock():
-            with open(
-                    os.path.join(
-                        AdidasThread.Globals.product_files_path,
-                        AdidasThread.Globals.product_file_name_prefix + str(self.t_id) + ".json"), "wt") as f1:
-                f1.write(json.dumps(AdidasThread.items))
+            for product in products:
+                AdidasThread.model_product_objects.add((product["modelId"], product["productId"]))
 
-        for product in products:
-            AdidasThread.model_product_objects.add((product["modelId"], product["productId"]))
 
-        print(AdidasThread.model_product_objects)
+        #     with open(
+        #             os.path.join(
+        #                 AdidasThread.Globals.product_files_path,
+        #                 AdidasThread.Globals.product_file_name_prefix + str(self.id) + ".json"), "wt") as f1:
+        #         f1.write(json.dumps(AdidasThread.items))
+
+
+        print(self.id, ":", len(AdidasThread.model_product_objects))
         # self.save_data(AdidasThread.products_data, file_name="products.json")
 
     def run(self):
+        print(self.id, self.type)
         if self.type == TYPES.GET_ITEMS_LIST:
             self.retrieve_items()
         if self.type == TYPES.GET_REVIEWS:
