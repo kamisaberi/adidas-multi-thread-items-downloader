@@ -76,7 +76,7 @@ class AdidasThread(threading.Thread):
         for item in self.model_product_objects:
             self.paginate_reviews(product_id=item["product_id"], model_id=item["model_id"])
 
-    def retrieve_items_list(self):
+    def retrieve_items(self):
         AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
         response = requests.get(
             AdidasThread.Globals.items_url,
@@ -92,6 +92,12 @@ class AdidasThread(threading.Thread):
         data = response_json["raw"]["itemList"]
         AdidasThread.Settings.update_settings(data)
         AdidasThread.items.extend(data["items"])
+        with threading.Lock():
+            with open(
+                    os.path.join(
+                        AdidasThread.Globals.product_files_path,
+                        AdidasThread.Globals.product_file_name_prefix + str(self.t_id) + ".json"), "wt") as f1:
+                f1.write(json.dumps(AdidasThread.items))
 
         for product in products:
             obj = {
@@ -99,19 +105,23 @@ class AdidasThread(threading.Thread):
                 "model_id": product["modelId"]
             }
             AdidasThread.model_product_objects.append(obj)
-            # self.save_data(AdidasThread.products_data, file_name="products.json")
+        print(AdidasThread.model_product_objects)
+        # self.save_data(AdidasThread.products_data, file_name="products.json")
 
     def run(self):
         if self.type == TYPES.GET_ITEMS_LIST:
-            AdidasThread.retrieve_items_list(None)
+            self.retrieve_items()
         if self.type == TYPES.GET_REVIEWS:
             self.paginate_reviews(0, 0, 0)
 
     class Globals:
         settings_file_path: str = "files/settings.json"
+        product_file_name_prefix: str = "pr-"
+        product_files_path: str = "files"
         params: dict = {
             'query': 'all',
-            "start": 0
+            "start": 0,
+            "sort": "newest-to-oldest"
         }
         headers: dict = {
             'authority': 'www.adidas.at',
@@ -145,7 +155,7 @@ class AdidasThread(threading.Thread):
             AdidasThread.Settings.items_per_page = data["viewSize"]
 
         @staticmethod
-        def save_settings(data):
+        def save_settings():
             with open(AdidasThread.Globals.settings_file_path, "wt") as f1:
                 settings = {
                     "start_from": AdidasThread.Settings.start_from,
