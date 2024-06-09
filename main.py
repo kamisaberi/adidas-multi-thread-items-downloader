@@ -11,11 +11,11 @@ if __name__ == "__main__":
     # while True:
     thread1 = ad.AdidasThread(1, ad.TYPES.GET_ITEMS_LIST)
     thread1.start()
-    thread1.join(0.2)
+    thread1.join(0.1)
 
-    thread1 = ad.AdidasThread(2, ad.TYPES.GET_ITEMS_LIST)
-    thread1.start()
-    thread1.join(0.2)
+    # thread1 = ad.AdidasThread(2, ad.TYPES.GET_ITEMS_LIST)
+    # thread1.start()
+    # thread1.join(0.2)
     # time.sleep(10)
 
     # thread2 = ad.AdidasThread(2, ad.TYPES.GET_REVIEWS)

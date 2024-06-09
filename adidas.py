@@ -27,17 +27,18 @@ class TYPES(enum.Enum):
 class AdidasThread(threading.Thread):
     t_id: int = 0
     type: TYPES = TYPES.NONE
-    products_data: list = []
+    products_data: list[dict] = []
+    # board : list[list[Piece]] = []
 
     # STATIC PROPERTIES
-    items: list = [dict]
-    model_product_objects: list = [dict]
+    items: list[dict] = []
+    model_product_objects: set[tuple[str, str]] = set()
 
     def __init__(self, t_id, t_type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.t_id = t_id
         self.type = t_type
-        self.model_product_objects = []
+        self.model_product_objects = set()
 
     def read_file_contents(self, file_name):
         with lock:
@@ -73,8 +74,8 @@ class AdidasThread(threading.Thread):
         return
 
     def get_reviews(self):
-        for item in self.model_product_objects:
-            self.paginate_reviews(product_id=item["product_id"], model_id=item["model_id"])
+        for model, product in self.model_product_objects:
+            self.paginate_reviews(product_id=product, model_id=model)
 
     def retrieve_items(self):
         AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
@@ -91,7 +92,10 @@ class AdidasThread(threading.Thread):
             return
         data = response_json["raw"]["itemList"]
         AdidasThread.Settings.update_settings(data)
+        # print(AdidasThread.items)
         AdidasThread.items.extend(data["items"])
+        # print(AdidasThread.items)
+
         with threading.Lock():
             with open(
                     os.path.join(
@@ -100,11 +104,8 @@ class AdidasThread(threading.Thread):
                 f1.write(json.dumps(AdidasThread.items))
 
         for product in products:
-            obj = {
-                "product_id": product["productId"],
-                "model_id": product["modelId"]
-            }
-            AdidasThread.model_product_objects.append(obj)
+            AdidasThread.model_product_objects.add((product["modelId"], product["productId"]))
+
         print(AdidasThread.model_product_objects)
         # self.save_data(AdidasThread.products_data, file_name="products.json")
 
