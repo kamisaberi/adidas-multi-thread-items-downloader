@@ -9,13 +9,14 @@ import sys
 product_ids = []
 
 is_p_threads_done = False
-lock = threading.Lock()
 
+# lock = threading.Lock()
 
-def print_progress_bar(progress, total):
-    percent = 100 * (progress / float(total))
-    bar = '█' * int(percent) + ('░' * (100 - int(percent)))
-    print(f"\r|{bar}| {percent:.2f}%", end="\r")
+should_load_settings = threading.Event()
+should_load_settings.set()
+should_update_settings = threading.Event()
+should_update_settings.clear()
+
 
 
 class TYPES(enum.Enum):
@@ -32,16 +33,16 @@ class AdidasThread(threading.Thread):
 
     # STATIC PROPERTIES
     items: list[dict] = []
-    model_product_objects: set[tuple[str, str]] = set()
+    model_product_objects: list[tuple[str, str]] = list()
 
     def __init__(self, id, type, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.id = id
         self.type = type
-        self.model_product_objects = set()
+        # self.model_product_objects = list()
 
     def read_file_contents(self, file_name):
-        with lock:
+        with threading.Lock():
             with open(str(self.id) + file_name, "r") as f:
                 file_contents = json.loads(f.read())
                 f.close()
@@ -55,7 +56,7 @@ class AdidasThread(threading.Thread):
             file_contents = self.read_file_contents(file_name)
             loaded["items"].extend(file_contents["items"])
         loaded["items"].append(data)
-        with lock:
+        with threading.Lock:
             with open(str(self.id) + file_name, "w") as f:
                 json.dump(loaded, f)
         return
@@ -78,7 +79,15 @@ class AdidasThread(threading.Thread):
             self.paginate_reviews(product_id=product, model_id=model)
 
     def retrieve_items(self):
-        AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
+        if should_load_settings.is_set():
+            # print("CHECK")
+            AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
+            should_load_settings.clear()
+            should_update_settings.set()
+        else:
+            AdidasThread.Globals.params["start"] = AdidasThread.Globals.last_start_point
+            print("START:", AdidasThread.Globals.params["start"])
+            # print("START FROM :", AdidasThread.Globals.params["start"])
         response = requests.get(
             AdidasThread.Globals.items_url,
             headers=AdidasThread.Globals.headers,
@@ -91,15 +100,17 @@ class AdidasThread(threading.Thread):
         except KeyError:
             return
         data = response_json["raw"]["itemList"]
-        AdidasThread.Settings.update_settings(data)
+        if should_update_settings.is_set():
+            AdidasThread.Settings.update_settings(data)
+            should_update_settings.clear()
+        AdidasThread.Globals.last_start_point += data["viewSize"]
         # print(AdidasThread.items)
         AdidasThread.items.extend(data["items"])
         # print(AdidasThread.items)
 
-        with threading.Lock():
-            for product in products:
-                AdidasThread.model_product_objects.add((product["modelId"], product["productId"]))
-
+        # with threading.Lock():
+        for product in products:
+            AdidasThread.model_product_objects.append((product["modelId"], product["productId"]))
 
         #     with open(
         #             os.path.join(
@@ -107,8 +118,8 @@ class AdidasThread(threading.Thread):
         #                 AdidasThread.Globals.product_file_name_prefix + str(self.id) + ".json"), "wt") as f1:
         #         f1.write(json.dumps(AdidasThread.items))
 
+        print(self.id, ":", len(AdidasThread.model_product_objects), len(set(AdidasThread.model_product_objects)))
 
-        print(self.id, ":", len(AdidasThread.model_product_objects))
         # self.save_data(AdidasThread.products_data, file_name="products.json")
 
     def run(self):
@@ -119,6 +130,7 @@ class AdidasThread(threading.Thread):
             self.paginate_reviews(0, 0, 0)
 
     class Globals:
+        last_start_point: int = 0
         settings_file_path: str = "files/settings.json"
         product_file_name_prefix: str = "pr-"
         product_files_path: str = "files"
@@ -157,6 +169,7 @@ class AdidasThread(threading.Thread):
             AdidasThread.Settings.items_count = data["count"]
             AdidasThread.Settings.reminder_from_last_check = data["count"] - AdidasThread.Settings.items_count
             AdidasThread.Settings.items_per_page = data["viewSize"]
+            # AdidasThread.Settings.start_from += data["viewSize"]
 
         @staticmethod
         def save_settings():

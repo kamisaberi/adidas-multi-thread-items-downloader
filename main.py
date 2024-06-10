@@ -2,8 +2,11 @@ import threading
 from typing import Any
 
 import adidas as ad
+
 import sys
+
 import time
+# sys.stdout = open("logs/" + str(int(time.time())) + ".txt", "wt")
 
 if __name__ == "__main__":
     ad.AdidasThread.Settings.load_settings()
