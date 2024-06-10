@@ -2,5 +2,7 @@
   "start_from": 0,
   "items_per_page": 48,
   "items_count": 12606,
-  "reminder_from_last_check": 0
+  "reminder_from_last_check": 0,
+  "items_threads_count": 12,
+  "reviews_threads_count": 12
 }
