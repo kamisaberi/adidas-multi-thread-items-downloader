@@ -13,6 +13,7 @@ import time
 if __name__ == "__main__":
     ad.AdidasThread.Settings.load_settings()
     thread = ad.AdidasThread(0, ad.TYPES.GET_PREFERENCES, daemon=True)
+    thread.start()
     thread.join()
     threads: [threading.Thread] = []
 

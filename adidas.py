@@ -100,21 +100,30 @@ class AdidasThread(threading.Thread):
         AdidasThread.Settings.update_settings(data)
 
     def retrieve_items(self):
-        self.item_start = AdidasThread.Settings.start_from
+
+        self.item_start = AdidasThread.Globals.last_start_point
         self.item_end = self.item_start + AdidasThread.Settings.items_per_page
-        AdidasThread.Globals.last_start_point = AdidasThread.Settings.start_from
         AdidasThread.Globals.params["start"] = self.item_start
+        AdidasThread.Globals.gotten_items_list.append((self.item_start, self.item_end))
 
         response = requests.get(
             AdidasThread.Globals.items_url,
             headers=AdidasThread.Globals.headers,
             params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
+            # TODO REMOVE start end from AdidasThread.Globals.gotten_items_list
+            # DONE test needed
+            AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
+            # TODO needs to revert last_start_point
             return
         response_json = response.json()
         try:
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
+            # TODO REMOVE start end from AdidasThread.Globals.gotten_items_list
+            # DONE test needed
+            AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
+            # TODO needs to revert last_start_point
             return
         data = response_json["raw"]["itemList"]
         if should_update_settings.is_set():
@@ -154,6 +163,7 @@ class AdidasThread(threading.Thread):
         product_file_name_prefix: str = "pr-"
         product_files_path: str = "files"
         gotten_items_list: list[tuple[int, int]] = list()
+        # gotten_items_list: list[dict[tuple[int, int]: int]] = list()
         params: dict = {
             'query': 'all',
             "start": 0,
