@@ -105,11 +105,11 @@ class AdidasThread(threading.Thread):
             return
         response_json = response.json()
         try:
-            _ = response_json["raw"]["itemList"]["items"]
+            data = response_json["raw"]["itemList"]
+            AdidasThread.Settings.update_settings(data)
         except KeyError:
             return
-        data = response_json["raw"]["itemList"]
-        AdidasThread.Settings.update_settings(data)
+
 
     def retrieve_items(self):
 
