@@ -105,6 +105,7 @@ class AdidasThread(threading.Thread):
         self.item_end = self.item_start + AdidasThread.Settings.items_per_page
         AdidasThread.Globals.params["start"] = self.item_start
         AdidasThread.Globals.gotten_items_list.append((self.item_start, self.item_end))
+        print(AdidasThread.Globals.gotten_items_list)
 
         response = requests.get(
             AdidasThread.Globals.items_url,
