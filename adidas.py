@@ -18,18 +18,19 @@ should_update_settings = threading.Event()
 should_update_settings.clear()
 
 
-
 class TYPES(enum.Enum):
     NONE = 0
-    GET_ITEMS_LIST = 1
-    GET_REVIEWS = 2
+    GET_PREFERENCES = 1
+    GET_ITEMS_LIST = 2
+    GET_REVIEWS = 3
 
 
 class AdidasThread(threading.Thread):
     id: int = 0
     type: TYPES = TYPES.NONE
     products_data: list[dict] = []
-    # board : list[list[Piece]] = []
+    item_start = 0
+    item_end = 0
 
     # STATIC PROPERTIES
     items: list[dict] = []
@@ -78,16 +79,32 @@ class AdidasThread(threading.Thread):
         for model, product in self.model_product_objects:
             self.paginate_reviews(product_id=product, model_id=model)
 
-    def retrieve_items(self):
+    def retrieve_preferences(self):
         if should_load_settings.is_set():
-            # print("CHECK")
             AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
             should_load_settings.clear()
             should_update_settings.set()
-        else:
-            AdidasThread.Globals.params["start"] = AdidasThread.Globals.last_start_point
-            print("START:", AdidasThread.Globals.params["start"])
-            # print("START FROM :", AdidasThread.Globals.params["start"])
+        AdidasThread.Globals.params["start"] = 0
+        response = requests.get(
+            AdidasThread.Globals.items_url,
+            headers=AdidasThread.Globals.headers,
+            params=AdidasThread.Globals.params)
+        if response is None or response.status_code != 200:
+            return
+        response_json = response.json()
+        try:
+            _ = response_json["raw"]["itemList"]["items"]
+        except KeyError:
+            return
+        data = response_json["raw"]["itemList"]
+        AdidasThread.Settings.update_settings(data)
+
+    def retrieve_items(self):
+        self.item_start = AdidasThread.Settings.start_from
+        self.item_end = self.item_start + AdidasThread.Settings.items_per_page
+        AdidasThread.Globals.last_start_point = AdidasThread.Settings.start_from
+        AdidasThread.Globals.params["start"] = self.item_start
+
         response = requests.get(
             AdidasThread.Globals.items_url,
             headers=AdidasThread.Globals.headers,
@@ -124,6 +141,8 @@ class AdidasThread(threading.Thread):
 
     def run(self):
         print(self.id, self.type)
+        if self.type == TYPES.GET_PREFERENCES:
+            self.retrieve_items()
         if self.type == TYPES.GET_ITEMS_LIST:
             self.retrieve_items()
         if self.type == TYPES.GET_REVIEWS:
@@ -134,6 +153,7 @@ class AdidasThread(threading.Thread):
         settings_file_path: str = "files/settings.json"
         product_file_name_prefix: str = "pr-"
         product_files_path: str = "files"
+        gotten_items_list: list[tuple[int, int]] = list()
         params: dict = {
             'query': 'all',
             "start": 0,

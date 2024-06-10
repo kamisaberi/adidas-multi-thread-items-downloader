@@ -6,11 +6,16 @@ import adidas as ad
 import sys
 
 import time
+
 # sys.stdout = open("logs/" + str(int(time.time())) + ".txt", "wt")
+
 
 if __name__ == "__main__":
     ad.AdidasThread.Settings.load_settings()
+    thread = ad.AdidasThread(0, ad.TYPES.GET_PREFERENCES, daemon=True)
+    thread.join()
     threads: [threading.Thread] = []
+
     while True:
         if len(ad.AdidasThread.items) < ad.AdidasThread.Settings.items_count:
             thread = ad.AdidasThread(len(threads) + 1, ad.TYPES.GET_ITEMS_LIST, daemon=True)
