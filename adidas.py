@@ -23,6 +23,17 @@ class TYPES(enum.Enum):
 
 
 class AdidasThread(threading.Thread):
+    """
+        Instance Members:
+            thread_id: int = 0
+            thread_type: TYPES = TYPES.NONE
+            products_data: list[dict] = []
+            item_start = 0
+            item_end = 0
+        Static Members :
+            items: list[dict] = []
+            model_product_objects: list[tuple[str, str]] = list()
+    """
     thread_id: int = 0
     thread_type: TYPES = TYPES.NONE
     products_data: list[dict] = []
@@ -34,6 +45,11 @@ class AdidasThread(threading.Thread):
     model_product_objects: list[tuple[str, str]] = list()
 
     class Events:
+        """
+            Static Members :
+                should_load_settings :
+                should_update_settings :
+        """
         # Static Members
         should_load_settings = threading.Event()
         should_load_settings.set()
@@ -41,6 +57,18 @@ class AdidasThread(threading.Thread):
         should_update_settings.clear()
 
     class Globals:
+        """
+            next_start_point:
+            settings_file_path:
+            product_file_name_prefix:
+            product_files_path:
+            gotten_items_list:
+            # gotten_items_list:
+            params:
+            headers:
+            items_url:
+            reviews_url:
+        """
         next_start_point: int = 0
         settings_file_path: str = "files/settings.json"
         product_file_name_prefix: str = "pr-"
@@ -144,10 +172,9 @@ class AdidasThread(threading.Thread):
         AdidasThread.Globals.next_start_point = self.item_end
         # print(AdidasThread.Globals.gotten_items_list)
 
-        response = requests.get(
-            AdidasThread.Globals.items_url,
-            headers=AdidasThread.Globals.headers,
-            params=AdidasThread.Globals.params)
+        response = requests.get(AdidasThread.Globals.items_url,
+                                headers=AdidasThread.Globals.headers,
+                                params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
             AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
@@ -194,11 +221,19 @@ class AdidasThread(threading.Thread):
                 self.paginate_reviews(0, 0, 0)
 
     class Settings:
+        """
+            items_per_page : indicates every page has how many items
+            items_count : determines how many items exist on webpage totally
+            start_from : determines position that items threads  should start to get items
+            reminder_from_last_check : indicates how many items are go behind and threads should get these items
+            items_threads_count : determines how many threads for getting items can work simultaneously
+            reviews_threads_count : determines how many threads for getting reviews can work simultaneously
+        """
         items_per_page = 0
         items_count = 0
         start_from = 0
         reminder_from_last_check = 0
-        items_threads_count = 0,
+        items_threads_count = 0
         reviews_threads_count = 0
 
         @staticmethod
