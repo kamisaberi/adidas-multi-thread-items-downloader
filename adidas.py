@@ -107,44 +107,7 @@ class AdidasThread(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
-    def read_file_contents(self, file_name):
-        with threading.Lock():
-            with open(str(self.thread_id) + file_name, "r") as f:
-                file_contents = json.loads(f.read())
-                f.close()
-            return file_contents
-
-    def save_data(self, data, file_name):
-        loaded = {
-            "items": []
-        }
-        if os.path.exists(file_name):
-            file_contents = self.read_file_contents(file_name)
-            loaded["items"].extend(file_contents["items"])
-        loaded["items"].append(data)
-        with threading.Lock:
-            with open(str(self.thread_id) + file_name, "w") as f:
-                json.dump(loaded, f)
-        return
-
-    def paginate_reviews(self, product_id, model_id, limit=5, offset=0):
-        while True:
-            url = str.format(AdidasThread.Globals.reviews_url, model_id=model_id, limit=limit, offset=offset)
-            response = requests.get(url)
-            if response is None or "totalResults" not in (res := response.json()):
-                break
-            if offset >= res["totalResults"]:
-                break
-            data = {"reviews": res["reviews"], "product_id": product_id}
-            self.save_data(data, "reviews.json")
-            offset += limit
-        return
-
-    def get_reviews(self):
-        for model, product in self.model_product_objects:
-            self.paginate_reviews(product_id=product, model_id=model)
-
-    def retrieve_preferences(self):
+    def _retrieve_preferences(self):
         if AdidasThread.Events.should_load_settings.is_set():
             AdidasThread.Events.should_load_settings.clear()
             AdidasThread.Events.should_update_settings.set()
@@ -160,8 +123,7 @@ class AdidasThread(threading.Thread):
         except:
             return
 
-    def retrieve_items(self):
-
+    def _retrieve_items(self):
         self.item_start = AdidasThread.Globals.next_start_point
         self.item_end = AdidasThread.Globals.next_start_point + AdidasThread.Settings.items_per_page
         AdidasThread.Globals.params["start"] = self.item_start
@@ -208,15 +170,52 @@ class AdidasThread(threading.Thread):
 
         # self.save_data(AdidasThread.products_data, file_name="products.json")
 
+    def _paginate_reviews(self, product_id, model_id, limit=5, offset=0):
+        while True:
+            url = str.format(AdidasThread.Globals.reviews_url, model_id=model_id, limit=limit, offset=offset)
+            response = requests.get(url)
+            if response is None or "totalResults" not in (res := response.json()):
+                break
+            if offset >= res["totalResults"]:
+                break
+            data = {"reviews": res["reviews"], "product_id": product_id}
+            self.save_data(data, "reviews.json")
+            offset += limit
+        return
+
+    def _get_reviews(self):
+        for model, product in self.model_product_objects:
+            self._paginate_reviews(product_id=product, model_id=model)
+
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
             case TYPES.GET_PREFERENCES:
-                self.retrieve_preferences()
+                self._retrieve_preferences()
             case TYPES.GET_ITEMS_LIST:
-                self.retrieve_items()
+                self._retrieve_items()
             case TYPES.GET_REVIEWS:
-                self.paginate_reviews(0, 0, 0)
+                self._paginate_reviews(0, 0, 0)
+
+    def read_file_contents(self, file_name):
+        with threading.Lock():
+            with open(str(self.thread_id) + file_name, "r") as f:
+                file_contents = json.loads(f.read())
+                f.close()
+            return file_contents
+
+    def save_data(self, data, file_name):
+        loaded = {
+            "items": []
+        }
+        if os.path.exists(file_name):
+            file_contents = self.read_file_contents(file_name)
+            loaded["items"].extend(file_contents["items"])
+        loaded["items"].append(data)
+        with threading.Lock:
+            with open(str(self.thread_id) + file_name, "w") as f:
+                json.dump(loaded, f)
+        return
 
     class Settings:
         """
