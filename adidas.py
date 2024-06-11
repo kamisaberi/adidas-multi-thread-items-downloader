@@ -187,7 +187,6 @@ class AdidasThread(threading.Thread):
         for model, product in self.model_product_objects:
             self._paginate_reviews(product_id=product, model_id=model)
 
-
     def read_file_contents(self, file_name):
         with threading.Lock():
             with open(str(self.thread_id) + file_name, "r") as f:
@@ -207,6 +206,7 @@ class AdidasThread(threading.Thread):
             with open(str(self.thread_id) + file_name, "w") as f:
                 json.dump(loaded, f)
         return
+
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
@@ -259,6 +259,7 @@ class AdidasThread(threading.Thread):
                     "start_from": AdidasThread.Settings.start_from,
                     "items_per_page": AdidasThread.Settings.items_per_page,
                     "items_count": AdidasThread.Settings.items_count,
-                    "reminder_from_last_check": AdidasThread.Settings.reminder_from_last_check
+                    "reminder_from_last_check": AdidasThread.Settings.reminder_from_last_check,
+                    "assigned_items_indices": AdidasThread.Globals.assigned_items_indices
                 }
                 f1.write(json.dumps(settings))
