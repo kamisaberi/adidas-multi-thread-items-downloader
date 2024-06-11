@@ -146,7 +146,6 @@ class AdidasThread(threading.Thread):
 
     def retrieve_preferences(self):
         if AdidasThread.Events.should_load_settings.is_set():
-            AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
             AdidasThread.Events.should_load_settings.clear()
             AdidasThread.Events.should_update_settings.set()
         AdidasThread.Globals.params["start"] = 0
@@ -156,11 +155,9 @@ class AdidasThread(threading.Thread):
             params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
             return
-        response_json = response.json()
         try:
-            data = response_json["raw"]["itemList"]
-            AdidasThread.Settings.update_settings(data)
-        except KeyError:
+            AdidasThread.Settings.update_settings(response.json()["raw"]["itemList"])
+        except:
             return
 
     def retrieve_items(self):
@@ -177,7 +174,7 @@ class AdidasThread(threading.Thread):
                                 params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
             AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
-            # TODO needs to revert last_start_point
+            # TODO needs to revert next_start_point
             return
         response_json = response.json()
         try:
