@@ -187,15 +187,6 @@ class AdidasThread(threading.Thread):
         for model, product in self.model_product_objects:
             self._paginate_reviews(product_id=product, model_id=model)
 
-    def run(self):
-        print(self.thread_id, self.thread_type)
-        match self.thread_type:
-            case TYPES.GET_PREFERENCES:
-                self._retrieve_preferences()
-            case TYPES.GET_ITEMS_LIST:
-                self._retrieve_items()
-            case TYPES.GET_REVIEWS:
-                self._paginate_reviews(0, 0, 0)
 
     def read_file_contents(self, file_name):
         with threading.Lock():
@@ -216,6 +207,15 @@ class AdidasThread(threading.Thread):
             with open(str(self.thread_id) + file_name, "w") as f:
                 json.dump(loaded, f)
         return
+    def run(self):
+        print(self.thread_id, self.thread_type)
+        match self.thread_type:
+            case TYPES.GET_PREFERENCES:
+                self._retrieve_preferences()
+            case TYPES.GET_ITEMS_LIST:
+                self._retrieve_items()
+            case TYPES.GET_REVIEWS:
+                self._paginate_reviews(0, 0, 0)
 
     class Settings:
         """
