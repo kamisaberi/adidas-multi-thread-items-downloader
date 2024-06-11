@@ -73,7 +73,7 @@ class AdidasThread(threading.Thread):
         settings_file_path: str = "files/settings.json"
         product_file_name_prefix: str = "pr-"
         product_files_path: str = "files"
-        gotten_items_list: list[tuple[int, int]] = list()
+        assigned_items_indices: list[tuple[int, int]] = list()
         # gotten_items_list: list[dict[tuple[int, int]: int]] = list()
         params: dict = {
             'query': 'all',
@@ -127,7 +127,7 @@ class AdidasThread(threading.Thread):
         self.item_start = AdidasThread.Globals.next_start_point
         self.item_end = AdidasThread.Globals.next_start_point + AdidasThread.Settings.items_per_page
         AdidasThread.Globals.params["start"] = self.item_start
-        AdidasThread.Globals.gotten_items_list.append((self.item_start, self.item_end))
+        AdidasThread.Globals.assigned_items_indices.append((self.item_start, self.item_end))
         AdidasThread.Globals.next_start_point += AdidasThread.Settings.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
@@ -135,14 +135,14 @@ class AdidasThread(threading.Thread):
                                 headers=AdidasThread.Globals.headers,
                                 params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
-            AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
+            AdidasThread.Globals.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert next_start_point
             return
         response_json = response.json()
         try:
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
-            AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
+            AdidasThread.Globals.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
             return
         data = response_json["raw"]["itemList"]
