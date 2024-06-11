@@ -58,16 +58,16 @@ class AdidasThread(threading.Thread):
 
     class Globals:
         """
-            next_start_point:
-            settings_file_path:
-            product_file_name_prefix:
-            product_files_path:
-            gotten_items_list:
-            # gotten_items_list:
-            params:
-            headers:
-            items_url:
-            reviews_url:
+            Static Members:
+                next_start_point:
+                settings_file_path:
+                product_file_name_prefix:
+                product_files_path:
+                gotten_items_list:
+                params:
+                headers:
+                items_url:
+                reviews_url:
         """
         next_start_point: int = 0
         settings_file_path: str = "files/settings.json"
@@ -222,12 +222,13 @@ class AdidasThread(threading.Thread):
 
     class Settings:
         """
-            items_per_page : indicates every page has how many items
-            items_count : determines how many items exist on webpage totally
-            start_from : determines position that items threads  should start to get items
-            reminder_from_last_check : indicates how many items are go behind and threads should get these items
-            items_threads_count : determines how many threads for getting items can work simultaneously
-            reviews_threads_count : determines how many threads for getting reviews can work simultaneously
+            Static Members :
+                items_per_page : indicates every page has how many items
+                items_count : determines how many items exist on webpage totally
+                start_from : determines position that items threads  should start to get items
+                reminder_from_last_check : indicates how many items are go behind and threads should get these items
+                items_threads_count : determines how many threads for getting items can work simultaneously
+                reviews_threads_count : determines how many threads for getting reviews can work simultaneously
         """
         items_per_page = 0
         items_count = 0
