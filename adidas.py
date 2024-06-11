@@ -40,6 +40,28 @@ class AdidasThread(threading.Thread):
         should_update_settings = threading.Event()
         should_update_settings.clear()
 
+    class Globals:
+        next_start_point: int = 0
+        settings_file_path: str = "files/settings.json"
+        product_file_name_prefix: str = "pr-"
+        product_files_path: str = "files"
+        gotten_items_list: list[tuple[int, int]] = list()
+        # gotten_items_list: list[dict[tuple[int, int]: int]] = list()
+        params: dict = {
+            'query': 'all',
+            "start": 0,
+            "sort": "newest-to-oldest"
+        }
+        headers: dict = {
+            'authority': 'www.adidas.at',
+            'accept': '*/*',
+            'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
+            'content-type': 'application/json',
+            'user-agent': 'PostmanRuntime/7.35.0',
+        }
+        items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
+        reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
+
     def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
@@ -170,28 +192,6 @@ class AdidasThread(threading.Thread):
                 self.retrieve_items()
             case TYPES.GET_REVIEWS:
                 self.paginate_reviews(0, 0, 0)
-
-    class Globals:
-        next_start_point: int = 0
-        settings_file_path: str = "files/settings.json"
-        product_file_name_prefix: str = "pr-"
-        product_files_path: str = "files"
-        gotten_items_list: list[tuple[int, int]] = list()
-        # gotten_items_list: list[dict[tuple[int, int]: int]] = list()
-        params: dict = {
-            'query': 'all',
-            "start": 0,
-            "sort": "newest-to-oldest"
-        }
-        headers: dict = {
-            'authority': 'www.adidas.at',
-            'accept': '*/*',
-            'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-            'content-type': 'application/json',
-            'user-agent': 'PostmanRuntime/7.35.0',
-        }
-        items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
-        reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
 
     class Settings:
         items_per_page = 0
