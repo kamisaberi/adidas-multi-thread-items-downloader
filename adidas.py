@@ -42,7 +42,7 @@ class AdidasThread(threading.Thread):
 
     # STATIC PROPERTIES
     items: list[dict] = []
-    model_product_objects: list[tuple[str, str]] = list()
+    model_product_objects: set[tuple[str, str]] = set()
 
     class Events:
         """
@@ -166,10 +166,10 @@ class AdidasThread(threading.Thread):
     def retrieve_items(self):
 
         self.item_start = AdidasThread.Globals.next_start_point
-        self.item_end = self.item_start + AdidasThread.Settings.items_per_page
+        self.item_end = AdidasThread.Globals.next_start_point + AdidasThread.Settings.items_per_page
         AdidasThread.Globals.params["start"] = self.item_start
         AdidasThread.Globals.gotten_items_list.append((self.item_start, self.item_end))
-        AdidasThread.Globals.next_start_point = self.item_end
+        AdidasThread.Globals.next_start_point += AdidasThread.Settings.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
         response = requests.get(AdidasThread.Globals.items_url,
@@ -195,9 +195,10 @@ class AdidasThread(threading.Thread):
         AdidasThread.items.extend(data["items"])
         # print(AdidasThread.items)
 
-        # with threading.Lock():
-        for product in products:
-            AdidasThread.model_product_objects.append((product["modelId"], product["productId"]))
+        with threading.Lock():
+            AdidasThread.model_product_objects.update(
+                [(product["modelId"], product["productId"]) for product in products]
+            )
 
         #     with open(
         #             os.path.join(
