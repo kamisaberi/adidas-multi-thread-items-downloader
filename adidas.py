@@ -11,12 +11,8 @@ product_ids = []
 
 is_p_threads_done = False
 
-# lock = threading.Lock()
 
-should_load_settings = threading.Event()
-should_load_settings.set()
-should_update_settings = threading.Event()
-should_update_settings.clear()
+# lock = threading.Lock()
 
 
 class TYPES(enum.Enum):
@@ -36,6 +32,13 @@ class AdidasThread(threading.Thread):
     # STATIC PROPERTIES
     items: list[dict] = []
     model_product_objects: list[tuple[str, str]] = list()
+
+    class Events:
+        # Static Members
+        should_load_settings = threading.Event()
+        should_load_settings.set()
+        should_update_settings = threading.Event()
+        should_update_settings.clear()
 
     def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
@@ -92,10 +95,10 @@ class AdidasThread(threading.Thread):
             self.paginate_reviews(product_id=product, model_id=model)
 
     def retrieve_preferences(self):
-        if should_load_settings.is_set():
+        if AdidasThread.Events.should_load_settings.is_set():
             AdidasThread.Globals.params["start"] = AdidasThread.Settings.start_from
-            should_load_settings.clear()
-            should_update_settings.set()
+            AdidasThread.Events.should_load_settings.clear()
+            AdidasThread.Events.should_update_settings.set()
         AdidasThread.Globals.params["start"] = 0
         response = requests.get(
             AdidasThread.Globals.items_url,
@@ -109,7 +112,6 @@ class AdidasThread(threading.Thread):
             AdidasThread.Settings.update_settings(data)
         except KeyError:
             return
-
 
     def retrieve_items(self):
 
@@ -125,8 +127,6 @@ class AdidasThread(threading.Thread):
             headers=AdidasThread.Globals.headers,
             params=AdidasThread.Globals.params)
         if response is None or response.status_code != 200:
-            # TODO REMOVE start end from AdidasThread.Globals.gotten_items_list
-            # DONE test needed
             AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
             return
@@ -134,15 +134,13 @@ class AdidasThread(threading.Thread):
         try:
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
-            # TODO REMOVE start end from AdidasThread.Globals.gotten_items_list
-            # DONE test needed
             AdidasThread.Globals.gotten_items_list.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
             return
         data = response_json["raw"]["itemList"]
-        if should_update_settings.is_set():
+        if AdidasThread.Events.should_update_settings.is_set():
             AdidasThread.Settings.update_settings(data)
-            should_update_settings.clear()
+            AdidasThread.Events.should_update_settings.clear()
         AdidasThread.Globals.next_start_point += data["viewSize"]
         # print(AdidasThread.items)
         AdidasThread.items.extend(data["items"])
@@ -165,12 +163,13 @@ class AdidasThread(threading.Thread):
 
     def run(self):
         print(self.thread_id, self.thread_type)
-        if self.thread_type == TYPES.GET_PREFERENCES:
-            self.retrieve_items()
-        if self.thread_type == TYPES.GET_ITEMS_LIST:
-            self.retrieve_items()
-        if self.thread_type == TYPES.GET_REVIEWS:
-            self.paginate_reviews(0, 0, 0)
+        match self.thread_type:
+            case TYPES.GET_PREFERENCES:
+                self.retrieve_preferences()
+            case TYPES.GET_ITEMS_LIST:
+                self.retrieve_items()
+            case TYPES.GET_REVIEWS:
+                self.paginate_reviews(0, 0, 0)
 
     class Globals:
         next_start_point: int = 0
