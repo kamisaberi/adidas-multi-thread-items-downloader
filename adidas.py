@@ -202,6 +202,9 @@ class AdidasThread(threading.Thread):
         for model, product in self.model_product_objects:
             self._paginate_reviews(product_id=product, model_id=model)
 
+    def _download_images(self, item_data: dict):
+        pass
+
     def read_file_contents(self, file_name):
         with threading.Lock():
             with open(str(self.thread_id) + file_name, "r") as f:
@@ -231,16 +234,15 @@ class AdidasThread(threading.Thread):
                 self._retrieve_items()
             case TYPES.GET_REVIEWS:
                 self._paginate_reviews(0, 0, 0)
+            case TYPES.DOWNLOAD_PRODUCT_MEDIA:
+                self._download_images(dict())
 
     class Settings:
         """
-            Static Members :
-                items_per_page : indicates every page has how many items
-                items_count : determines how many items exist on webpage totally
-                start_from : determines position that items threads  should start to get items
-                reminder_from_last_check : indicates how many items are go behind and threads should get these items
-                items_threads_count : determines how many threads for getting items can work simultaneously
-                reviews_threads_count : determines how many threads for getting reviews can work simultaneously
+            Static Methods :
+                load_settings :
+                update_settings :
+                save_settings :
         """
 
         @staticmethod
@@ -253,6 +255,7 @@ class AdidasThread(threading.Thread):
                 AdidasThread.Globals.reminder_from_last_check = settings["reminder_from_last_check"]
                 AdidasThread.Globals.items_threads_count = settings["items_threads_count"]
                 AdidasThread.Globals.reviews_threads_count = settings["reviews_threads_count"]
+                AdidasThread.Globals.assigned_items_indices = settings["assigned_items_indices"]
 
         @staticmethod
         def update_settings(data):

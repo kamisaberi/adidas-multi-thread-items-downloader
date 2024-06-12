@@ -1,0 +1,93 @@
+{
+  "personalizable": false,
+  "division": "Sportswear",
+  "category": "accessories",
+  "sport": "Freizeit",
+  "orderable": 1,
+  "preorderable": "false",
+  "salePercentage": "0%",
+  "customBadge": "3er-Pack",
+  "isFlash": false,
+  "productType": null,
+  "previewTo": null,
+  "onlineFrom": "2022-12-01T00:00:00.000Z",
+  "colorVariations": [
+    "IC1327",
+    "IC1328",
+    "HT3463"
+  ],
+  "sizeType": [],
+  "ageGroups": [],
+  "subTitle": "Sportswear",
+  "link": "/thin-and-light-no-show-socken_-3-paar/IC1327.html",
+  "unisex": true,
+  "altText": "Sportswear Thin and Light No-Show Socken, 3 Paar Schwarz",
+  "sustainability": [],
+  "surface": [],
+  "genericProductType": [
+    "Socks"
+  ],
+  "availableSizes": [],
+  "closure": [],
+  "strapType": [],
+  "ecomTechnologies": [],
+  "keyCategoryCode": "MDT_KEY_CATEGORY_v_00088",
+  "teamKits": [],
+  "displayName": "Thin and Light No-Show Socken, 3 Paar",
+  "rating": 4.6508,
+  "ratingCount": 272,
+  "image": {
+    "cloudinary": true,
+    "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/59339a7ca87648e1993eaefa0117c294_9366/thin-and-light-no-show-socken_-3-paar.jpg"
+  },
+  "images": [
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/59339a7ca87648e1993eaefa0117c294_9366/thin-and-light-no-show-socken_-3-paar.jpg",
+      "metadata": {
+        "sortOrder": "0",
+        "assetUsage": [
+          "plp"
+        ],
+        "imageStyle": "3D Torso",
+        "view": "Side View",
+        "usageTerms": "eCommerce",
+        "subjects": [
+          {
+            "gender": null,
+            "modelChest": null,
+            "modelHeight": null,
+            "modelWaist": null,
+            "productSize": "40-42"
+          }
+        ]
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/d9c2755a4d9441b5b7b0aefa0117c841_9366/thin-and-light-no-show-socken_-3-paar.jpg",
+      "metadata": {
+        "sortOrder": "1",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "3D Torso",
+        "view": "Side Center View",
+        "usageTerms": "eCommerce",
+        "subjects": [
+          {
+            "gender": null,
+            "modelChest": null,
+            "modelHeight": null,
+            "modelWaist": null,
+            "productSize": "40-42"
+          }
+        ]
+      }
+    }
+  ],
+  "productId": "IC1327",
+  "modelId": "EBB71",
+  "price": 10,
+  "salePrice": 10
+}
