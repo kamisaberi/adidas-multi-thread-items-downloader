@@ -110,13 +110,25 @@ class AdidasThread(threading.Thread):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.thread_id = thread_id
         self.thread_type = thread_type
+
         # self.model_product_objects = list()
 
-    def __eq__(self, other: Union['AdidasThread', enum.Enum, int]):
+    def __eq__(self, other: Union['AdidasThread', TYPES, dict]):
         if isinstance(other, enum.Enum):
             return self.thread_type == other
-        if isinstance(other, AdidasThread):
+        elif isinstance(other, AdidasThread):
             return self.thread_type == other.thread_type
+        elif isinstance(other, dict):
+            for key, value in other.items():
+                v = getattr(self, key, None)
+                if v is None:
+                    return False
+                if not callable(v) and (type(v) is not type(value) or v != value):
+                    return False
+                if callable(v) and v() != value:
+                    return False
+            return True
+
         return False
 
     def __hash__(self):
@@ -255,7 +267,8 @@ class AdidasThread(threading.Thread):
                 AdidasThread.Globals.reminder_from_last_check = settings["reminder_from_last_check"]
                 AdidasThread.Globals.items_threads_count = settings["items_threads_count"]
                 AdidasThread.Globals.reviews_threads_count = settings["reviews_threads_count"]
-                AdidasThread.Globals.assigned_items_indices = settings["assigned_items_indices"]
+                AdidasThread.Globals.assigned_items_indices = [tuple(pair) for pair in
+                                                               settings["assigned_items_indices"]]
 
         @staticmethod
         def update_settings(data):
