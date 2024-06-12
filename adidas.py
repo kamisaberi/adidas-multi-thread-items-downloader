@@ -20,6 +20,7 @@ class TYPES(enum.Enum):
     GET_PREFERENCES = 1
     GET_ITEMS_LIST = 2
     GET_REVIEWS = 3
+    DOWNLOAD_PRODUCT_MEDIA = 4
 
 
 class AdidasThread(threading.Thread):
@@ -36,12 +37,12 @@ class AdidasThread(threading.Thread):
     """
     thread_id: int = 0
     thread_type: TYPES = TYPES.NONE
-    products_data: list[dict] = []
-    item_start = 0
-    item_end = 0
+    products_data: list[dict] = list()
+    item_start: int = 0
+    item_end: int = 0
 
     # STATIC PROPERTIES
-    items: list[dict] = []
+    items: list[dict] = list()
     model_product_objects: set[tuple[str, str]] = set()
 
     class Events:
@@ -68,6 +69,12 @@ class AdidasThread(threading.Thread):
                 headers:
                 items_url:
                 reviews_url:
+                items_per_page:
+                items_count:
+                start_from:
+                reminder_from_last_check:
+                items_threads_count:
+                reviews_threads_count:
         """
         next_start_point: int = 0
         settings_file_path: str = "files/settings.json"
@@ -91,12 +98,12 @@ class AdidasThread(threading.Thread):
         reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
 
         # Moved from Settings class
-        items_per_page = 0
+        items_per_page: int = 0
         items_count: int = 0
-        start_from = 0
-        reminder_from_last_check = 0
-        items_threads_count = 0
-        reviews_threads_count = 0
+        start_from: int = 0
+        reminder_from_last_check: int = 0
+        items_threads_count: int = 0
+        reviews_threads_count: int = 0
 
     def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
@@ -105,7 +112,7 @@ class AdidasThread(threading.Thread):
         self.thread_type = thread_type
         # self.model_product_objects = list()
 
-    def __eq__(self, other: Union['AdidasThread', enum.Enum]):
+    def __eq__(self, other: Union['AdidasThread', enum.Enum, int]):
         if isinstance(other, enum.Enum):
             return self.thread_type == other
         if isinstance(other, AdidasThread):

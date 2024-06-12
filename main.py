@@ -12,7 +12,7 @@ if __name__ == "__main__":
     thread = ad.AdidasThread(0, ad.TYPES.GET_PREFERENCES, daemon=True)
     thread.start()
     thread.join()
-    threads: [threading.Thread] = []
+    threads: [ad.AdidasThread] = []
     while True:
         if len(ad.AdidasThread.items) < ad.AdidasThread.Globals.items_count:
             if threads.count(ad.TYPES.GET_ITEMS_LIST) < ad.AdidasThread.Globals.items_threads_count:
