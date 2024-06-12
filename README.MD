@@ -5,6 +5,5 @@
 
 
 
-
 ## Changes : 
 - `AdidasThread.Globals.gotten_items_list` changed to `AdidasThread.Globals.assigned_items_indices`
