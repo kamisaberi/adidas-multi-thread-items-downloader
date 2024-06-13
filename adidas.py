@@ -128,7 +128,6 @@ class AdidasThread(threading.Thread):
                 if callable(v) and v() != value:
                     return False
             return True
-
         return False
 
     def __hash__(self):
@@ -152,7 +151,8 @@ class AdidasThread(threading.Thread):
 
     def _retrieve_items(self):
         self.item_start = AdidasThread.Globals.next_start_point
-        self.item_end = AdidasThread.Globals.next_start_point + AdidasThread.Globals.items_per_page
+        self.item_end = min(AdidasThread.Globals.next_start_point + AdidasThread.Globals.items_per_page,
+                            AdidasThread.Globals.items_count)
         AdidasThread.Globals.params["start"] = self.item_start
         AdidasThread.Globals.assigned_items_indices.append((self.item_start, self.item_end))
         AdidasThread.Globals.next_start_point += AdidasThread.Globals.items_per_page
