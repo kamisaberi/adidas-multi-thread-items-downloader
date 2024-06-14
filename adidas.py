@@ -43,7 +43,7 @@ class AdidasThread(threading.Thread):
 
     # STATIC PROPERTIES
     items: list[dict] = list()
-    model_product_objects: set[tuple[str, str]] = set()
+    model_product_objects: list[tuple[str, str]] = list()
 
     class Events:
         """
@@ -182,9 +182,8 @@ class AdidasThread(threading.Thread):
         # print(AdidasThread.items)
 
         with threading.Lock():
-            AdidasThread.model_product_objects.update(
-                [(product["modelId"], product["productId"]) for product in products]
-            )
+            AdidasThread.model_product_objects.extend(
+                [(product["modelId"], product["productId"]) for product in products])
 
         #     with open(
         #             os.path.join(
@@ -288,3 +287,9 @@ class AdidasThread(threading.Thread):
                     "assigned_items_indices": AdidasThread.Globals.assigned_items_indices
                 }
                 f1.write(json.dumps(settings))
+
+
+class AdidasHelper:
+    @staticmethod
+    def update_items_count(items_count, reminder):
+        pass

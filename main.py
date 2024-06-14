@@ -17,7 +17,8 @@ if __name__ == "__main__":
     thread.join()
     threads: [ad.AdidasThread] = []
     while True:
-        if len(ad.AdidasThread.items) < ad.AdidasThread.Globals.items_count:
+        if len(ad.AdidasThread.model_product_objects) < ad.AdidasThread.Globals.items_count:
+            # if len(ad.AdidasThread.items) < ad.AdidasThread.Globals.items_count:
             # if threads.count(ad.TYPES.GET_ITEMS_LIST) < ad.AdidasThread.Globals.items_threads_count:
             cnt = threads.count({"thread_type": ad.TYPES.GET_ITEMS_LIST, "is_alive": True})
             print("CNT:", cnt)
