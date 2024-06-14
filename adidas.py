@@ -166,36 +166,36 @@ class AdidasThread(threading.Thread):
 
         rem = AdidasHelper.get_reminder_count(AdidasThread.model_product_objects,
                                               response.json()["raw"]["itemList"]["items"])
-        AdidasHelper.update_items_count(AdidasThread.Globals.assigned_items_indices, rem)
+        AdidasHelper.update_items_count(AdidasThread.assigned_items_indices, rem)
 
     def _retrieve_items(self):
-        self.item_start = AdidasThread.Globals.next_start_point
-        self.item_end = min(AdidasThread.Globals.next_start_point + AdidasThread.Globals.items_per_page,
-                            AdidasThread.Globals.items_count)
-        AdidasThread.Globals.params["start"] = self.item_start
-        AdidasThread.Globals.assigned_items_indices.append((self.item_start, self.item_end))
-        AdidasThread.Globals.next_start_point += AdidasThread.Globals.items_per_page
+        self.item_start = AdidasThread.next_start_point
+        self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page,
+                            AdidasThread.items_count)
+        AdidasThread.params["start"] = self.item_start
+        AdidasThread.assigned_items_indices.append((self.item_start, self.item_end))
+        AdidasThread.next_start_point += AdidasThread.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
-        response = requests.get(AdidasThread.Globals.items_url,
-                                headers=AdidasThread.Globals.headers,
-                                params=AdidasThread.Globals.params)
+        response = requests.get(AdidasThread.urls.items,
+                                headers=AdidasThread.headers,
+                                params=AdidasThread.params)
         if response is None or response.status_code != 200:
-            AdidasThread.Globals.assigned_items_indices.remove((self.item_start, self.item_end))
+            AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert next_start_point
             return
         response_json = response.json()
         try:
             products = response_json["raw"]["itemList"]["items"]
         except KeyError:
-            AdidasThread.Globals.assigned_items_indices.remove((self.item_start, self.item_end))
+            AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
             return
         data = response_json["raw"]["itemList"]
-        if AdidasThread.Events.should_update_settings.is_set():
+        if AdidasThread.events.should_update_settings.is_set():
             AdidasThread.Settings.update_settings(data)
-            AdidasThread.Events.should_update_settings.clear()
-        AdidasThread.Globals.next_start_point += data["viewSize"]
+            AdidasThread.events.should_update_settings.clear()
+        AdidasThread.next_start_point += data["viewSize"]
         # print(AdidasThread.items)
         AdidasThread.items.extend(data["items"])
         # print(AdidasThread.items)
@@ -217,7 +217,7 @@ class AdidasThread(threading.Thread):
 
     def _paginate_reviews(self, product_id, model_id, limit=5, offset=0):
         while True:
-            url = str.format(AdidasThread.Globals.reviews_url, model_id=model_id, limit=limit, offset=offset)
+            url = str.format(AdidasThread.urls.reviews, model_id=model_id, limit=limit, offset=offset)
             response = requests.get(url)
             if response is None or "totalResults" not in (res := response.json()):
                 break
@@ -277,7 +277,7 @@ class AdidasThread(threading.Thread):
 
         @staticmethod
         def load_settings():
-            with open(AdidasThread.Globals.settings_file_path, "rt") as f1:
+            with open(AdidasThread.settings_file_path, "rt") as f1:
                 settings = json.loads(f1.read())
                 AdidasThread.Globals.items_per_page = settings["items_per_page"]
                 AdidasThread.Globals.items_count = settings["items_count"]
@@ -298,13 +298,13 @@ class AdidasThread(threading.Thread):
 
         @staticmethod
         def save_settings():
-            with open(AdidasThread.Globals.settings_file_path, "wt") as f1:
+            with open(AdidasThread.settings_file_path, "wt") as f1:
                 settings = {
-                    "start_from": AdidasThread.Globals.start_from,
-                    "items_per_page": AdidasThread.Globals.items_per_page,
-                    "items_count": AdidasThread.Globals.items_count,
-                    "reminder_from_last_check": AdidasThread.Globals.reminder_from_last_check,
-                    "assigned_items_indices": AdidasThread.Globals.assigned_items_indices
+                    "start_from": AdidasThread.start_from,
+                    "items_per_page": AdidasThread.items_per_page,
+                    "items_count": AdidasThread.items_count,
+                    "reminder_from_last_check": AdidasThread.reminder_from_last_check,
+                    "assigned_items_indices": AdidasThread.assigned_items_indices
                 }
                 f1.write(json.dumps(settings))
 
