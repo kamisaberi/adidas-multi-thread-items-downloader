@@ -6,8 +6,7 @@ import os
 import json
 import sys
 from typing import Union
-
-from debugpy._vendored.pydevd._pydevd_bundle._debug_adapter.pydevd_schema import NextResponse
+from collections import namedtuple
 
 product_ids = []
 
@@ -37,6 +36,7 @@ class AdidasThread(threading.Thread):
             items: list[dict] = []
             model_product_objects: list[tuple[str, str]] = list()
     """
+    # INSTANCE PROPERTIES
     thread_id: int = 0
     thread_type: TYPES = TYPES.NONE
     products_data: list[dict] = list()
@@ -46,18 +46,10 @@ class AdidasThread(threading.Thread):
     # STATIC PROPERTIES
     items: list[dict] = list()
     model_product_objects: list[tuple[str, str]] = list()
-
-    class Events:
-        """
-            Static Members :
-                should_load_settings :
-                should_update_settings :
-        """
-        # Static Members
-        should_load_settings = threading.Event()
-        should_load_settings.set()
-        should_update_settings = threading.Event()
-        should_update_settings.clear()
+    events: namedtuple = (namedtuple("events", ["should_load_settings", "should_update_settings"])
+                          (threading.Event(), threading.Event()))
+    events.should_load_settings.set()
+    events.should_update_settings.clear()
 
     class Globals:
         """
