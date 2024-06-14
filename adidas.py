@@ -35,6 +35,21 @@ class AdidasThread(threading.Thread):
         Static Members :
             items: list[dict] = []
             model_product_objects: list[tuple[str, str]] = list()
+            next_start_point:
+            settings_file_path:
+            product_file_name_prefix:
+            product_files_path:
+            gotten_items_list:
+            params:
+            headers:
+            items_url:
+            reviews_url:
+            items_per_page:
+            items_count:
+            start_from:
+            reminder_from_last_check:
+            items_threads_count:
+            reviews_threads_count:
     """
     # INSTANCE PROPERTIES
     thread_id: int = 0
@@ -44,12 +59,46 @@ class AdidasThread(threading.Thread):
     item_end: int = 0
 
     # STATIC PROPERTIES
-    items: list[dict] = list()
-    model_product_objects: list[tuple[str, str]] = list()
     events: namedtuple = (namedtuple("events", ["should_load_settings", "should_update_settings"])
                           (threading.Event(), threading.Event()))
     events.should_load_settings.set()
     events.should_update_settings.clear()
+
+    urls: namedtuple = (namedtuple("urls", ["items", "reviews"])
+                        ("https://www.adidas.at/api/plp/content-engine/search?",
+                         ("https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT"
+                          "&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest")))
+    items: list[dict] = list()
+    model_product_objects: list[tuple[str, str]] = list()
+
+    next_start_point: int = 0
+    settings_file_path: str = "files/settings.json"
+    product_file_name_prefix: str = "pr-"
+    product_files_path: str = "files"
+    assigned_items_indices: list[tuple[int, int]] = list()
+    # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
+    params: dict = {
+        'query': 'all',
+        "start": 0,
+        "sort": "newest-to-oldest"
+    }
+    headers: dict = {
+        'authority': 'www.adidas.at',
+        'accept': '*/*',
+        'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
+        'content-type': 'application/json',
+        'user-agent': 'PostmanRuntime/7.35.0',
+    }
+    # items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
+    # reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
+
+    # Moved from Settings class
+    items_per_page: int = 0
+    items_count: int = 0
+    start_from: int = 0
+    reminder_from_last_check: int = 0
+    items_threads_count: int = 0
+    reviews_threads_count: int = 0
 
     class Globals:
         """
@@ -70,34 +119,6 @@ class AdidasThread(threading.Thread):
                 items_threads_count:
                 reviews_threads_count:
         """
-        next_start_point: int = 0
-        settings_file_path: str = "files/settings.json"
-        product_file_name_prefix: str = "pr-"
-        product_files_path: str = "files"
-        assigned_items_indices: list[tuple[int, int]] = list()
-        # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
-        params: dict = {
-            'query': 'all',
-            "start": 0,
-            "sort": "newest-to-oldest"
-        }
-        headers: dict = {
-            'authority': 'www.adidas.at',
-            'accept': '*/*',
-            'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-            'content-type': 'application/json',
-            'user-agent': 'PostmanRuntime/7.35.0',
-        }
-        items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
-        reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
-
-        # Moved from Settings class
-        items_per_page: int = 0
-        items_count: int = 0
-        start_from: int = 0
-        reminder_from_last_check: int = 0
-        items_threads_count: int = 0
-        reviews_threads_count: int = 0
 
     def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
@@ -128,14 +149,14 @@ class AdidasThread(threading.Thread):
         return hash(self.thread_type)
 
     def _retrieve_preferences(self):
-        if AdidasThread.Events.should_load_settings.is_set():
-            AdidasThread.Events.should_load_settings.clear()
-            AdidasThread.Events.should_update_settings.set()
-        AdidasThread.Globals.params["start"] = 0
+        if AdidasThread.events.should_load_settings.is_set():
+            AdidasThread.events.should_load_settings.clear()
+            AdidasThread.events.should_update_settings.set()
+        AdidasThread.params["start"] = 0
         response = requests.get(
-            AdidasThread.Globals.items_url,
-            headers=AdidasThread.Globals.headers,
-            params=AdidasThread.Globals.params)
+            AdidasThread.urls.items,
+            headers=AdidasThread.headers,
+            params=AdidasThread.params)
         if response is None or response.status_code != 200:
             return
         try:
