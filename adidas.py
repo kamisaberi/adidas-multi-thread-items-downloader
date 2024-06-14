@@ -151,6 +151,10 @@ class AdidasThread(threading.Thread):
         except:
             return
 
+        rem = AdidasHelper.get_reminder_count(AdidasThread.model_product_objects,
+                                              response.json()["raw"]["itemList"]["items"])
+        AdidasHelper.update_items_count(AdidasThread.Globals.assigned_items_indices, rem)
+
     def _retrieve_items(self):
         self.item_start = AdidasThread.Globals.next_start_point
         self.item_end = min(AdidasThread.Globals.next_start_point + AdidasThread.Globals.items_per_page,
@@ -304,7 +308,7 @@ class AdidasHelper:
         pass
 
     @staticmethod
-    def get_reminder_count(model_object_items: list, new_items: list):
+    def get_reminder_count(model_object_items: list, new_items: list) -> int:
         """
             TODO should find which of downloaded item from model_product_objects
             TODO is in new items and calculate the differences number
