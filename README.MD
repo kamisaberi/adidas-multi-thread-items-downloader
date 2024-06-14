@@ -1,5 +1,5 @@
 ## bugs :
-- anytime we find new items that added to store we should update `AdidasThread.Globals.gotten_items_list` itmes 
+- anytime we find new items that added to store we should update `AdidasThread.Globals.gotten_items_list` items 
 - (IMPORTANT) should find another way to check which items downloaded
 - *****(IMPORTANT)(SOLUTION) at retrieve_preferences thread I should traverse items project_id until we reach first item that we have inside model_product_objects
 

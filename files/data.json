@@ -1,0 +1,1021 @@
+{
+    "ctl": {
+        "recommendations": [
+            {
+                "type": "ctl-apparel-first-layer",
+                "rank": 1,
+                "articleNumber": "IR9691",
+                "name": "Trefoil Essentials T-Shirt",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/7d7d0535ce1942418d2c2d053edc6f7a_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_21_model.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f48af118b5e74432af18d40e4d10e0ec_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_23_hover_model.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/dc16cc2aeb36434b9cb4280a7b923027_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_01_laydown.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7d7d0535ce1942418d2c2d053edc6f7a_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_21_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f48af118b5e74432af18d40e4d10e0ec_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_23_hover_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ebd49a57b3cd4bef83c6733d6c3bacba_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_25_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/dc16cc2aeb36434b9cb4280a7b923027_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_01_laydown.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/696cf51129bc4c24b5476d89cd548c54_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/54d73c92b0334e00a4fe655873210e70_9366/Trefoil_Essentials_T-Shirt_Weiss_IR9691_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/trefoil-essentials-t-shirt/IR9691.html",
+                "pricing": {
+                    "currentPrice": 28,
+                    "standardPrice": 28,
+                    "standardPriceNoVat": 23.33
+                },
+                "brand": "Originals",
+                "gender": "M",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [],
+                "recIndex": 0
+            },
+            {
+                "type": "ctl-apparel-second-layer",
+                "rank": 1,
+                "articleNumber": "IS4364",
+                "name": "Collared Sweatshirt",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/536da4755dd944039be0d496569ae9a9_9366/Collared_Sweatshirt_Grun_IS4364_21_model.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/bf712f90e4f846d5ba85e51f33e619a0_9366/Collared_Sweatshirt_Grun_IS4364_23_hover_model.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1cf4dd0724974f6599dc7b78caded8d0_9366/Collared_Sweatshirt_Grun_IS4364_01_laydown.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/536da4755dd944039be0d496569ae9a9_9366/Collared_Sweatshirt_Grun_IS4364_21_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/bf712f90e4f846d5ba85e51f33e619a0_9366/Collared_Sweatshirt_Grun_IS4364_23_hover_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4f8e7bbfdd0d408799e4bc8f1a0a504b_9366/Collared_Sweatshirt_Grun_IS4364_25_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1cf4dd0724974f6599dc7b78caded8d0_9366/Collared_Sweatshirt_Grun_IS4364_01_laydown.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7373af942dfa4f28ab54365996c5a9bb_9366/Collared_Sweatshirt_Grun_IS4364_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9cf7c5564f9e4f9ab01edacd433d041a_9366/Collared_Sweatshirt_Grun_IS4364_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/collared-sweatshirt/IS4364.html",
+                "pricing": {
+                    "currentPrice": 52.5,
+                    "standardPrice": 70,
+                    "standardPriceNoVat": 58.33,
+                    "salePrice": 52.5,
+                    "salePriceNoVat": 43.75,
+                    "discountText": "-25%",
+                    "ecomPriorPrice": 70,
+                    "ecomPriorPriceDiscount": "-25%",
+                    "appPriorPrice": 70,
+                    "appPriorPriceDiscount": "-25%",
+                    "priorPriceDays": 30
+                },
+                "brand": "Originals",
+                "gender": "M",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "badgeStyle": "custom",
+                "badgeText": "SUMMER SALE",
+                "surface": [],
+                "recIndex": 1
+            },
+            {
+                "type": "ctl-pants",
+                "rank": 1,
+                "articleNumber": "IJ7055",
+                "name": "adicolor Classics Firebird Trainingshose",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/39e2da4371fa43a98a34afb2017d0d71_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_21_model.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/39e2da4371fa43a98a34afb2017d0d71_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_21_model.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1da2e6d657ef497798e0af9d016c688e_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_01_laydown.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/39e2da4371fa43a98a34afb2017d0d71_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_21_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b715fe7372514084a355afb2017d46c3_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_23_hover_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/aefe5255ae034aa7b183afb201752cd3_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_25_model.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1da2e6d657ef497798e0af9d016c688e_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_01_laydown.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d99b24e488c1433b98d9afb2017d7e4d_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d26c5377132d4abb9b61afb2017dd417_9366/adicolor_Classics_Firebird_Trainingshose_Schwarz_IJ7055_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/adicolor-classics-firebird-trainingshose/IJ7055.html",
+                "pricing": {
+                    "currentPrice": 65,
+                    "standardPrice": 65,
+                    "standardPriceNoVat": 54.17
+                },
+                "brand": "Originals",
+                "gender": "M",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [],
+                "recIndex": 2
+            },
+            {
+                "type": "ctl-accessories",
+                "rank": 3,
+                "articleNumber": "HC9550",
+                "name": "Trefoil Ankle Socken, 3 Paar",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/08567f478e5445cca7ecad9a0105aa9f_9366/Trefoil_Ankle_Socken_3_Paar_Weiss_HC9550_03_standard.jpg",
+                "secondaryImageLink": null,
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/08567f478e5445cca7ecad9a0105aa9f_9366/Trefoil_Ankle_Socken_3_Paar_Weiss_HC9550_03_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/08567f478e5445cca7ecad9a0105aa9f_9366/Trefoil_Ankle_Socken_3_Paar_Weiss_HC9550_03_standard.jpg"
+                ],
+                "link": "https://www.adidas.at/trefoil-ankle-socken_-3-paar/HC9550.html",
+                "pricing": {
+                    "currentPrice": 13,
+                    "standardPrice": 13,
+                    "standardPriceNoVat": 10.83
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "badgeStyle": "custom",
+                "badgeText": "3er-Pack",
+                "surface": [],
+                "recIndex": 3
+            }
+        ]
+    },
+    "ymal": {
+        "recommendations": [
+            {
+                "type": "ymal",
+                "rank": 1,
+                "articleNumber": "IE3403",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c8ba9fed910a44abb0ca268e1a2dbb64_9366/Handball_Spezial_Schuh_Weiss_IE3403_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/5bb21d20641e4d0587abf25f942a47ed_9366/Handball_Spezial_Schuh_Weiss_IE3403_010_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c8ba9fed910a44abb0ca268e1a2dbb64_9366/Handball_Spezial_Schuh_Weiss_IE3403_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c8ba9fed910a44abb0ca268e1a2dbb64_9366/Handball_Spezial_Schuh_Weiss_IE3403_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/5bb21d20641e4d0587abf25f942a47ed_9366/Handball_Spezial_Schuh_Weiss_IE3403_010_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/46890d85efd04b4898698b01a69ab0dc_9366/Handball_Spezial_Schuh_Weiss_IE3403_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1a90c1e55acb47a1bb5a6e1d61042d64_9366/Handball_Spezial_Schuh_Weiss_IE3403_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9fde9607e7534f24ae70fd8c35c2f9ab_9366/Handball_Spezial_Schuh_Weiss_IE3403_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7c513d8a564a4753a2e67248770d6275_9366/Handball_Spezial_Schuh_Weiss_IE3403_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0d215ba834694d179eb2567d85445ec1_9366/Handball_Spezial_Schuh_Weiss_IE3403_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/338dc250e5974ea79fe6ba95c697ef58_9366/Handball_Spezial_Schuh_Weiss_IE3403_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0660dc1fd4af4ecb87c51f7d14e269f7_9366/Handball_Spezial_Schuh_Weiss_IE3403_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e93542810a0e4245b0bea4b83174b053_9366/Handball_Spezial_Schuh_Weiss_IE3403_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IE3403.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 0
+            },
+            {
+                "type": "ymal",
+                "rank": 2,
+                "articleNumber": "IH7497",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/b11b37f2b5154215be11eb842e604c73_9366/Handball_Spezial_Schuh_Blau_IH7497_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/d5292fcee1d047dc8ffad58b982c33bf_9366/Handball_Spezial_Schuh_Blau_IH7497_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/b11b37f2b5154215be11eb842e604c73_9366/Handball_Spezial_Schuh_Blau_IH7497_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b11b37f2b5154215be11eb842e604c73_9366/Handball_Spezial_Schuh_Blau_IH7497_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d5292fcee1d047dc8ffad58b982c33bf_9366/Handball_Spezial_Schuh_Blau_IH7497_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b603de561cfd4c3e8e7ebd0989bb57dd_9366/Handball_Spezial_Schuh_Blau_IH7497_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/781c5c5027bf430cb1c1126e74f85c8d_9366/Handball_Spezial_Schuh_Blau_IH7497_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d7634e6e5b814d5eab8b250badf0f6b8_9366/Handball_Spezial_Schuh_Blau_IH7497_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/96dab445fa7640e5b4dc34290ff9fcf5_9366/Handball_Spezial_Schuh_Blau_IH7497_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/3f2aa61956cb4b6284e1a557be0adbe1_9366/Handball_Spezial_Schuh_Blau_IH7497_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/15930d0b85a44218be59c10c20fbd56b_9366/Handball_Spezial_Schuh_Blau_IH7497_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e4519e2a01f5485f83d9fd7bf4da7e37_9366/Handball_Spezial_Schuh_Blau_IH7497_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IH7497.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 1
+            },
+            {
+                "type": "ymal",
+                "rank": 3,
+                "articleNumber": "IG6276",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/79e58d33c69848d5b6cbe29424aaf2ee_9366/Handball_Spezial_Schuh_Blau_IG6276_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/8d7d208328c242479a36ef22c4951494_9366/Handball_Spezial_Schuh_Blau_IG6276_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/79e58d33c69848d5b6cbe29424aaf2ee_9366/Handball_Spezial_Schuh_Blau_IG6276_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/79e58d33c69848d5b6cbe29424aaf2ee_9366/Handball_Spezial_Schuh_Blau_IG6276_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8d7d208328c242479a36ef22c4951494_9366/Handball_Spezial_Schuh_Blau_IG6276_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b7a0af7c094142669645538a0d18192f_9366/Handball_Spezial_Schuh_Blau_IG6276_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/aad33d4af6544593988f5874b4b51d12_9366/Handball_Spezial_Schuh_Blau_IG6276_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f9c70d01f79d403a9c8f0418322dd654_9366/Handball_Spezial_Schuh_Blau_IG6276_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/37281a5da73e4637b7cea8ce4ce6dee6_9366/Handball_Spezial_Schuh_Blau_IG6276_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cfe9c4b7264b41c5aab5263ab7b1bbbc_9366/Handball_Spezial_Schuh_Blau_IG6276_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9090ae793662497b94bb7fcb6a8fe301_9366/Handball_Spezial_Schuh_Blau_IG6276_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/db634e186f684618b7c0166062bcd54a_9366/Handball_Spezial_Schuh_Blau_IG6276_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IG6276.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 2
+            },
+            {
+                "type": "ymal",
+                "rank": 5,
+                "articleNumber": "IF3817",
+                "name": "Gazelle Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1f0c93feb98c401f8be3dec77ef247d2_9366/Gazelle_Schuh_Weiss_IF3817_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/305b5805bc7749408ff2e0b0754315ce_9366/Gazelle_Schuh_Weiss_IF3817_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1f0c93feb98c401f8be3dec77ef247d2_9366/Gazelle_Schuh_Weiss_IF3817_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1f0c93feb98c401f8be3dec77ef247d2_9366/Gazelle_Schuh_Weiss_IF3817_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/305b5805bc7749408ff2e0b0754315ce_9366/Gazelle_Schuh_Weiss_IF3817_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/5ee1b7df419f40b88dd4b4ed7fb198b5_9366/Gazelle_Schuh_Weiss_IF3817_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8b6ffd7e1f0b4d1dbf0870aa81a68f1a_9366/Gazelle_Schuh_Weiss_IF3817_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d8f58ce42ba64f3180f0b139ebcf8413_9366/Gazelle_Schuh_Weiss_IF3817_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cbf2199c14b74b71890686baf52610ec_9366/Gazelle_Schuh_Weiss_IF3817_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f11bb7c3cdf84ba4b999266e14726711_9366/Gazelle_Schuh_Weiss_IF3817_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c22083c872a94530b10a3d2217d57959_9366/Gazelle_Schuh_Weiss_IF3817_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/eeb180fdd3db43edbce855b54bba47b0_9366/Gazelle_Schuh_Weiss_IF3817_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/gazelle-schuh/IF3817.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 3
+            },
+            {
+                "type": "ymal",
+                "rank": 6,
+                "articleNumber": "IE3402",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f47dd922de9c4d1594aaa308f84ff80e_9366/Handball_Spezial_Schuh_Schwarz_IE3402_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/dab254670c4c487abeb3d0771abac85c_9366/Handball_Spezial_Schuh_Schwarz_IE3402_010_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f47dd922de9c4d1594aaa308f84ff80e_9366/Handball_Spezial_Schuh_Schwarz_IE3402_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f47dd922de9c4d1594aaa308f84ff80e_9366/Handball_Spezial_Schuh_Schwarz_IE3402_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/dab254670c4c487abeb3d0771abac85c_9366/Handball_Spezial_Schuh_Schwarz_IE3402_010_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8f387131db0b4feaa4446e880d052687_9366/Handball_Spezial_Schuh_Schwarz_IE3402_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/787da71b5cd84cc6b9824f164007ba7c_9366/Handball_Spezial_Schuh_Schwarz_IE3402_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8d7fb6b997f34b48bf2f02c0a94ad7d0_9366/Handball_Spezial_Schuh_Schwarz_IE3402_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b9ae4f5ac784473ab1040ae46e59ca8a_9366/Handball_Spezial_Schuh_Schwarz_IE3402_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9b155f1f65bd46dca87bd16df85afd43_9366/Handball_Spezial_Schuh_Schwarz_IE3402_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0ead04a9ab864cd182f699abe8c70585_9366/Handball_Spezial_Schuh_Schwarz_IE3402_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/73f258b869d041e8842fb1a4dcba5a93_9366/Handball_Spezial_Schuh_Schwarz_IE3402_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c98c07d6f36c492fb69be212ca18036f_9366/Handball_Spezial_Schuh_Schwarz_IE3402_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IE3402.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 4
+            },
+            {
+                "type": "ymal",
+                "rank": 7,
+                "articleNumber": "H03473",
+                "name": "Campus 00s Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c2b3ca00e0e34665a911af8800a7ddba_9366/Campus_00s_Schuh_Gelb_H03473_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1ba477e095a94d999bb8af8701150345_9366/Campus_00s_Schuh_Gelb_H03473_15_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c2b3ca00e0e34665a911af8800a7ddba_9366/Campus_00s_Schuh_Gelb_H03473_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c2b3ca00e0e34665a911af8800a7ddba_9366/Campus_00s_Schuh_Gelb_H03473_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/bd034ca4512b41ac9bd8af8800a7f839_9366/Campus_00s_Schuh_Gelb_H03473_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6f802b2fa81a493b943aaf8800a80328_9366/Campus_00s_Schuh_Gelb_H03473_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/451eba106424478c9d67af8800a80b6d_9366/Campus_00s_Schuh_Gelb_H03473_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7f16eba8a65d47519810af8800a81a95_9366/Campus_00s_Schuh_Gelb_H03473_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c360dca811144be097b1af8800a7eb62_9366/Campus_00s_Schuh_Gelb_H03473_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/975b46bc23344d3a953caf8800a83d9d_9366/Campus_00s_Schuh_Gelb_H03473_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1ba477e095a94d999bb8af8701150345_9366/Campus_00s_Schuh_Gelb_H03473_15_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8dcc97f6ddd6403c88c7af8800a82908_9366/Campus_00s_Schuh_Gelb_H03473_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4f4ba1e2859b4896925daf8800a833e4_9366/Campus_00s_Schuh_Gelb_H03473_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/campus-00s-schuh/H03473.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 5
+            },
+            {
+                "type": "ymal",
+                "rank": 8,
+                "articleNumber": "DB3021",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/6218f8cc55984cfe92d1a96d0110ac7e_9366/Handball_Spezial_Schuh_Schwarz_DB3021_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/96c5eb48a9074ee9889aa96d0110ca89_9366/Handball_Spezial_Schuh_Schwarz_DB3021_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/6218f8cc55984cfe92d1a96d0110ac7e_9366/Handball_Spezial_Schuh_Schwarz_DB3021_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6218f8cc55984cfe92d1a96d0110ac7e_9366/Handball_Spezial_Schuh_Schwarz_DB3021_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/96c5eb48a9074ee9889aa96d0110ca89_9366/Handball_Spezial_Schuh_Schwarz_DB3021_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/89ca78bab363419a82ffa96d0110db67_9366/Handball_Spezial_Schuh_Schwarz_DB3021_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cee46178e4c7447d872ea96d0110ebe6_9366/Handball_Spezial_Schuh_Schwarz_DB3021_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/233924e6eb06422888eca96d0110fa0e_9366/Handball_Spezial_Schuh_Schwarz_DB3021_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/16a771580e0343fea6dfa96d0110bbab_9366/Handball_Spezial_Schuh_Schwarz_DB3021_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1163d0ac6cc742429a57a96d01113b1b_9366/Handball_Spezial_Schuh_Schwarz_DB3021_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d65fa683580746dbb899a96d011108df_9366/Handball_Spezial_Schuh_Schwarz_DB3021_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/decac332a76c4375b6d2a96d011117f6_9366/Handball_Spezial_Schuh_Schwarz_DB3021_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/071b13d2e12e45d092eaa96d01112693_9366/Handball_Spezial_Schuh_Schwarz_DB3021_43_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/DB3021.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 6
+            },
+            {
+                "type": "ymal",
+                "rank": 9,
+                "articleNumber": "IE3437",
+                "name": "Samba OG Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/186872d7bb8445edaa5bf79de16759e6_9366/Samba_OG_Schuh_Weiss_IE3437_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/8833f921dc1541919e4e248b92d82178_9366/Samba_OG_Schuh_Weiss_IE3437_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/186872d7bb8445edaa5bf79de16759e6_9366/Samba_OG_Schuh_Weiss_IE3437_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/186872d7bb8445edaa5bf79de16759e6_9366/Samba_OG_Schuh_Weiss_IE3437_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8833f921dc1541919e4e248b92d82178_9366/Samba_OG_Schuh_Weiss_IE3437_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/49ae8938bded442fbcfe48035686cde7_9366/Samba_OG_Schuh_Weiss_IE3437_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/81b9eda8b1ca4c2e8e54bbec1cb42eab_9366/Samba_OG_Schuh_Weiss_IE3437_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a1616579f8404abc956542631a2e9e77_9366/Samba_OG_Schuh_Weiss_IE3437_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/26790121dcfa4708b986a69d3f116c54_9366/Samba_OG_Schuh_Weiss_IE3437_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/675a000c5c234f8ba51716d54b430f77_9366/Samba_OG_Schuh_Weiss_IE3437_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/23719a3707c7494ea9879d6210f8d595_9366/Samba_OG_Schuh_Weiss_IE3437_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6e3c4e71b0b44975b4500398df44ab46_9366/Samba_OG_Schuh_Weiss_IE3437_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/samba-og-schuh/IE3437.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 7
+            },
+            {
+                "type": "ymal",
+                "rank": 10,
+                "articleNumber": "IG5932",
+                "name": "Samba OG Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/31715de33f6643eeb32b6a82008bd648_9366/Samba_OG_Schuh_Weiss_IG5932_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/a6d3a3feb0bc48d8b28386793b5ecbe2_9366/Samba_OG_Schuh_Weiss_IG5932_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/31715de33f6643eeb32b6a82008bd648_9366/Samba_OG_Schuh_Weiss_IG5932_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/31715de33f6643eeb32b6a82008bd648_9366/Samba_OG_Schuh_Weiss_IG5932_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a6d3a3feb0bc48d8b28386793b5ecbe2_9366/Samba_OG_Schuh_Weiss_IG5932_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/98cf2aad066e4667802bf6b8a20c361b_9366/Samba_OG_Schuh_Weiss_IG5932_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c8c7ca1919d84d48a9124caa7db48272_9366/Samba_OG_Schuh_Weiss_IG5932_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4e1b2e26ba584bcb9c54d23205b43a5c_9366/Samba_OG_Schuh_Weiss_IG5932_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b91a2221fb5446ab954264cec40cb814_9366/Samba_OG_Schuh_Weiss_IG5932_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/10a89b4a4f3245e88672fd1e4ebf114d_9366/Samba_OG_Schuh_Weiss_IG5932_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e405a537a32343a6802423cc1dedf7d5_9366/Samba_OG_Schuh_Weiss_IG5932_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/81b48c032d624f039f0ef930795eb569_9366/Samba_OG_Schuh_Weiss_IG5932_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/samba-og-schuh/IG5932.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 8
+            },
+            {
+                "type": "ymal",
+                "rank": 11,
+                "articleNumber": "IG1596",
+                "name": "Gazelle Indoor Low Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ad1ec12acd1e4504a85b50174373585b_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/dcefc2a08d4844229f7da8dad340bf40_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ad1ec12acd1e4504a85b50174373585b_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ad1ec12acd1e4504a85b50174373585b_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/dcefc2a08d4844229f7da8dad340bf40_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/455957577df541d385f1a87c6ecf591c_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f2e2d887f055454e876d1dd390861d1f_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/852f306e50aa47c194dd14560166401d_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/753122875d904634ad9d8a36111a78dd_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/bb401dfbbfb745ac9cd95a7f4cb08006_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7ffbf795271b46a3b75d1d63a0300126_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/abb6d5dc3f984baa9230894970227774_9366/Gazelle_Indoor_Low_Schuh_Grun_IG1596_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/gazelle-indoor-low-schuh/IG1596.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 9
+            },
+            {
+                "type": "ymal",
+                "rank": 12,
+                "articleNumber": "JH6183",
+                "name": "Campus 00s Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/0bf4194a660547a0bf64c6c19d198001_9366/Campus_00s_Schuh_Braun_JH6183_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ec2c51d5411e438a94d26f428b843c3b_9366/Campus_00s_Schuh_Braun_JH6183_15_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/0bf4194a660547a0bf64c6c19d198001_9366/Campus_00s_Schuh_Braun_JH6183_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0bf4194a660547a0bf64c6c19d198001_9366/Campus_00s_Schuh_Braun_JH6183_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ca59130db63646cfb7c8dc39ec2cdc91_9366/Campus_00s_Schuh_Braun_JH6183_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/fac7b859c78d49a88edb3df16d6201d7_9366/Campus_00s_Schuh_Braun_JH6183_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/bbd1132ab2404434b060c13900f4522c_9366/Campus_00s_Schuh_Braun_JH6183_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/36b856e62cea4faba1caa9f7a5f01fc6_9366/Campus_00s_Schuh_Braun_JH6183_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/7639c01863d04fd68c002b8f0c55402b_9366/Campus_00s_Schuh_Braun_JH6183_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/dc6f349bba454c3ba46b4f3ed452cef2_9366/Campus_00s_Schuh_Braun_JH6183_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ec2c51d5411e438a94d26f428b843c3b_9366/Campus_00s_Schuh_Braun_JH6183_15_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1704d6252b5f409ebea0ab7003ddca6b_9366/Campus_00s_Schuh_Braun_JH6183_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/af312883fbfa43f693dcd72ab73b6068_9366/Campus_00s_Schuh_Braun_JH6183_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/campus-00s-schuh/JH6183.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "badgeStyle": "custom",
+                "badgeText": "Nur bei adidas",
+                "surface": [],
+                "recIndex": 10
+            },
+            {
+                "type": "ymal",
+                "rank": 13,
+                "articleNumber": "IG6213",
+                "name": "Gazelle Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/4745ba78d0224d8db0d369f3eae7a7cb_9366/Gazelle_Schuh_Rot_IG6213_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ce8561dce14741fc824bef1cf89c216d_9366/Gazelle_Schuh_Rot_IG6213_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/4745ba78d0224d8db0d369f3eae7a7cb_9366/Gazelle_Schuh_Rot_IG6213_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4745ba78d0224d8db0d369f3eae7a7cb_9366/Gazelle_Schuh_Rot_IG6213_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ce8561dce14741fc824bef1cf89c216d_9366/Gazelle_Schuh_Rot_IG6213_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/2d4d2e0e04854169952d9127ce0cd600_9366/Gazelle_Schuh_Rot_IG6213_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/5c309a835cca4cbb858ab212f298bb7d_9366/Gazelle_Schuh_Rot_IG6213_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f4e3e8cc47ee4bc5b78b49df450601ef_9366/Gazelle_Schuh_Rot_IG6213_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/3e3f91abab424cccb45126e5698ea6e4_9366/Gazelle_Schuh_Rot_IG6213_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e05d872601534bb78b09c917d6d746b6_9366/Gazelle_Schuh_Rot_IG6213_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ff3b3a26fcc046d089b2473765d31dad_9366/Gazelle_Schuh_Rot_IG6213_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/43ea8967a44944db994787ded7b0a9d2_9366/Gazelle_Schuh_Rot_IG6213_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/gazelle-schuh/IG6213.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 11
+            }
+        ]
+    },
+    "oab": {
+        "recommendations": [
+            {
+                "type": "oab",
+                "rank": 1,
+                "articleNumber": "BD7633",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/82d433384c7c435f9a2fa96d0101d323_9366/Handball_Spezial_Schuh_Blau_BD7633_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/24d6e4bd92a24af289a0a96d0101f83d_9366/Handball_Spezial_Schuh_Blau_BD7633_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/82d433384c7c435f9a2fa96d0101d323_9366/Handball_Spezial_Schuh_Blau_BD7633_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/82d433384c7c435f9a2fa96d0101d323_9366/Handball_Spezial_Schuh_Blau_BD7633_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/24d6e4bd92a24af289a0a96d0101f83d_9366/Handball_Spezial_Schuh_Blau_BD7633_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8ded5c713dd74ab4a26ca96d01020c32_9366/Handball_Spezial_Schuh_Blau_BD7633_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4f628d8c4f3e436eab2fa96d01025fee_9366/Handball_Spezial_Schuh_Blau_BD7633_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6a4195227baa42f6982fa96d01027550_9366/Handball_Spezial_Schuh_Blau_BD7633_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d6210c07710a44728118a96d0101e524_9366/Handball_Spezial_Schuh_Blau_BD7633_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/eab27b773345465c8611a96d010f280f_9366/Handball_Spezial_Schuh_Blau_BD7633_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cde26d0f90184b339060a96d010285e8_9366/Handball_Spezial_Schuh_Blau_BD7633_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/101cb28208ab47c29631a96d01029511_9366/Handball_Spezial_Schuh_Blau_BD7633_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/99fbcc4765954d9791e4a96d0102a324_9366/Handball_Spezial_Schuh_Blau_BD7633_43_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/BD7633.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 0
+            },
+            {
+                "type": "oab",
+                "rank": 2,
+                "articleNumber": "B75806",
+                "name": "Samba OG Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/3bbecbdf584e40398446a8bf0117cf62_9366/Samba_OG_Schuh_Weiss_B75806_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/8c4158c4c39a4ab09b8ba8c000c96fd0_9366/Samba_OG_Schuh_Weiss_B75806_010_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/3bbecbdf584e40398446a8bf0117cf62_9366/Samba_OG_Schuh_Weiss_B75806_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/3bbecbdf584e40398446a8bf0117cf62_9366/Samba_OG_Schuh_Weiss_B75806_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8c4158c4c39a4ab09b8ba8c000c96fd0_9366/Samba_OG_Schuh_Weiss_B75806_010_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ec595635a2994adea094a8bf0117ef1a_9366/Samba_OG_Schuh_Weiss_B75806_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/97cd0902ae2e402b895aa8bf0117f98f_9366/Samba_OG_Schuh_Weiss_B75806_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b067d21288bc43ec8298a8bf01180400_9366/Samba_OG_Schuh_Weiss_B75806_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/3a8d5f9cb7444bd195f1a8bf01180e68_9366/Samba_OG_Schuh_Weiss_B75806_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Schuh_Weiss_B75806_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b19389122c51434eb5bea8bf0117da35_9366/Samba_OG_Schuh_Weiss_B75806_07_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f9ce5733049f4ca8a93aa8bf011858bd_9366/Samba_OG_Schuh_Weiss_B75806_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/671c62b81c3448e980aca8bf01181a93_9366/Samba_OG_Schuh_Weiss_B75806_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6cea1ecd4fee4337ab5da8bf011823ca_9366/Samba_OG_Schuh_Weiss_B75806_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0c94e4fecb7a4088b15fa8bf01183214_9366/Samba_OG_Schuh_Weiss_B75806_43_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1d9a02f0be704fafbe3d6b8158afb9f6_9366/Samba_OG_Schuh_Weiss_B75806_HM2.jpg"
+                ],
+                "link": "https://www.adidas.at/samba-og-schuh/B75806.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 1
+            },
+            {
+                "type": "oab",
+                "rank": 3,
+                "articleNumber": "IG6199",
+                "name": "Gazelle Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/8f4dbcc5f8f041478d6bf895a572fc94_9366/Gazelle_Schuh_Braun_IG6199_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/5a64ca26266e4d7f8177e5f8c088fa93_9366/Gazelle_Schuh_Braun_IG6199_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/8f4dbcc5f8f041478d6bf895a572fc94_9366/Gazelle_Schuh_Braun_IG6199_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8f4dbcc5f8f041478d6bf895a572fc94_9366/Gazelle_Schuh_Braun_IG6199_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/5a64ca26266e4d7f8177e5f8c088fa93_9366/Gazelle_Schuh_Braun_IG6199_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f82a12276f9c4c34a1641720e091e3d3_9366/Gazelle_Schuh_Braun_IG6199_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f9afe250d4004dae849057b9146a2e43_9366/Gazelle_Schuh_Braun_IG6199_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0d37250ecdf8434b9bcc7b9ea67585ab_9366/Gazelle_Schuh_Braun_IG6199_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/307e49f6f7754c92a501e27cea17d24f_9366/Gazelle_Schuh_Braun_IG6199_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/833503d666964048b4e8d520758f054f_9366/Gazelle_Schuh_Braun_IG6199_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d575581cb53c43b8b546d35ee8206e1e_9366/Gazelle_Schuh_Braun_IG6199_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f70b58cd27f64f56910f920eb086c7da_9366/Gazelle_Schuh_Braun_IG6199_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/gazelle-schuh/IG6199.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 2
+            },
+            {
+                "type": "oab",
+                "rank": 4,
+                "articleNumber": "IE0877",
+                "name": "Samba OG Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/a6604ec9a5d24781a145316c2935944f_9366/Samba_OG_Schuh_Weiss_IE0877_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/1728c1f21fbc41868170e24edb30777e_9366/Samba_OG_Schuh_Weiss_IE0877_15_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/a6604ec9a5d24781a145316c2935944f_9366/Samba_OG_Schuh_Weiss_IE0877_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a6604ec9a5d24781a145316c2935944f_9366/Samba_OG_Schuh_Weiss_IE0877_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/15f820915df84825a352182ce4d47e8b_9366/Samba_OG_Schuh_Weiss_IE0877_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ddafe76e25db4b7db00cc23e7c93a225_9366/Samba_OG_Schuh_Weiss_IE0877_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a96407bfc3c7479fb626e57050388850_9366/Samba_OG_Schuh_Weiss_IE0877_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0471acdeca084383806e039ebd7ffa39_9366/Samba_OG_Schuh_Weiss_IE0877_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c7cf165d88c84ab5b8687637434f476b_9366/Samba_OG_Schuh_Weiss_IE0877_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/8ea767a3b79f46a6bf3e499bae8256bf_9366/Samba_OG_Schuh_Weiss_IE0877_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1728c1f21fbc41868170e24edb30777e_9366/Samba_OG_Schuh_Weiss_IE0877_15_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/fb5e869ac12e4ef6b3c1d08b5778fd74_9366/Samba_OG_Schuh_Weiss_IE0877_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/bf06bbac13fb4d0c85eb113ddc8d3cbf_9366/Samba_OG_Schuh_Weiss_IE0877_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/samba-og-schuh/IE0877.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 3
+            },
+            {
+                "type": "oab",
+                "rank": 5,
+                "articleNumber": "BB5478",
+                "name": "Gazelle Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/698e41ae0196408eb16aa7fb008046ad_9366/Gazelle_Schuh_Blau_BB5478_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/a3194492f1844b5e882aa606009923c3_9366/Gazelle_Schuh_Blau_BB5478_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/698e41ae0196408eb16aa7fb008046ad_9366/Gazelle_Schuh_Blau_BB5478_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/698e41ae0196408eb16aa7fb008046ad_9366/Gazelle_Schuh_Blau_BB5478_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a3194492f1844b5e882aa606009923c3_9366/Gazelle_Schuh_Blau_BB5478_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f1aa6a30d7a9456a9066a60600eb686e_9366/Gazelle_Schuh_Blau_BB5478_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/16ca2b2e70424aa19f78a7fb00806c19_9366/Gazelle_Schuh_Blau_BB5478_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4f40b13ed50148679522a7fb008074df_9366/Gazelle_Schuh_Blau_BB5478_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/659a50e02eeb4977b7cca7fb0080500e_9366/Gazelle_Schuh_Blau_BB5478_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e9ed48da143143fda968a6a900abaa8e_9366/Gazelle_Schuh_Blau_BB5478_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e03091a99c044e2cabc9a60600eb6e72_9366/Gazelle_Schuh_Blau_BB5478_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/e819bd44cfdd4c12b319a606009938b0_9366/Gazelle_Schuh_Blau_BB5478_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9386fe85b8f94df8bee4a7fb0080905a_9366/Gazelle_Schuh_Blau_BB5478_43_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/gazelle-schuh/BB5478.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 4
+            },
+            {
+                "type": "oab",
+                "rank": 6,
+                "articleNumber": "HQ8708",
+                "name": "Campus 00s Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/4659ee058ba34bd2a5d0af500104c17d_9366/Campus_00s_Schuh_Schwarz_HQ8708_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/11dafceeeb034d99950aaf49015814db_9366/Campus_00s_Schuh_Schwarz_HQ8708_010_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/4659ee058ba34bd2a5d0af500104c17d_9366/Campus_00s_Schuh_Schwarz_HQ8708_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/4659ee058ba34bd2a5d0af500104c17d_9366/Campus_00s_Schuh_Schwarz_HQ8708_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/11dafceeeb034d99950aaf49015814db_9366/Campus_00s_Schuh_Schwarz_HQ8708_010_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/506681c25cee4ece9a6aaf500104dbb2_9366/Campus_00s_Schuh_Schwarz_HQ8708_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/fde30f9f78b14fb8a9fbaf500104e57b_9366/Campus_00s_Schuh_Schwarz_HQ8708_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a93a651339a34d269115af500104f641_9366/Campus_00s_Schuh_Schwarz_HQ8708_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d7cac0147c614d428808af5001050224_9366/Campus_00s_Schuh_Schwarz_HQ8708_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a76716648b634481ba31af500104ce25_9366/Campus_00s_Schuh_Schwarz_HQ8708_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cba977e83e8646a39bdcaf5001052feb_9366/Campus_00s_Schuh_Schwarz_HQ8708_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/dad2bda0dfc84132a787af5001050eb4_9366/Campus_00s_Schuh_Schwarz_HQ8708_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0511a3e23b6041d293c6af50010517e1_9366/Campus_00s_Schuh_Schwarz_HQ8708_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cd0a9e774e3d49da9d48af500105220c_9366/Campus_00s_Schuh_Schwarz_HQ8708_43_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/campus-00s-schuh/HQ8708.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 5
+            },
+            {
+                "type": "oab",
+                "rank": 7,
+                "articleNumber": "IG6192",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f8a8e692966748f4a493eb756649ff87_9366/Handball_Spezial_Schuh_Grun_IG6192_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/48827d5dad844c7fb212b83e955f2c82_9366/Handball_Spezial_Schuh_Grun_IG6192_15_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f8a8e692966748f4a493eb756649ff87_9366/Handball_Spezial_Schuh_Grun_IG6192_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f8a8e692966748f4a493eb756649ff87_9366/Handball_Spezial_Schuh_Grun_IG6192_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/55b17777e67748f0bdcbdcdb9e45fe51_9366/Handball_Spezial_Schuh_Grun_IG6192_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/68099330d10c42c79d5805bc5774d861_9366/Handball_Spezial_Schuh_Grun_IG6192_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/499d9b2802564229922a41e699a6ff85_9366/Handball_Spezial_Schuh_Grun_IG6192_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d77e5ed304ed4ab580ca1c359d215bf5_9366/Handball_Spezial_Schuh_Grun_IG6192_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ac6a8a60355544f08cf0174d51fe2b22_9366/Handball_Spezial_Schuh_Grun_IG6192_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d9b24369ce894ad08079dbccd4cccf39_9366/Handball_Spezial_Schuh_Grun_IG6192_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/48827d5dad844c7fb212b83e955f2c82_9366/Handball_Spezial_Schuh_Grun_IG6192_15_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6c90965deaff42d4aa51a4cf2c0e4b32_9366/Handball_Spezial_Schuh_Grun_IG6192_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/765ae6afb9894ffc8aa1fc69e378c5dc_9366/Handball_Spezial_Schuh_Grun_IG6192_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IG6192.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 6
+            },
+            {
+                "type": "oab",
+                "rank": 8,
+                "articleNumber": "H03472",
+                "name": "Campus 00s Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/b0b6d4a107ad4e84b3baaf8700866f07_9366/Campus_00s_Schuh_Grun_H03472_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ba4281fa367b47ec8cb4af8601259d72_9366/Campus_00s_Schuh_Grun_H03472_15_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/b0b6d4a107ad4e84b3baaf8700866f07_9366/Campus_00s_Schuh_Grun_H03472_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b0b6d4a107ad4e84b3baaf8700866f07_9366/Campus_00s_Schuh_Grun_H03472_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/169f11f7ed0443758ab9af8700867feb_9366/Campus_00s_Schuh_Grun_H03472_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/b2f3f623042b48efbaa0af8700868a88_9366/Campus_00s_Schuh_Grun_H03472_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/94f21e1e039b43efb1f0af870086924c_9366/Campus_00s_Schuh_Grun_H03472_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f0caec685aa940d08afeaf8700869b04_9366/Campus_00s_Schuh_Grun_H03472_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/02ab30b8a3914924946baf8700867759_9366/Campus_00s_Schuh_Grun_H03472_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d774c3a930d34279a7e2af87009183e7_9366/Campus_00s_Schuh_Grun_H03472_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ba4281fa367b47ec8cb4af8601259d72_9366/Campus_00s_Schuh_Grun_H03472_15_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0d9c3e92d691425ba0c8af870086a63c_9366/Campus_00s_Schuh_Grun_H03472_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c8c71dff74584359a866af870086af61_9366/Campus_00s_Schuh_Grun_H03472_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/campus-00s-schuh/H03472.html",
+                "pricing": {
+                    "currentPrice": 120,
+                    "standardPrice": 120,
+                    "standardPriceNoVat": 100
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 7
+            },
+            {
+                "type": "oab",
+                "rank": 11,
+                "articleNumber": "IG6275",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c6c7c78972df4a0e9dd14bc1b5098de7_9366/Handball_Spezial_Schuh_Rosa_IG6275_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/92610aa15075472b8b1e7b8a1da12d5d_9366/Handball_Spezial_Schuh_Rosa_IG6275_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c6c7c78972df4a0e9dd14bc1b5098de7_9366/Handball_Spezial_Schuh_Rosa_IG6275_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c6c7c78972df4a0e9dd14bc1b5098de7_9366/Handball_Spezial_Schuh_Rosa_IG6275_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/92610aa15075472b8b1e7b8a1da12d5d_9366/Handball_Spezial_Schuh_Rosa_IG6275_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/44485f919119414faa6a66557af58c19_9366/Handball_Spezial_Schuh_Rosa_IG6275_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c095c06a52fa4dbaa396d6a10fb6d887_9366/Handball_Spezial_Schuh_Rosa_IG6275_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/eb04b5dd26e04ed69610c61d21c834cc_9366/Handball_Spezial_Schuh_Rosa_IG6275_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/cdd23dd0181349e499b3b946c74408c8_9366/Handball_Spezial_Schuh_Rosa_IG6275_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/75be40d1d47f4e8092812e5a313cf0c9_9366/Handball_Spezial_Schuh_Rosa_IG6275_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/993441c901aa478ca7a4a7a3805e6e4f_9366/Handball_Spezial_Schuh_Rosa_IG6275_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/eb5ad79c34b6487dbc93c8a45ccadd00_9366/Handball_Spezial_Schuh_Rosa_IG6275_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IG6275.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 8
+            },
+            {
+                "type": "oab",
+                "rank": 12,
+                "articleNumber": "IF9014",
+                "name": "Handball Spezial Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/3e777fb0e87a4690a28b84f7c01594fd_9366/Handball_Spezial_Schuh_Beige_IF9014_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/9fa1fad1a7484634b135a3f210c07691_9366/Handball_Spezial_Schuh_Beige_IF9014_02_standard_hover.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/3e777fb0e87a4690a28b84f7c01594fd_9366/Handball_Spezial_Schuh_Beige_IF9014_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/3e777fb0e87a4690a28b84f7c01594fd_9366/Handball_Spezial_Schuh_Beige_IF9014_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9fa1fad1a7484634b135a3f210c07691_9366/Handball_Spezial_Schuh_Beige_IF9014_02_standard_hover.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6e6af08e4bd545d0aeea60856095bd1d_9366/Handball_Spezial_Schuh_Beige_IF9014_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9f534446b9ad4063842fa857f40cc895_9366/Handball_Spezial_Schuh_Beige_IF9014_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/a9ffe79bc81a4dcb850167fc53526fab_9366/Handball_Spezial_Schuh_Beige_IF9014_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/30d1526e5be74e4aa881a860a246a983_9366/Handball_Spezial_Schuh_Beige_IF9014_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/ca43a999273e4072ba5160603561af0a_9366/Handball_Spezial_Schuh_Beige_IF9014_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/db54f81c3b2e4391a7e3ebe38ab6bc39_9366/Handball_Spezial_Schuh_Beige_IF9014_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/78a55f1fc5444f6b80ac4915736cb458_9366/Handball_Spezial_Schuh_Beige_IF9014_42_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/handball-spezial-schuh/IF9014.html",
+                "pricing": {
+                    "currentPrice": 110,
+                    "standardPrice": 110,
+                    "standardPriceNoVat": 91.67
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 9
+            },
+            {
+                "type": "oab",
+                "rank": 13,
+                "articleNumber": "IF0642",
+                "name": "Samba Decon Schuh",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/9c8b3c063ec14e3789e7afd2010a5e36_9366/Samba_Decon_Schuh_Weiss_IF0642_01_standard.jpg",
+                "secondaryImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/c418b5ad9a024b2895e7afd4013afcea_9366/Samba_Decon_Schuh_Weiss_IF0642_010_hover_standard.jpg",
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/9c8b3c063ec14e3789e7afd2010a5e36_9366/Samba_Decon_Schuh_Weiss_IF0642_01_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9c8b3c063ec14e3789e7afd2010a5e36_9366/Samba_Decon_Schuh_Weiss_IF0642_01_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/c418b5ad9a024b2895e7afd4013afcea_9366/Samba_Decon_Schuh_Weiss_IF0642_010_hover_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/1a002f882ffc46fe9f64afd2010a74a2_9366/Samba_Decon_Schuh_Weiss_IF0642_02_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/79fdaff6cec04a518b55afd2010a7c8b_9366/Samba_Decon_Schuh_Weiss_IF0642_03_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/6e8801647b9f4ead8519afd2010a8463_9366/Samba_Decon_Schuh_Weiss_IF0642_04_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/f7120afbad8c4ede888cafd2010a9003_9366/Samba_Decon_Schuh_Weiss_IF0642_05_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/d7caa62a97174c5ea8f7afd2010a699e_9366/Samba_Decon_Schuh_Weiss_IF0642_06_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/19fd9ef0372e447bb88eafd2012bd550_9366/Samba_Decon_Schuh_Weiss_IF0642_09_standard.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/0147c493cee5402481a7afd2010a9b78_9366/Samba_Decon_Schuh_Weiss_IF0642_41_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/9472da712c8d47bc92b8afd2010aa65f_9366/Samba_Decon_Schuh_Weiss_IF0642_42_detail.jpg",
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/01f654f333b94d90bdd3afd2010aae99_9366/Samba_Decon_Schuh_Weiss_IF0642_43_detail.jpg"
+                ],
+                "link": "https://www.adidas.at/samba-decon-schuh/IF0642.html",
+                "pricing": {
+                    "currentPrice": 150,
+                    "standardPrice": 150,
+                    "standardPriceNoVat": 125
+                },
+                "brand": "Originals",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "badgeStyle": "new",
+                "badgeText": "Neu",
+                "surface": [
+                    "Straße"
+                ],
+                "recIndex": 10
+            },
+            {
+                "type": "oab",
+                "rank": 14,
+                "articleNumber": "HT3453",
+                "name": "Cushioned Sportswear Crew Socken, 6 Paar",
+                "imageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/22dbc8f581d64c9e9aa3af10009c5ef5_9366/Cushioned_Sportswear_Crew_Socken_6_Paar_Weiss_HT3453_03_standard.jpg",
+                "secondaryImageLink": null,
+                "standaloneImageLink": "https://assets.adidas.com/images/w_600,f_auto,q_auto/22dbc8f581d64c9e9aa3af10009c5ef5_9366/Cushioned_Sportswear_Crew_Socken_6_Paar_Weiss_HT3453_03_standard.jpg",
+                "imageAssets": [
+                    "https://assets.adidas.com/images/w_600,f_auto,q_auto/22dbc8f581d64c9e9aa3af10009c5ef5_9366/Cushioned_Sportswear_Crew_Socken_6_Paar_Weiss_HT3453_03_standard.jpg"
+                ],
+                "link": "https://www.adidas.at/cushioned-sportswear-crew-socken_-6-paar/HT3453.html",
+                "pricing": {
+                    "currentPrice": 23,
+                    "standardPrice": 23,
+                    "standardPriceNoVat": 19.17
+                },
+                "brand": "Sportswear",
+                "gender": "U",
+                "ages": [],
+                "specialLaunch": false,
+                "specialLaunchType": "NONE",
+                "events": [],
+                "badgeStyle": "custom",
+                "badgeText": "6er-Pack",
+                "surface": [],
+                "recIndex": 11
+            }
+        ]
+    }
+}

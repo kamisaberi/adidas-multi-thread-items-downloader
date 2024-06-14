@@ -7,6 +7,8 @@ import json
 import sys
 from typing import Union
 
+from debugpy._vendored.pydevd._pydevd_bundle._debug_adapter.pydevd_schema import NextResponse
+
 product_ids = []
 
 is_p_threads_done = False
@@ -81,7 +83,7 @@ class AdidasThread(threading.Thread):
         product_file_name_prefix: str = "pr-"
         product_files_path: str = "files"
         assigned_items_indices: list[tuple[int, int]] = list()
-        # gotten_items_list: list[dict[tuple[int, int]: int]] = list()
+        # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
         params: dict = {
             'query': 'all',
             "start": 0,
@@ -263,6 +265,7 @@ class AdidasThread(threading.Thread):
                 AdidasThread.Globals.items_per_page = settings["items_per_page"]
                 AdidasThread.Globals.items_count = settings["items_count"]
                 AdidasThread.Globals.start_from = settings["start_from"]
+                AdidasThread.Globals.next_start_point = settings["start_from"]
                 AdidasThread.Globals.reminder_from_last_check = settings["reminder_from_last_check"]
                 AdidasThread.Globals.items_threads_count = settings["items_threads_count"]
                 AdidasThread.Globals.reviews_threads_count = settings["reviews_threads_count"]
@@ -291,5 +294,22 @@ class AdidasThread(threading.Thread):
 
 class AdidasHelper:
     @staticmethod
-    def update_items_count(items_count, reminder):
+    def update_items_count(assigned_items_indices, reminder: int):
+        """
+        TODO update assigned_items_indices values using reminder
+        :param assigned_items_indices:
+        :param reminder:
+        :return:
+        """
+        pass
+
+    @staticmethod
+    def get_reminder_count(model_object_items: list, new_items: list):
+        """
+            TODO should find which of downloaded item from model_product_objects
+            TODO is in new items and calculate the differences number
+        :param model_object_items:
+        :param new_items:
+        :return:
+        """
         pass

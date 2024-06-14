@@ -1,93 +1,206 @@
 {
   "personalizable": false,
-  "division": "Sportswear",
-  "category": "accessories",
+  "division": "Originals",
+  "category": "shoes",
   "sport": "Freizeit",
   "orderable": 1,
-  "preorderable": "false",
   "salePercentage": "0%",
-  "customBadge": "3er-Pack",
   "isFlash": false,
   "productType": null,
-  "previewTo": null,
-  "onlineFrom": "2022-12-01T00:00:00.000Z",
+  "previewTo": "2024-06-07T10:00:00.000Z",
+  "onlineFrom": "2024-06-04T10:00:00.000Z",
   "colorVariations": [
-    "IC1327",
-    "IC1328",
-    "HT3463"
+    "IF7086",
+    "IF7087",
+    "IF7088"
   ],
   "sizeType": [],
   "ageGroups": [],
-  "subTitle": "Sportswear",
-  "link": "/thin-and-light-no-show-socken_-3-paar/IC1327.html",
+  "subTitle": "Originals",
+  "link": "/handball-spezial-schuh/IF7087.html",
   "unisex": true,
-  "altText": "Sportswear Thin and Light No-Show Socken, 3 Paar Schwarz",
+  "altText": "Originals Handball Spezial Schuh Blau",
   "sustainability": [],
-  "surface": [],
-  "genericProductType": [
-    "Socks"
+  "surface": [
+    "Straße"
   ],
+  "genericProductType": [],
   "availableSizes": [],
   "closure": [],
   "strapType": [],
   "ecomTechnologies": [],
-  "keyCategoryCode": "MDT_KEY_CATEGORY_v_00088",
+  "keyCategoryCode": "MDT_KEY_CATEGORY_v_00142",
   "teamKits": [],
-  "displayName": "Thin and Light No-Show Socken, 3 Paar",
-  "rating": 4.6508,
-  "ratingCount": 272,
+  "displayName": "Handball Spezial Schuh",
+  "rating": 4.8039,
+  "ratingCount": 51,
   "image": {
     "cloudinary": true,
-    "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/59339a7ca87648e1993eaefa0117c294_9366/thin-and-light-no-show-socken_-3-paar.jpg"
+    "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/53168a510a5a421281007a794fc4a6f0_9366/handball-spezial-schuh.jpg"
+  },
+  "secondImage": {
+    "cloudinary": true,
+    "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/bc508900850d4b768ae84509825e4a37_9366/handball-spezial-schuh.jpg"
   },
   "images": [
     {
       "cloudinary": true,
-      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/59339a7ca87648e1993eaefa0117c294_9366/thin-and-light-no-show-socken_-3-paar.jpg",
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/53168a510a5a421281007a794fc4a6f0_9366/handball-spezial-schuh.jpg",
       "metadata": {
         "sortOrder": "0",
         "assetUsage": [
           "plp"
         ],
-        "imageStyle": "3D Torso",
-        "view": "Side View",
+        "imageStyle": "Standard",
+        "view": "Side Lateral View",
         "usageTerms": "eCommerce",
-        "subjects": [
-          {
-            "gender": null,
-            "modelChest": null,
-            "modelHeight": null,
-            "modelWaist": null,
-            "productSize": "40-42"
-          }
-        ]
+        "subjects": []
       }
     },
     {
       "cloudinary": true,
-      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/d9c2755a4d9441b5b7b0aefa0117c841_9366/thin-and-light-no-show-socken_-3-paar.jpg",
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/1fa18f47b66e4f4980ba74d48de04ecc_9366/handball-spezial-schuh.jpg",
       "metadata": {
         "sortOrder": "1",
         "assetUsage": [
           "pdp"
         ],
-        "imageStyle": "3D Torso",
-        "view": "Side Center View",
+        "imageStyle": "Standard",
+        "view": "Side Lateral Center View",
         "usageTerms": "eCommerce",
-        "subjects": [
-          {
-            "gender": null,
-            "modelChest": null,
-            "modelHeight": null,
-            "modelWaist": null,
-            "productSize": "40-42"
-          }
-        ]
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/eecfc7b97013400b999901b16fd526ca_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "10",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Detail View 2",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/32761c161cf14ef39f88ed8301942376_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "2",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Top Portrait View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/ccb2bd1de5914749aca1d329ea3172fb_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "3",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Bottom View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/3c01b2fea7e84a27bfa74bf13afbc00d_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "4",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Front Lateral Top View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/b28cb50d6e1246108ef0520cf17550bd_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "5",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Back Lateral Top View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/3caf66baa7644531a2f6d12697118ceb_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "6",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Side Medial Center View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/7316a97c837e4986b8ed83a24bdea730_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "7",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Mirrored Pair View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/bc508900850d4b768ae84509825e4a37_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "8",
+        "assetUsage": [
+          "pdp",
+          "plp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Laces View",
+        "usageTerms": "eCommerce",
+        "subjects": []
+      }
+    },
+    {
+      "cloudinary": true,
+      "src": "https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/2b70afb4fb854a1883d7e0ae9e7fd62a_9366/handball-spezial-schuh.jpg",
+      "metadata": {
+        "sortOrder": "9",
+        "assetUsage": [
+          "pdp"
+        ],
+        "imageStyle": "Standard",
+        "view": "Detail View 1",
+        "usageTerms": "eCommerce",
+        "subjects": []
       }
     }
   ],
-  "productId": "IC1327",
-  "modelId": "EBB71",
-  "price": 10,
-  "salePrice": 10
+  "productId": "IF7087",
+  "modelId": "handBSPZL",
+  "price": 110,
+  "salePrice": 110
 }
