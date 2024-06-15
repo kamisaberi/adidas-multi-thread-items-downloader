@@ -71,7 +71,6 @@ class AdidasThread(threading.Thread):
 
     paths: namedtuple = (namedtuple("paths", ["settings_file_path", "product_file_name_prefix", "product_files_path"])
                          ("files/settings.json", "pr-", "files"))
-
     templates: namedtuple = (namedtuple("templates", ["params", "headers"])
                              ({'query': 'all',
                                "start": 0,
@@ -296,12 +295,14 @@ class AdidasHelper:
         pass
 
     @staticmethod
-    def get_reminder_count(model_object_items: list, new_items: list) -> int:
+    def get_reminder_count(model_product_objects: list, new_items: list) -> int:
         """
             TODO should find which of downloaded item from model_product_objects
             TODO is in new items and calculate the differences number
-        :param model_object_items:
+        :param model_product_objects:
         :param new_items:
         :return:
         """
-        pass
+
+
+
