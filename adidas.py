@@ -68,57 +68,33 @@ class AdidasThread(threading.Thread):
                         ("https://www.adidas.at/api/plp/content-engine/search?",
                          ("https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT"
                           "&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest")))
+
+    paths: namedtuple = (namedtuple("paths", ["settings_file_path", "product_file_name_prefix", "product_files_path"])
+                         ("files/settings.json", "pr-", "files"))
+
+    templates: namedtuple = (namedtuple("templates", ["params", "headers"])
+                             ({'query': 'all',
+                               "start": 0,
+                               "sort": "newest-to-oldest"},
+                              {'authority': 'www.adidas.at',
+                               'accept': '*/*',
+                               'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
+                               'content-type': 'application/json',
+                               'user-agent': 'PostmanRuntime/7.35.0'}
+                              ))
+
     items: list[dict] = list()
     model_product_objects: list[tuple[str, str]] = list()
-
     next_start_point: int = 0
-    settings_file_path: str = "files/settings.json"
-    product_file_name_prefix: str = "pr-"
-    product_files_path: str = "files"
     assigned_items_indices: list[tuple[int, int]] = list()
     # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
-    params: dict = {
-        'query': 'all',
-        "start": 0,
-        "sort": "newest-to-oldest"
-    }
-    headers: dict = {
-        'authority': 'www.adidas.at',
-        'accept': '*/*',
-        'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-        'content-type': 'application/json',
-        'user-agent': 'PostmanRuntime/7.35.0',
-    }
-    # items_url: str = "https://www.adidas.at/api/plp/content-engine/search?"
-    # reviews_url: str = "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
 
-    # Moved from Settings class
     items_per_page: int = 0
     items_count: int = 0
     start_from: int = 0
     reminder_from_last_check: int = 0
     items_threads_count: int = 0
     reviews_threads_count: int = 0
-
-    class Globals:
-        """
-            Static Members:
-                next_start_point:
-                settings_file_path:
-                product_file_name_prefix:
-                product_files_path:
-                gotten_items_list:
-                params:
-                headers:
-                items_url:
-                reviews_url:
-                items_per_page:
-                items_count:
-                start_from:
-                reminder_from_last_check:
-                items_threads_count:
-                reviews_threads_count:
-        """
 
     def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
@@ -152,11 +128,11 @@ class AdidasThread(threading.Thread):
         if AdidasThread.events.should_load_settings.is_set():
             AdidasThread.events.should_load_settings.clear()
             AdidasThread.events.should_update_settings.set()
-        AdidasThread.params["start"] = 0
+        AdidasThread.templates.params["start"] = 0
         response = requests.get(
             AdidasThread.urls.items,
-            headers=AdidasThread.headers,
-            params=AdidasThread.params)
+            headers=AdidasThread.templates.headers,
+            params=AdidasThread.templates.params)
         if response is None or response.status_code != 200:
             return
         try:
@@ -172,14 +148,14 @@ class AdidasThread(threading.Thread):
         self.item_start = AdidasThread.next_start_point
         self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page,
                             AdidasThread.items_count)
-        AdidasThread.params["start"] = self.item_start
+        AdidasThread.templates.params["start"] = self.item_start
         AdidasThread.assigned_items_indices.append((self.item_start, self.item_end))
         AdidasThread.next_start_point += AdidasThread.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
         response = requests.get(AdidasThread.urls.items,
-                                headers=AdidasThread.headers,
-                                params=AdidasThread.params)
+                                headers=AdidasThread.templates.headers,
+                                params=AdidasThread.templates.params)
         if response is None or response.status_code != 200:
             AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert next_start_point
@@ -277,28 +253,27 @@ class AdidasThread(threading.Thread):
 
         @staticmethod
         def load_settings():
-            with open(AdidasThread.settings_file_path, "rt") as f1:
+            with open(AdidasThread.paths.settings_file_path, "rt") as f1:
                 settings = json.loads(f1.read())
-                AdidasThread.Globals.items_per_page = settings["items_per_page"]
-                AdidasThread.Globals.items_count = settings["items_count"]
-                AdidasThread.Globals.start_from = settings["start_from"]
-                AdidasThread.Globals.next_start_point = settings["start_from"]
-                AdidasThread.Globals.reminder_from_last_check = settings["reminder_from_last_check"]
-                AdidasThread.Globals.items_threads_count = settings["items_threads_count"]
-                AdidasThread.Globals.reviews_threads_count = settings["reviews_threads_count"]
-                AdidasThread.Globals.assigned_items_indices = [tuple(pair) for pair in
-                                                               settings["assigned_items_indices"]]
+                AdidasThread.items_per_page = settings["items_per_page"]
+                AdidasThread.items_count = settings["items_count"]
+                AdidasThread.start_from = settings["start_from"]
+                AdidasThread.next_start_point = settings["start_from"]
+                AdidasThread.reminder_from_last_check = settings["reminder_from_last_check"]
+                AdidasThread.items_threads_count = settings["items_threads_count"]
+                AdidasThread.reviews_threads_count = settings["reviews_threads_count"]
+                AdidasThread.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
 
         @staticmethod
         def update_settings(data):
-            AdidasThread.Globals.items_count = data["count"]
-            AdidasThread.Globals.reminder_from_last_check = data["count"] - AdidasThread.Globals.items_count
-            AdidasThread.Globals.items_per_page = data["viewSize"]
+            AdidasThread.items_count = data["count"]
+            AdidasThread.reminder_from_last_check = data["count"] - AdidasThread.items_count
+            AdidasThread.items_per_page = data["viewSize"]
             # AdidasThread.Globals.start_from += data["viewSize"]
 
         @staticmethod
         def save_settings():
-            with open(AdidasThread.settings_file_path, "wt") as f1:
+            with open(AdidasThread.paths.settings_file_path, "wt") as f1:
                 settings = {
                     "start_from": AdidasThread.start_from,
                     "items_per_page": AdidasThread.items_per_page,
