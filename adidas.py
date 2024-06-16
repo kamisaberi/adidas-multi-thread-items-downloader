@@ -127,16 +127,15 @@ class AdidasThread(threading.Thread):
         if self.events.should_load_settings.is_set():
             self.events.should_load_settings.clear()
             self.events.should_update_settings.set()
-        self.templates.params["start"] = 0
 
+        self.templates.params["start"] = 0
         preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
 
         # TODO first i should check , i need to get new reminder or not  ??????
-        if (rem := AdidasHelper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
-            AdidasThread.assigned_items_indices = AdidasHelper.update_items_count(
-                AdidasThread.assigned_items_indices, rem)
+        if (rem := Helper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
+            AdidasThread.assigned_items_indices = Helper.update_items_count(AdidasThread.assigned_items_indices, rem)
 
-    def _retrieve_items(self):
+    def _retrieve_items(self) -> bool:
         self.item_start = AdidasThread.next_start_point
         self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page, AdidasThread.items_count)
         AdidasThread.templates.params["start"] = self.item_start
@@ -144,46 +143,23 @@ class AdidasThread(threading.Thread):
         AdidasThread.next_start_point += AdidasThread.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
-        response = requests.get(AdidasThread.urls.items,
-                                headers=AdidasThread.templates.headers,
-                                params=AdidasThread.templates.params)
-        if response is None or response.status_code != 200:
-            AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
-            # TODO needs to revert next_start_point
-            return
-        response_json = response.json()
-        try:
-            products = response_json["raw"]["itemList"]["items"]
-        except KeyError:
+        preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
+        if preset is None and items is None:
             AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO needs to revert last_start_point
-            return
-        data = response_json["raw"]["itemList"]
-
-
+            return False
 
         if AdidasThread.events.should_update_settings.is_set():
-            AdidasThread.Settings.update_settings(data)
+            AdidasThread.Settings.update_settings(preset)
             AdidasThread.events.should_update_settings.clear()
-        AdidasThread.next_start_point += data["viewSize"]
-        # print(AdidasThread.items)
-        AdidasThread.items.extend(data["items"])
-        # print(AdidasThread.items)
+        AdidasThread.next_start_point += preset["viewSize"]
+        AdidasThread.items.extend(items)
 
         with threading.Lock():
-            AdidasThread.model_product_objects.extend(
-                [(product["modelId"], product["productId"]) for product in products])
+            AdidasThread.model_product_objects.extend([(product["modelId"], product["productId"]) for product in items])
 
-        #     with open(
-        #             os.path.join(
-        #                 AdidasThread.Globals.product_files_path,
-        #                 AdidasThread.Globals.product_file_name_prefix + str(self.id) + ".json"), "wt") as f1:
-        #         f1.write(json.dumps(AdidasThread.items))
-
-        print(self.thread_id, ":", len(AdidasThread.model_product_objects),
-              len(set(AdidasThread.model_product_objects)))
-
-        # self.save_data(AdidasThread.products_data, file_name="products.json")
+        print(self.thread_id, len(AdidasThread.model_product_objects), len(set(AdidasThread.model_product_objects)))
+        return True
 
     def _paginate_reviews(self, product_id, model_id, limit=5, offset=0):
         while True:
@@ -278,7 +254,7 @@ class AdidasThread(threading.Thread):
                 f1.write(json.dumps(settings))
 
 
-class AdidasHelper:
+class Helper:
     @staticmethod
     def update_items_count(assigned_items_indices, reminder: int):
         """
