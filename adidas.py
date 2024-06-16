@@ -303,6 +303,9 @@ class AdidasHelper:
         :param new_items:
         :return:
         """
-
-
-
+        for new_item in new_items:
+            obj = (new_item["modelId"], new_item["productId"])
+            if obj in AdidasThread.model_product_objects:
+                ind = AdidasThread.model_product_objects.index(obj)
+                return ind
+        return -1
