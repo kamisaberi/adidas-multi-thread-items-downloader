@@ -93,8 +93,6 @@ class AdidasThread(threading.Thread):
         self.item_start: int = 0
         self.item_end: int = 0
 
-        # self.model_product_objects = list()
-
     def __eq__(self, other: Union['AdidasThread', TYPES, dict]):
         if isinstance(other, enum.Enum):
             return self.thread_type == other
