@@ -140,7 +140,6 @@ class AdidasThread(threading.Thread):
         except:
             return
 
-
         # TODO first i should check , i need to get new reminder or not  ??????
         rem = AdidasHelper.get_reminder_count(AdidasThread.model_product_objects,
                                               response.json()["raw"]["itemList"]["items"])
