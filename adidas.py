@@ -113,7 +113,7 @@ class Adidas(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
-    def _retrieve_data(self, url: str, headers: dict, params: dict) -> (dict, dict):
+    def _download_items(self, url: str, headers: dict = None, params: dict = None) -> (dict, dict):
         try:
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
@@ -129,7 +129,7 @@ class Adidas(threading.Thread):
             self.events.should_update_settings.set()
 
         self.templates.params["start"] = 0
-        preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
+        preset, items = self._download_items(self.urls.items, self.templates.headers, self.templates.params)
 
         # TODO first i should check , i need to get new reminder or not  ??????
         if (rem := Helper.get_reminder_count(Adidas.model_product_objects, items)) != -1:
@@ -143,7 +143,7 @@ class Adidas(threading.Thread):
         Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
-        preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
+        preset, items = self._download_items(self.urls.items, self.templates.headers, self.templates.params)
         if preset is None and items is None:
             Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
