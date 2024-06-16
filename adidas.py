@@ -22,7 +22,7 @@ class TYPES(enum.Enum):
     DOWNLOAD_PRODUCT_MEDIA = 4
 
 
-class AdidasThread(threading.Thread):
+class Adidas(threading.Thread):
     """
         Instance Members:
             thread_id: int = 0
@@ -93,10 +93,10 @@ class AdidasThread(threading.Thread):
         self.item_start: int = 0
         self.item_end: int = 0
 
-    def __eq__(self, other: Union['AdidasThread', TYPES, dict]):
+    def __eq__(self, other: Union['Adidas', TYPES, dict]):
         if isinstance(other, enum.Enum):
             return self.thread_type == other
-        elif isinstance(other, AdidasThread):
+        elif isinstance(other, Adidas):
             return self.thread_type == other.thread_type
         elif isinstance(other, dict):
             for key, value in other.items():
@@ -132,39 +132,39 @@ class AdidasThread(threading.Thread):
         preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
 
         # TODO first i should check , i need to get new reminder or not  ??????
-        if (rem := Helper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
-            AdidasThread.assigned_items_indices = Helper.update_items_count(AdidasThread.assigned_items_indices, rem)
+        if (rem := Helper.get_reminder_count(Adidas.model_product_objects, items)) != -1:
+            Adidas.assigned_items_indices = Helper.update_items_count(Adidas.assigned_items_indices, rem)
 
     def _retrieve_items(self) -> bool:
-        self.item_start = AdidasThread.next_start_point
-        self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page, AdidasThread.items_count)
-        AdidasThread.templates.params["start"] = self.item_start
-        AdidasThread.assigned_items_indices.append((self.item_start, self.item_end))
-        AdidasThread.next_start_point += AdidasThread.items_per_page
+        self.item_start = Adidas.next_start_point
+        self.item_end = min(Adidas.next_start_point + Adidas.items_per_page, Adidas.items_count)
+        Adidas.templates.params["start"] = self.item_start
+        Adidas.assigned_items_indices.append((self.item_start, self.item_end))
+        Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
 
         preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
         if preset is None and items is None:
-            AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
+            Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
             return False
 
-        if AdidasThread.events.should_update_settings.is_set():
-            AdidasThread.Settings.update_settings(preset)
-            AdidasThread.events.should_update_settings.clear()
+        if Adidas.events.should_update_settings.is_set():
+            Adidas.Settings.update_settings(preset)
+            Adidas.events.should_update_settings.clear()
 
-        AdidasThread.next_start_point += preset["viewSize"]
-        AdidasThread.items.extend(items)
+        Adidas.next_start_point += preset["viewSize"]
+        Adidas.items.extend(items)
 
         with threading.Lock():
-            AdidasThread.model_product_objects.extend([(product["modelId"], product["productId"]) for product in items])
+            Adidas.model_product_objects.extend([(product["modelId"], product["productId"]) for product in items])
 
-        print(self.thread_id, len(AdidasThread.model_product_objects), len(set(AdidasThread.model_product_objects)))
+        print(self.thread_id, len(Adidas.model_product_objects), len(set(Adidas.model_product_objects)))
         return True
 
     def _paginate_reviews(self, product_id, model_id, limit=5, offset=0):
         while True:
-            url = str.format(AdidasThread.urls.reviews, model_id=model_id, limit=limit, offset=offset)
+            url = str.format(Adidas.urls.reviews, model_id=model_id, limit=limit, offset=offset)
             response = requests.get(url)
             if response is None or "totalResults" not in (res := response.json()):
                 break
@@ -224,33 +224,33 @@ class AdidasThread(threading.Thread):
 
         @staticmethod
         def load_settings():
-            with open(AdidasThread.paths.settings_file_path, "rt") as f1:
+            with open(Adidas.paths.settings_file_path, "rt") as f1:
                 settings = json.loads(f1.read())
-                AdidasThread.items_per_page = settings["items_per_page"]
-                AdidasThread.items_count = settings["items_count"]
-                AdidasThread.start_from = settings["start_from"]
-                AdidasThread.next_start_point = settings["start_from"]
-                AdidasThread.reminder_from_last_check = settings["reminder_from_last_check"]
-                AdidasThread.items_threads_count = settings["items_threads_count"]
-                AdidasThread.reviews_threads_count = settings["reviews_threads_count"]
-                AdidasThread.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
+                Adidas.items_per_page = settings["items_per_page"]
+                Adidas.items_count = settings["items_count"]
+                Adidas.start_from = settings["start_from"]
+                Adidas.next_start_point = settings["start_from"]
+                Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
+                Adidas.items_threads_count = settings["items_threads_count"]
+                Adidas.reviews_threads_count = settings["reviews_threads_count"]
+                Adidas.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
 
         @staticmethod
         def update_settings(data):
-            AdidasThread.items_count = data["count"]
-            AdidasThread.reminder_from_last_check = data["count"] - AdidasThread.items_count
-            AdidasThread.items_per_page = data["viewSize"]
+            Adidas.items_count = data["count"]
+            Adidas.reminder_from_last_check = data["count"] - Adidas.items_count
+            Adidas.items_per_page = data["viewSize"]
             # AdidasThread.Globals.start_from += data["viewSize"]
 
         @staticmethod
         def save_settings():
-            with open(AdidasThread.paths.settings_file_path, "wt") as f1:
+            with open(Adidas.paths.settings_file_path, "wt") as f1:
                 settings = {
-                    "start_from": AdidasThread.start_from,
-                    "items_per_page": AdidasThread.items_per_page,
-                    "items_count": AdidasThread.items_count,
-                    "reminder_from_last_check": AdidasThread.reminder_from_last_check,
-                    "assigned_items_indices": AdidasThread.assigned_items_indices
+                    "start_from": Adidas.start_from,
+                    "items_per_page": Adidas.items_per_page,
+                    "items_count": Adidas.items_count,
+                    "reminder_from_last_check": Adidas.reminder_from_last_check,
+                    "assigned_items_indices": Adidas.assigned_items_indices
                 }
                 f1.write(json.dumps(settings))
 
@@ -281,7 +281,7 @@ class Helper:
         """
         for new_item in new_items:
             obj = (new_item["modelId"], new_item["productId"])
-            if obj in AdidasThread.model_product_objects:
-                ind = AdidasThread.model_product_objects.index(obj)
+            if obj in Adidas.model_product_objects:
+                ind = Adidas.model_product_objects.index(obj)
                 return ind
         return -1
