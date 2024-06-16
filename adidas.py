@@ -146,6 +146,7 @@ class AdidasThread(threading.Thread):
         preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
         if preset is None and items is None:
             AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
+            # TODO BUG-#10
             return False
 
         if AdidasThread.events.should_update_settings.is_set():
