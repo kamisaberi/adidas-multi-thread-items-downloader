@@ -114,17 +114,14 @@ class AdidasThread(threading.Thread):
         return hash(self.thread_type)
 
     def _retrieve_data(self, url: str, headers: dict, params: dict) -> (dict, dict):
-        response = requests.get(url, headers=headers, params=params)
-        if response is None or response.status_code != 200:
-            return
         try:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
             data = response.json()["raw"]["itemList"]
-        except:
+            info = dict(list(data.items())[:6])
+            return info, data["items"]
+        except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
-
-        # preset = {"viewSize": data["viewSize"], "count": data["count"], "startIndex": data["startIndex"]}
-        preset = dict(list(data.items())[:6])
-        return preset, data["items"]
 
     def _retrieve_preferences(self):
         if self.events.should_load_settings.is_set():
@@ -132,8 +129,7 @@ class AdidasThread(threading.Thread):
             self.events.should_update_settings.set()
         self.templates.params["start"] = 0
 
-        preset, items = self._retrieve_data(self.urls.items, self.templates.headers,
-                                            self.templates.params)
+        preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
 
         # TODO first i should check , i need to get new reminder or not  ??????
         if (rem := AdidasHelper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
@@ -163,6 +159,9 @@ class AdidasThread(threading.Thread):
             # TODO needs to revert last_start_point
             return
         data = response_json["raw"]["itemList"]
+
+
+
         if AdidasThread.events.should_update_settings.is_set():
             AdidasThread.Settings.update_settings(data)
             AdidasThread.events.should_update_settings.clear()
