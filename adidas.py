@@ -74,7 +74,8 @@ class AdidasThread(threading.Thread):
     templates: namedtuple = (namedtuple("templates", ["params", "headers"])
                              ({'query': 'all',
                                "start": 0,
-                               "sort": "newest-to-oldest"},
+                               "sort": "newest-to-oldest"
+                               },
                               {'authority': 'www.adidas.at',
                                'accept': '*/*',
                                'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
@@ -139,6 +140,8 @@ class AdidasThread(threading.Thread):
         except:
             return
 
+
+        # TODO first i should check , i need to get new reminder or not  ??????
         rem = AdidasHelper.get_reminder_count(AdidasThread.model_product_objects,
                                               response.json()["raw"]["itemList"]["items"])
         AdidasHelper.update_items_count(AdidasThread.assigned_items_indices, rem)
