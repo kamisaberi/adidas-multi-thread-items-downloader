@@ -124,22 +124,26 @@ class AdidasThread(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
+    def _retrieve_data(self, url: str, headers: dict, params: dict) -> (dict, dict):
+        response = requests.get(url, headers=headers, params=params)
+        if response is None or response.status_code != 200:
+            return
+        try:
+            data = response.json()["raw"]["itemList"]
+        except:
+            return None, None
+        preset = {"viewSize": data["viewSize"], "count": data["count"], "startIndex": data["startIndex"]}
+        return preset, data["items"]
+
     def _retrieve_preferences(self):
         if AdidasThread.events.should_load_settings.is_set():
             AdidasThread.events.should_load_settings.clear()
             AdidasThread.events.should_update_settings.set()
         AdidasThread.templates.params["start"] = 0
-        response = requests.get(
-            AdidasThread.urls.items,
-            headers=AdidasThread.templates.headers,
-            params=AdidasThread.templates.params)
-        if response is None or response.status_code != 200:
-            return
-        try:
-            AdidasThread.Settings.update_settings(response.json()["raw"]["itemList"])
-        except:
-            return
-        items = response.json()["raw"]["itemList"]["items"]
+
+        preset, items = self._retrieve_data(AdidasThread.urls.items, AdidasThread.templates.headers,
+                                            AdidasThread.templates.params)
+
         # TODO first i should check , i need to get new reminder or not  ??????
         if (rem := AdidasHelper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
             AdidasThread.assigned_items_indices = AdidasHelper.update_items_count(
@@ -147,8 +151,7 @@ class AdidasThread(threading.Thread):
 
     def _retrieve_items(self):
         self.item_start = AdidasThread.next_start_point
-        self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page,
-                            AdidasThread.items_count)
+        self.item_end = min(AdidasThread.next_start_point + AdidasThread.items_per_page, AdidasThread.items_count)
         AdidasThread.templates.params["start"] = self.item_start
         AdidasThread.assigned_items_indices.append((self.item_start, self.item_end))
         AdidasThread.next_start_point += AdidasThread.items_per_page
