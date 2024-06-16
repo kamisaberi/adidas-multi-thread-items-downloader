@@ -10,8 +10,6 @@ from collections import namedtuple
 
 product_ids = []
 
-is_p_threads_done = False
-
 
 # lock = threading.Lock()
 
@@ -52,11 +50,6 @@ class AdidasThread(threading.Thread):
             reviews_threads_count:
     """
     # INSTANCE PROPERTIES
-    thread_id: int = 0
-    thread_type: TYPES = TYPES.NONE
-    products_data: list[dict] = list()
-    item_start: int = 0
-    item_end: int = 0
 
     # STATIC PROPERTIES
     events: namedtuple = (namedtuple("events", ["should_load_settings", "should_update_settings"])
@@ -88,7 +81,6 @@ class AdidasThread(threading.Thread):
     next_start_point: int = 0
     assigned_items_indices: list[tuple[int, int]] = list()
     # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
-
     items_per_page: int = 0
     items_count: int = 0
     start_from: int = 0
@@ -101,6 +93,8 @@ class AdidasThread(threading.Thread):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.thread_id = thread_id
         self.thread_type = thread_type
+        self.item_start: int = 0
+        self.item_end: int = 0
 
         # self.model_product_objects = list()
 
@@ -132,17 +126,19 @@ class AdidasThread(threading.Thread):
             data = response.json()["raw"]["itemList"]
         except:
             return None, None
-        preset = {"viewSize": data["viewSize"], "count": data["count"], "startIndex": data["startIndex"]}
+
+        # preset = {"viewSize": data["viewSize"], "count": data["count"], "startIndex": data["startIndex"]}
+        preset = dict(list(data.items())[:6])
         return preset, data["items"]
 
     def _retrieve_preferences(self):
-        if AdidasThread.events.should_load_settings.is_set():
-            AdidasThread.events.should_load_settings.clear()
-            AdidasThread.events.should_update_settings.set()
-        AdidasThread.templates.params["start"] = 0
+        if self.events.should_load_settings.is_set():
+            self.events.should_load_settings.clear()
+            self.events.should_update_settings.set()
+        self.templates.params["start"] = 0
 
-        preset, items = self._retrieve_data(AdidasThread.urls.items, AdidasThread.templates.headers,
-                                            AdidasThread.templates.params)
+        preset, items = self._retrieve_data(self.urls.items, self.templates.headers,
+                                            self.templates.params)
 
         # TODO first i should check , i need to get new reminder or not  ??????
         if (rem := AdidasHelper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
