@@ -139,11 +139,11 @@ class AdidasThread(threading.Thread):
             AdidasThread.Settings.update_settings(response.json()["raw"]["itemList"])
         except:
             return
-
+        items = response.json()["raw"]["itemList"]["items"]
         # TODO first i should check , i need to get new reminder or not  ??????
-        rem = AdidasHelper.get_reminder_count(AdidasThread.model_product_objects,
-                                              response.json()["raw"]["itemList"]["items"])
-        AdidasHelper.update_items_count(AdidasThread.assigned_items_indices, rem)
+        if (rem := AdidasHelper.get_reminder_count(AdidasThread.model_product_objects, items)) != -1:
+            AdidasThread.assigned_items_indices = AdidasHelper.update_items_count(
+                AdidasThread.assigned_items_indices, rem)
 
     def _retrieve_items(self):
         self.item_start = AdidasThread.next_start_point
