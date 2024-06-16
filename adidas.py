@@ -146,12 +146,12 @@ class AdidasThread(threading.Thread):
         preset, items = self._retrieve_data(self.urls.items, self.templates.headers, self.templates.params)
         if preset is None and items is None:
             AdidasThread.assigned_items_indices.remove((self.item_start, self.item_end))
-            # TODO needs to revert last_start_point
             return False
 
         if AdidasThread.events.should_update_settings.is_set():
             AdidasThread.Settings.update_settings(preset)
             AdidasThread.events.should_update_settings.clear()
+
         AdidasThread.next_start_point += preset["viewSize"]
         AdidasThread.items.extend(items)
 
