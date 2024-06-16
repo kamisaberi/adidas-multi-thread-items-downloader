@@ -292,7 +292,11 @@ class AdidasHelper:
         :param reminder:
         :return:
         """
-        pass
+        for i in range(len(assigned_items_indices)):
+            assigned_items_indices[i] = (
+                assigned_items_indices[i][0] + reminder, assigned_items_indices[i][1] + reminder)
+
+        return assigned_items_indices
 
     @staticmethod
     def get_reminder_count(model_product_objects: list, new_items: list) -> int:
