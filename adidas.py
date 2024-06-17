@@ -175,11 +175,17 @@ class Adidas(threading.Thread):
             data["reviews"].extend(res["reviews"])
             offset += limit
 
-        self.save_data(data, "reviews.json")
+        # self.save_data(data, "reviews.json")
         return data
 
+    def _get_links(self, item_data: dict) -> list[str]:
+        links = [item_data["image"]["src"], item_data["secondaryImage"]["src"]]
+        for image in item_data["image"]:
+            links.append(image["src"])
+        return links
+
     def _download_images(self, item_data: dict):
-        pass
+        links = self._get_links(item_data)
 
     def read_file_contents(self, file_name):
         with threading.Lock():
