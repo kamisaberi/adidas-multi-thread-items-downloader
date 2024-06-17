@@ -5,7 +5,7 @@ import enum
 import os
 import json
 import sys
-from typing import Union
+from typing import Union, Dict, List, Any
 from collections import namedtuple
 
 
@@ -155,22 +155,28 @@ class Adidas(threading.Thread):
         print(self.thread_id, len(Adidas.model_product_objects), len(set(Adidas.model_product_objects)))
         return True
 
-    def _paginate_reviews(self, product_id, model_id, limit=5, offset=0):
+    def _download_reviews(self, url: str) -> dict | None:
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            if response is None or "totalResults" not in response.json():
+                return None
+            return response.json()
+        except (requests.exceptions.RequestException, ValueError, KeyError):
+            return None
+
+    def retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
+        data = {"product_id": product_id, "reviews": []}
         while True:
             url = str.format(Adidas.urls.reviews, model_id=model_id, limit=limit, offset=offset)
-            response = requests.get(url)
-            if response is None or "totalResults" not in (res := response.json()):
+            res = self._download_reviews(url)
+            if res is None or offset >= res["totalResults"]:
                 break
-            if offset >= res["totalResults"]:
-                break
-            data = {"reviews": res["reviews"], "product_id": product_id}
-            self.save_data(data, "reviews.json")
+            data["reviews"].extend(res["reviews"])
             offset += limit
-        return
 
-    def _get_reviews(self):
-        for model, product in self.model_product_objects:
-            self._paginate_reviews(product_id=product, model_id=model)
+        self.save_data(data, "reviews.json")
+        return data
 
     def _download_images(self, item_data: dict):
         pass
