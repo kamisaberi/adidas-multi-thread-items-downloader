@@ -5,7 +5,7 @@ import enum
 import os
 import json
 import sys
-from typing import Union, Dict, List, Any
+from typing import Union, Dict, List, Any, NamedTuple
 from collections import namedtuple
 
 
@@ -64,6 +64,14 @@ class Adidas(threading.Thread):
         return (namedtuple("events", ["should_load_settings", "should_update_settings"])
                 (should_load_settings, should_update_settings))
 
+    @staticmethod
+    def initialize_items_info():
+        return NamedTuple("items_info",
+                          [("next_start_point", int),
+                           ("model_product_objects", list[tuple[str, str]]),
+                           ("assigned_items_indices", list[tuple[int, int]])])(
+            0, list(), list())
+
     # STATIC PROPERTIES
     events: namedtuple = initialize_events()
     urls, paths, templates = load_templates()
@@ -72,10 +80,10 @@ class Adidas(threading.Thread):
     model_product_objects: list[tuple[str, str]] = list()
     next_start_point: int = 0
     assigned_items_indices: list[tuple[int, int]] = list()
+    items_info: NamedTuple = initialize_items_info()
     # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
     items_per_page: int = 0
     items_count: int = 0
-    start_from: int = 0
     reminder_from_last_check: int = 0
     items_threads_count: int = 0
     reviews_threads_count: int = 0
@@ -224,46 +232,43 @@ class Adidas(threading.Thread):
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
 
-    class Settings:
-        """
-            Static Methods :
-                load_settings :
-                update_settings :
-                save_settings :
-        """
+class Settings:
+    """
+        Static Methods :
+            load_settings :
+            update_settings :
+            save_settings :
+    """
 
-        @staticmethod
-        def load_settings():
-            with open(Adidas.paths.settings_file_path, "rt") as f1:
-                settings = json.loads(f1.read())
-                Adidas.items_per_page = settings["items_per_page"]
-                Adidas.items_count = settings["items_count"]
-                Adidas.start_from = settings["start_from"]
-                Adidas.next_start_point = settings["start_from"]
-                Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
-                Adidas.items_threads_count = settings["items_threads_count"]
-                Adidas.reviews_threads_count = settings["reviews_threads_count"]
-                Adidas.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
+    @staticmethod
+    def load_settings():
+        with open(Adidas.paths.settings_file_path, "rt") as f1:
+            settings = json.loads(f1.read())
+            Adidas.items_per_page = settings["items_per_page"]
+            Adidas.items_count = settings["items_count"]
+            Adidas.next_start_point = settings["start_from"]
+            Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
+            Adidas.items_threads_count = settings["items_threads_count"]
+            Adidas.reviews_threads_count = settings["reviews_threads_count"]
+            Adidas.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
 
-        @staticmethod
-        def update_settings(data):
-            Adidas.items_count = data["count"]
-            Adidas.reminder_from_last_check = data["count"] - Adidas.items_count
-            Adidas.items_per_page = data["viewSize"]
-            # AdidasThread.Globals.start_from += data["viewSize"]
+    @staticmethod
+    def update_settings(data):
+        Adidas.items_count = data["count"]
+        Adidas.reminder_from_last_check = data["count"] - Adidas.items_count
+        Adidas.items_per_page = data["viewSize"]
+        # AdidasThread.Globals.start_from += data["viewSize"]
 
-        @staticmethod
-        def save_settings():
-            with open(Adidas.paths.settings_file_path, "wt") as f1:
-                settings = {
-                    "start_from": Adidas.start_from,
-                    "items_per_page": Adidas.items_per_page,
-                    "items_count": Adidas.items_count,
-                    "reminder_from_last_check": Adidas.reminder_from_last_check,
-                    "assigned_items_indices": Adidas.assigned_items_indices
-                }
-                f1.write(json.dumps(settings))
-
+    @staticmethod
+    def save_settings():
+        with open(Adidas.paths.settings_file_path, "wt") as f1:
+            settings = {
+                "items_per_page": Adidas.items_per_page,
+                "items_count": Adidas.items_count,
+                "reminder_from_last_check": Adidas.reminder_from_last_check,
+                "assigned_items_indices": Adidas.assigned_items_indices
+            }
+            f1.write(json.dumps(settings))
 
 class Helper:
     @staticmethod
