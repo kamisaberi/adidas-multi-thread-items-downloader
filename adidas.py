@@ -188,8 +188,8 @@ class Adidas(threading.Thread):
         links = self._get_links(item_data)
         for link in links:
             response = requests.get(link)
-            # TODO BUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGG
-            with open("1.jpg", "wb") as f1:
+            name, suffix = link.splite("/")[-1].split(".")
+            with open(name + "." + suffix, "wb") as f1:
                 f1.write(response.content)
 
     def read_file_contents(self, file_name):
