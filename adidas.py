@@ -165,7 +165,7 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-    def retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
+    def _retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
         data = {"product_id": product_id, "reviews": []}
         while True:
             url = str.format(Adidas.urls.reviews, model_id=model_id, limit=limit, offset=offset)
@@ -220,7 +220,7 @@ class Adidas(threading.Thread):
             case TYPES.GET_ITEMS_LIST:
                 self._retrieve_items()
             case TYPES.GET_REVIEWS:
-                self._paginate_reviews(0, 0, 0)
+                self._retrieve_reviews(0, 0, 0)
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
 
