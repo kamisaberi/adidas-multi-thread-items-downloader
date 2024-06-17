@@ -8,11 +8,6 @@ import sys
 from typing import Union
 from collections import namedtuple
 
-product_ids = []
-
-
-# lock = threading.Lock()
-
 
 class TYPES(enum.Enum):
     NONE = 0
@@ -130,10 +125,8 @@ class Adidas(threading.Thread):
 
         self.templates.params["start"] = 0
         preset, items = self._download_items(self.urls.items, self.templates.headers, self.templates.params)
-
-        # TODO first i should check , i need to get new reminder or not  ??????
-        if (rem := Helper.get_reminder_count(Adidas.model_product_objects, items)) != -1:
-            Adidas.assigned_items_indices = Helper.update_items_count(Adidas.assigned_items_indices, rem)
+        Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
+                                                                  Adidas.assigned_items_indices, items)
 
     def _retrieve_items(self) -> bool:
         self.item_start = Adidas.next_start_point
@@ -257,21 +250,24 @@ class Adidas(threading.Thread):
 
 class Helper:
     @staticmethod
-    def update_items_count(assigned_items_indices, reminder: int):
+    def update_items_count(model_product_objects, assigned_items_indices, new_items):
         """
         TODO update assigned_items_indices values using reminder
+        :param model_product_objects:
+        :param new_items:
         :param assigned_items_indices:
-        :param reminder:
         :return:
         """
-        for i in range(len(assigned_items_indices)):
-            assigned_items_indices[i] = (
-                assigned_items_indices[i][0] + reminder, assigned_items_indices[i][1] + reminder)
+        # TODO first i should check , i need to get new reminder or not  ??????
+        if (reminder := Helper._get_reminder_count(model_product_objects, new_items)) != -1:
+            for i in range(len(assigned_items_indices)):
+                assigned_items_indices[i] = (
+                    assigned_items_indices[i][0] + reminder, assigned_items_indices[i][1] + reminder)
 
         return assigned_items_indices
 
     @staticmethod
-    def get_reminder_count(model_product_objects: list, new_items: list) -> int:
+    def _get_reminder_count(model_product_objects: list, new_items: list) -> int:
         """
             TODO should find which of downloaded item from model_product_objects
             TODO is in new items and calculate the differences number
@@ -281,7 +277,7 @@ class Helper:
         """
         for new_item in new_items:
             obj = (new_item["modelId"], new_item["productId"])
-            if obj in Adidas.model_product_objects:
-                ind = Adidas.model_product_objects.index(obj)
+            if obj in model_product_objects:
+                ind = model_product_objects.index(obj)
                 return ind
         return -1
