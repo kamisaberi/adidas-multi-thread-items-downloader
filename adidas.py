@@ -7,15 +7,7 @@ import json
 import sys
 from typing import Union, Dict, List, Any, NamedTuple
 from collections import namedtuple
-
-
-class ItemInfo:
-    # def __init__(self, order: int = 1, done: bool = False, reviews_count: int = 0, reviews_done: bool = False,
-    #              media_links: list[str] = [], media_done: bool = False):
-    def __init__(self, order: int, **kwargs):
-        self.order = order
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+from types import ItemInfo
 
 
 class TYPES(enum.Enum):
