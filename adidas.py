@@ -9,6 +9,15 @@ from typing import Union, Dict, List, Any, NamedTuple
 from collections import namedtuple
 
 
+class ItemInfo:
+    # def __init__(self, order: int = 1, done: bool = False, reviews_count: int = 0, reviews_done: bool = False,
+    #              media_links: list[str] = [], media_done: bool = False):
+    def __init__(self, order: int, **kwargs):
+        self.order = order
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+
 class TYPES(enum.Enum):
     NONE = 0
     GET_PREFERENCES = 1
@@ -66,11 +75,13 @@ class Adidas(threading.Thread):
 
     @staticmethod
     def initialize_items_info():
+
         return NamedTuple("items_info",
                           [("next_start_point", int),
+                           ("items", dict[tuple[str, str]: ItemInfo]),
                            ("model_product_objects", list[tuple[str, str]]),
                            ("assigned_items_indices", list[tuple[int, int]])])(
-            0, list(), list())
+            0, dict(), list(), list())
 
     # STATIC PROPERTIES
     events: namedtuple = initialize_events()
@@ -196,8 +207,8 @@ class Adidas(threading.Thread):
         links = self._get_links(item_data)
         for link in links:
             response = requests.get(link)
-            name, suffix = link.splite("/")[-1].split(".")
-            with open(name + "." + suffix, "wb") as f1:
+            name, extension = link.splite("/")[-1].split(".")
+            with open(name + "." + extension, "wb") as f1:
                 f1.write(response.content)
 
     def read_file_contents(self, file_name):
@@ -231,6 +242,7 @@ class Adidas(threading.Thread):
                 self._retrieve_reviews(0, 0, 0)
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
+
 
 class Settings:
     """
@@ -269,6 +281,7 @@ class Settings:
                 "assigned_items_indices": Adidas.assigned_items_indices
             }
             f1.write(json.dumps(settings))
+
 
 class Helper:
     @staticmethod
