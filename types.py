@@ -6,7 +6,5 @@ class ItemInfo:
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def __getattribute__(self, name):
-        k = self.__dict__.setdefault(name)
-        # print(name , k , end="\t\t")
-        return k
+    def __getattr__(self, name):
+        return self.__dict__.setdefault(name)

@@ -1,5 +1,6 @@
 from typing import Any
 
+
 # def __getattr__(name: str) -> Any: ... # incomplete
 
 
@@ -11,11 +12,11 @@ class ItemInfo:
     media_links: list[str] = ...
     media_done: bool = ...
 
-    def __getattr__(self, name: str) -> Any | None: ... # incomplete
-
     def __init__(self, order: int = 1, done: bool = False, reviews_count: int = 0, reviews_done: bool = False,
-                 media_links: list[str] = [], media_done: bool = False) -> None:...
-        # self.reviews_done: bool
+                 media_links: list[str] = [], media_done: bool = False) -> None: ...
 
+    # self.reviews_done: bool
+
+    def __getattr__(self, name: str) -> Any | None: ...  # incomplete
 # @property
 # def reviews_done(self) -> bool: ...

@@ -9,3 +9,4 @@ from foo import Foo
 f1 = Foo(first_name="ali")
 print(f1.first_name)
 print(f1.last_name)
+# print(dir(f1))
