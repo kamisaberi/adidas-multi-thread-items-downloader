@@ -1,13 +1,13 @@
-from collections import namedtuple
+from typing import NamedTuple, Any
 
-URLS = namedtuple("urls", ["items", "reviews"])(
+URLS = NamedTuple("urls", [("items", str), ("reviews", str)])(
     "https://www.adidas.at/api/plp/content-engine/search?",
     "https://www.adidas.at/api/models/{model_id}/reviews?bazaarVoiceLocale=de_AT&feature&includeLocales=de%2A&limit={limit}&offset={offset}&sort=newest"
 )
-PATHS = namedtuple("paths", ["settings_file_path", "product_file_name_prefix", "product_files_path"])(
+PATHS = NamedTuple("paths",
+                   [("settings_file_path", str), ("product_file_name_prefix", str), ("product_files_path", str)])(
     "prefs/settings.json", "pr-", "files")
-TEMPLATES = namedtuple("templates", ["params", "headers"])(
+TEMPLATES = NamedTuple("templates", [("params", dict[str:Any]), ("headers", dict[str:Any])])(
     {"query": "all", "start": 0, "sort": "newest-to-oldest"},
     {"authority": "www.adidas.at", "accept": "*/*", "accept-language": "en-US,en;q=0.9,fa;q=0.8",
-     "content-type": "application/json", "user-agent": "PostmanRuntime/7.35.0"}
-)
+     "content-type": "application/json", "user-agent": "PostmanRuntime/7.35.0"})

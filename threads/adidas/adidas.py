@@ -198,7 +198,7 @@ class Settings:
 
     @staticmethod
     def load_settings():
-        with open(Adidas.paths.settings_file_path, "rt") as f1:
+        with open(preset.PATHS.settings_file_path, "rt") as f1:
             settings = json.loads(f1.read())
             Adidas.items_per_page = settings["items_per_page"]
             Adidas.items_count = settings["items_count"]
@@ -217,7 +217,7 @@ class Settings:
 
     @staticmethod
     def save_settings():
-        with open(Adidas.paths.settings_file_path, "wt") as f1:
+        with open(preset.PATHS.settings_file_path, "wt") as f1:
             settings = {
                 "items_per_page": Adidas.items_per_page,
                 "items_count": Adidas.items_count,
