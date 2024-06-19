@@ -26,4 +26,6 @@ class Adidas:
             reviews_threads_count:
     """
 
-    Settings = None
+    items_per_page = None
+    next_start_point: int = ...
+    Settings = ...

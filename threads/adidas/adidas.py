@@ -6,7 +6,7 @@ import json
 from typing import Union, Any
 from collections import namedtuple
 from threads.base.types import ItemInfo
-import  preset
+import preset
 
 
 class TYPES(enum.Enum):
@@ -83,8 +83,7 @@ class Adidas(threading.Thread):
             self.events.should_load_settings.clear()
             self.events.should_update_settings.set()
 
-        self.templates.params["start"] = 0
-        preset, items = self._download_items(self.urls.items, self.templates.headers, self.templates.params)
+        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, preset.TEMPLATES.params)
         Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
                                                                   Adidas.assigned_items_indices, items)
 
