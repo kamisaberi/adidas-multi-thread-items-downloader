@@ -1,8 +1,4 @@
-import threading
-from typing import Any
-import adidas as ad
-import sys
-import time
+from threads import adidas as ad
 
 # sys.stdout = open("logs/" + str(int(time.time())) + ".txt", "wt")
 

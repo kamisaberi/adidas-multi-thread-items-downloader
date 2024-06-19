@@ -48,7 +48,7 @@ class Adidas(threading.Thread):
 
     @staticmethod
     def load_templates():
-        with open("prefs/templates.json") as file:
+        with open("../prefs/templates.json") as file:
             data = json.load(file)
             named_tuples = []
             for key, value in data.items():
