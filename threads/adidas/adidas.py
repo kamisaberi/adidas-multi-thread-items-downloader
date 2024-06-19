@@ -97,7 +97,7 @@ class Adidas(threading.Thread):
         Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
         info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, params)
-        if preset is None and items is None:
+        if info is None and items is None:
             Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
             return False

@@ -1,4 +1,7 @@
 class Adidas:
+    def __init__(self):
+        self.thread_type = None
+
     """
         Instance Members:
             thread_id: int = 0
@@ -26,6 +29,7 @@ class Adidas:
             reviews_threads_count:
     """
 
+    items_count = None
     items = None
     events = None
     items_per_page = None
