@@ -31,9 +31,9 @@ class Adidas(threading.Thread):
 
     items: list[dict] = list()
     items_info: dict[tuple[str, str]: ItemInfo] = dict()
-    model_product_objects: list[tuple[str, str]] = list()
+    # model_product_objects: list[tuple[str, str]] = list()
     next_start_point: int = 0
-    assigned_items_indices: list[tuple[int, int]] = list()
+    # assigned_items_indices: list[tuple[int, int]] = list()
     items_per_page: int = 0
     items_count: int = 0
     reminder_from_last_check: int = 0
