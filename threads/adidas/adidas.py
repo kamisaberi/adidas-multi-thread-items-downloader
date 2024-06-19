@@ -1,13 +1,12 @@
 import threading
 import requests
-import time
 import enum
 import os
 import json
-import sys
-from typing import Union, Dict, List, Any, NamedTuple
+from typing import Union, Any
 from collections import namedtuple
-from base.types import ItemInfo
+from threads.base.types import ItemInfo
+import  preset
 
 
 class TYPES(enum.Enum):
@@ -19,43 +18,6 @@ class TYPES(enum.Enum):
 
 
 class Adidas(threading.Thread):
-    """
-        Instance Members:
-            thread_id: int = 0
-            thread_type: TYPES = TYPES.NONE
-            products_data: list[dict] = []
-            item_start = 0
-            item_end = 0
-        Static Members :
-            items: list[dict] = []
-            model_product_objects: list[tuple[str, str]] = list()
-            next_start_point:
-            settings_file_path:
-            product_file_name_prefix:
-            product_files_path:
-            gotten_items_list:
-            params:
-            headers:
-            items_url:
-            reviews_url:
-            items_per_page:
-            items_count:
-            start_from:
-            reminder_from_last_check:
-            items_threads_count:
-            reviews_threads_count:
-    """
-
-    @staticmethod
-    def load_templates():
-        with open("../prefs/templates.json") as file:
-            data = json.load(file)
-            named_tuples = []
-            for key, value in data.items():
-                nt = namedtuple("urls", list(value.keys()))(*list(value.values()))
-                named_tuples.append(nt)
-            return named_tuples
-
     @staticmethod
     def initialize_events():
         should_load_settings = threading.Event()
@@ -65,26 +27,13 @@ class Adidas(threading.Thread):
         return (namedtuple("events", ["should_load_settings", "should_update_settings"])
                 (should_load_settings, should_update_settings))
 
-    @staticmethod
-    def initialize_items_info():
-
-        return NamedTuple("items_info",
-                          [("next_start_point", int),
-                           ("items", dict[tuple[str, str]: ItemInfo]),
-                           ("model_product_objects", list[tuple[str, str]]),
-                           ("assigned_items_indices", list[tuple[int, int]])])(
-            0, dict(), list(), list())
-
-    # STATIC PROPERTIES
     events: namedtuple = initialize_events()
-    urls, paths, templates = load_templates()
 
     items: list[dict] = list()
+    items_info: dict[tuple[str, str]: ItemInfo] = dict()
     model_product_objects: list[tuple[str, str]] = list()
     next_start_point: int = 0
     assigned_items_indices: list[tuple[int, int]] = list()
-    items_info: NamedTuple = initialize_items_info()
-    # assigned_items_indices: list[dict[tuple[int, int]: int]] = list()
     items_per_page: int = 0
     items_count: int = 0
     reminder_from_last_check: int = 0

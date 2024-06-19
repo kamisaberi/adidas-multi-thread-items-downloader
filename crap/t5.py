@@ -7,7 +7,7 @@ class Test:
     @staticmethod
     def load():
         print("asdsaaszdFgszdFsdaffdgh")
-        with open("prefs/templates.json") as file:
+        with open("../threads/adidas/templates.json") as file:
             data = json.load(file)
             return namedtuple("urls", list(data["urls"].keys()))(list(data["urls"].values()))
 

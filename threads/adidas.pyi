@@ -1,2 +1,0 @@
-class Adidas:
-    Settings = None
