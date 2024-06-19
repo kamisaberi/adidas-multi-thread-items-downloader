@@ -1,3 +1,4 @@
+import copy
 import threading
 import requests
 import enum
@@ -90,19 +91,19 @@ class Adidas(threading.Thread):
     def _retrieve_items(self) -> bool:
         self.item_start = Adidas.next_start_point
         self.item_end = min(Adidas.next_start_point + Adidas.items_per_page, Adidas.items_count)
-        Adidas.templates.params["start"] = self.item_start
+        params = copy.deepcopy(preset.TEMPLATES.params)
+        params["start"] = self.item_start
         Adidas.assigned_items_indices.append((self.item_start, self.item_end))
         Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
-
-        preset, items = self._download_items(self.urls.items, self.templates.headers, self.templates.params)
+        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, params)
         if preset is None and items is None:
             Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
             return False
 
         if Adidas.events.should_update_settings.is_set():
-            Adidas.Settings.update_settings(preset)
+            Adidas.Settings.update_settings(info)
             Adidas.events.should_update_settings.clear()
 
         Adidas.next_start_point += preset["viewSize"]
