@@ -7,7 +7,7 @@ import json
 import sys
 from typing import Union, Dict, List, Any, NamedTuple
 from collections import namedtuple
-from types import ItemInfo
+from base.types import ItemInfo
 
 
 class TYPES(enum.Enum):
