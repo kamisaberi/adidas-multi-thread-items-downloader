@@ -93,6 +93,7 @@ class Adidas(threading.Thread):
         self.item_end = min(Adidas.next_start_point + Adidas.items_per_page, Adidas.items_count)
         params = copy.deepcopy(preset.TEMPLATES.params)
         params["start"] = self.item_start
+
         Adidas.assigned_items_indices.append((self.item_start, self.item_end))
         Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
@@ -110,9 +111,11 @@ class Adidas(threading.Thread):
         Adidas.items.extend(items)
 
         with threading.Lock():
-            Adidas.model_product_objects.extend([(product["modelId"], product["productId"]) for product in items])
+            Adidas.items_info.update(
+                {(item["modelId"], item["productId"]): ItemInfo(order=self.item_start + offset)}
+                for offset, item in enumerate(items))
 
-        print(self.thread_id, len(Adidas.model_product_objects), len(set(Adidas.model_product_objects)))
+        print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
     def _download_reviews(self, url: str) -> dict | None:
