@@ -128,7 +128,7 @@ class Adidas(threading.Thread):
     def _retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
         data = {"product_id": product_id, "reviews": []}
         while True:
-            url = str.format(Adidas.urls.reviews, model_id=model_id, limit=limit, offset=offset)
+            url = str.format(preset.URLS.reviews, model_id=model_id, limit=limit, offset=offset)
             res = self._download_reviews(url)
             if res is None or offset >= res["totalResults"]:
                 break
