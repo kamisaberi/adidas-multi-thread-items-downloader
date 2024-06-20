@@ -34,22 +34,20 @@ class TestThread(threading.Thread):
 
     def run(self):
         while lock.locked():
-            print("locked")
+            print(self.thread_id, "locked")
             time.sleep(0.5)
             continue
         if self.write_file:
             if not lock.locked():
                 lock.acquire()
-                print(lock.locked())
-                print("locked")
-                print("WRITING INTO FILE STARTED")
+                print(self.thread_id, lock.locked())
+                print(self.thread_id, "WRITING INTO FILE STARTED")
                 time.sleep(5)
-                print("WRITING INTO FILE FINISHED")
+                print(self.thread_id, "WRITING INTO FILE FINISHED")
                 lock.release()
-                print(lock.locked())
-                print("locked")
+                print(self.thread_id, lock.locked())
         else:
-            print("REGULAR THREAD")
+            print(self.thread_id, "REGULAR THREAD")
 
 
 if __name__ == "__main__":
