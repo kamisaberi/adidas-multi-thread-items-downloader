@@ -12,13 +12,7 @@ def main():
         time.sleep(1)
         if threading.active_count() > 10:
             continue
-        prb = random.random()
-        if prb >= 0.5:
-            print(k, "WRITE FILE")
-            tt = TestThread(thread_id=k, write_file=True)
-        else:
-            print(k, "NOTHING")
-            tt = TestThread(thread_id=k, write_file=False)
+        tt = TestThread(thread_id=k, write_file=True, daemon=True)
         tt.start()
         tt.join(0.1)
         threads.append(tt)
@@ -34,20 +28,13 @@ class TestThread(threading.Thread):
 
     def run(self):
         while lock.locked():
-            print(self.thread_id, "locked")
             time.sleep(0.5)
             continue
-        if self.write_file:
-            if not lock.locked():
-                lock.acquire()
-                print(self.thread_id, lock.locked())
-                print(self.thread_id, "WRITING INTO FILE STARTED")
-                time.sleep(5)
-                print(self.thread_id, "WRITING INTO FILE FINISHED")
-                lock.release()
-                print(self.thread_id, lock.locked())
-        else:
-            print(self.thread_id, "REGULAR THREAD")
+        lock.acquire()
+        print(self.thread_id, "WRITING INTO FILE STARTED")
+        time.sleep(5)
+        print(self.thread_id, "WRITING INTO FILE FINISHED")
+        lock.release()
 
 
 if __name__ == "__main__":
