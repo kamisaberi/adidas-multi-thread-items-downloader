@@ -11,6 +11,7 @@ import preset
 
 lock = threading.Lock()
 
+
 class TYPES(enum.Enum):
     NONE = 0
     GET_PREFERENCES = 1
@@ -28,6 +29,13 @@ class Adidas(threading.Thread):
         should_update_settings.clear()
         return (namedtuple("events", ["should_load_settings", "should_update_settings"])
                 (should_load_settings, should_update_settings))
+
+    @staticmethod
+    def update_items_info(item_start: int, items: list):
+        with lock:
+            Adidas.items_info.update(
+                {(item["modelId"], item["productId"]): ItemInfo(order=item_start + offset)}
+                for offset, item in enumerate(items))
 
     events: namedtuple = initialize_events()
 
@@ -111,10 +119,7 @@ class Adidas(threading.Thread):
         Adidas.next_start_point += preset["viewSize"]
         Adidas.items.extend(items)
 
-        with lock:
-            Adidas.items_info.update(
-                {(item["modelId"], item["productId"]): ItemInfo(order=self.item_start + offset)}
-                for offset, item in enumerate(items))
+        Adidas.update_items_info(self.item_start, items)
 
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True

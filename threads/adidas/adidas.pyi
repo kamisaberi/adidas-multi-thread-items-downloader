@@ -37,4 +37,7 @@ class Adidas:
 
     def __init__(self):...
 
+    @staticmethod
+    def update_items_info(item_start, items):...
+
 
