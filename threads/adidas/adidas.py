@@ -9,6 +9,7 @@ from collections import namedtuple
 from threads.base.types import ItemInfo
 import preset
 
+lock = threading.Lock()
 
 class TYPES(enum.Enum):
     NONE = 0
@@ -110,7 +111,7 @@ class Adidas(threading.Thread):
         Adidas.next_start_point += preset["viewSize"]
         Adidas.items.extend(items)
 
-        with threading.Lock():
+        with lock:
             Adidas.items_info.update(
                 {(item["modelId"], item["productId"]): ItemInfo(order=self.item_start + offset)}
                 for offset, item in enumerate(items))
