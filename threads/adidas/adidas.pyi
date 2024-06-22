@@ -1,4 +1,5 @@
-class Adidas:
+import  threading
+class Adidas(threading.Thread):
     """
         Instance Members:
             thread_id: int = 0
