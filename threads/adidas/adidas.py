@@ -79,14 +79,14 @@ class Adidas(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
-    def create_params(self):
+    def _create_params(self):
         params = copy.deepcopy(preset.TEMPLATES.params)
         params["start"] = self.item_start
         return params
 
     def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
         try:
-            params = self.create_params()
+            params = self._create_params()
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             data = response.json()["raw"]["itemList"]
@@ -95,7 +95,7 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
 
-    def get_changed_items(self) -> (int, int, list[dict], dict[tuple[str, str]: ItemInfo]):
+    def _get_changed_items(self) -> (int, int, list[dict], dict[tuple[str, str]: ItemInfo]):
         if len(list(Adidas.items_info.keys())) == 0:
             info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
             return -1, -1, items, None
@@ -105,51 +105,35 @@ class Adidas(threading.Thread):
                 obj = (item["modelId"], item["productId"])
                 if obj in list(Adidas.items_info.keys()):
                     gotten_index = Adidas.items_info.keys().index(obj)
+                    self.item_start = 0
                     return new_index, gotten_index, items[:new_index + 1], dict(
                         list(Adidas.items_info.items())[:gotten_index + 1])
                 self.item_start += Adidas.items_per_page
 
     def _retrieve_preferences(self):
         while True:
-            if self.events.should_load_settings.is_set():
-                self.events.should_load_settings.clear()
-                self.events.should_update_settings.set()
-
-            new_index, gotten_index, new_items, removed_items = self.get_changed_items()
+            new_index, gotten_index, new_items, removed_items = self._get_changed_items()
             # TODO use returned items to decide whether terminate all threads or other thing
-
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
         self.item_start = Adidas.next_start_point
         self.item_end = min(Adidas.next_start_point + Adidas.items_per_page, Adidas.items_count)
-        params = copy.deepcopy(preset.TEMPLATES.params)
-        params["start"] = self.item_start
-
-        Adidas.assigned_items_indices.append((self.item_start, self.item_end))
         Adidas.next_start_point += Adidas.items_per_page
-        # print(AdidasThread.Globals.gotten_items_list)
         info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
         if info is None and items is None:
-            Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
             return False
 
-        if Adidas.events.should_update_settings.is_set():
-            Adidas.Settings.update_settings(info)
-            Adidas.events.should_update_settings.clear()
-
         Adidas.next_start_point += preset["viewSize"]
         Adidas.items.extend(items)
-
         Adidas.update_items_info(self.item_start, items)
-
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
-
-    def _download_reviews(self, url: str) -> dict | None:
+    def _download_reviews(self, model_id, limit, offset) -> dict | None:
         try:
+            url = str.format(preset.URLS.reviews, model_id=model_id, limit=limit, offset=offset)
             response = requests.get(url)
             response.raise_for_status()
             if response is None or "totalResults" not in response.json():
@@ -158,27 +142,21 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-
     def _retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
         data = {"product_id": product_id, "reviews": []}
         while True:
-            url = str.format(preset.URLS.reviews, model_id=model_id, limit=limit, offset=offset)
-            res = self._download_reviews(url)
+            res = self._download_reviews(model_id=model_id, limit=limit, offset=offset)
             if res is None or offset >= res["totalResults"]:
                 break
             data["reviews"].extend(res["reviews"])
             offset += limit
-
-        # self.save_data(data, "reviews.json")
         return data
-
 
     def _get_links(self, item_data: dict) -> list[str]:
         links = [item_data["image"]["src"], item_data["secondaryImage"]["src"]]
         for image in item_data["image"]:
             links.append(image["src"])
         return links
-
 
     def _download_images(self, item_data: dict):
         links = self._get_links(item_data)
@@ -187,29 +165,6 @@ class Adidas(threading.Thread):
             name, extension = link.splite("/")[-1].split(".")
             with open(name + "." + extension, "wb") as f1:
                 f1.write(response.content)
-
-
-    def read_file_contents(self, file_name):
-        with threading.Lock():
-            with open(str(self.thread_id) + file_name, "r") as f:
-                file_contents = json.loads(f.read())
-                f.close()
-            return file_contents
-
-
-    def save_data(self, data, file_name):
-        loaded = {
-            "items": []
-        }
-        if os.path.exists(file_name):
-            file_contents = self.read_file_contents(file_name)
-            loaded["items"].extend(file_contents["items"])
-        loaded["items"].append(data)
-        with threading.Lock:
-            with open(str(self.thread_id) + file_name, "w") as f:
-                json.dump(loaded, f)
-        return
-
 
     def run(self):
         print(self.thread_id, self.thread_type)
@@ -222,7 +177,6 @@ class Adidas(threading.Thread):
                 self._retrieve_reviews(0, 0, 0)
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
-
 
     class Settings:
         """
@@ -261,38 +215,3 @@ class Adidas(threading.Thread):
                     "assigned_items_indices": Adidas.assigned_items_indices
                 }
                 f1.write(json.dumps(settings))
-
-
-class Helper:
-    @staticmethod
-    def update_items_count(model_product_objects, assigned_items_indices, new_items):
-        """
-        TODO update assigned_items_indices values using reminder
-        :param model_product_objects:
-        :param new_items:
-        :param assigned_items_indices:
-        :return:
-        """
-        # TODO first i should check , i need to get new reminder or not  ??????
-        if (reminder := Helper._get_reminder_count(model_product_objects, new_items)) != -1:
-            for i in range(len(assigned_items_indices)):
-                assigned_items_indices[i] = (
-                    assigned_items_indices[i][0] + reminder, assigned_items_indices[i][1] + reminder)
-
-        return assigned_items_indices
-
-    @staticmethod
-    def _get_reminder_count(model_product_objects: list, new_items: list) -> int:
-        """
-            TODO should find which of downloaded item from model_product_objects
-            TODO is in new items and calculate the differences number
-        :param model_product_objects:
-        :param new_items:
-        :return:
-        """
-        for new_item in new_items:
-            obj = (new_item["modelId"], new_item["productId"])
-            if obj in model_product_objects:
-                ind = model_product_objects.index(obj)
-                return ind
-        return -1
