@@ -95,17 +95,19 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
 
-    def get_new_items_offset(self) -> (int, int, list, list):
-        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
-        for new_index, item in enumerate(items):
-            obj = (item["modelId"], item["productId"])
-            if obj in list(Adidas.items_info.keys()):
-                gotten_index = Adidas.items_info.keys().index(obj)
-                return (new_index,
-                        gotten_index,
-                        items[:new_index + 1],
-                        dict(list(Adidas.items_info.items())[:gotten_index + 1])
-                        )
+    def get_changed_items(self) -> (int, int, list[dict], dict[tuple[str, str]: ItemInfo]):
+        if len(list(Adidas.items_info.keys())) == 0:
+            info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
+            return -1, -1, items, None
+        while True:
+            info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
+            for new_index, item in enumerate(items):
+                obj = (item["modelId"], item["productId"])
+                if obj in list(Adidas.items_info.keys()):
+                    gotten_index = Adidas.items_info.keys().index(obj)
+                    return new_index, gotten_index, items[:new_index + 1], dict(
+                        list(Adidas.items_info.items())[:gotten_index + 1])
+                self.item_start += Adidas.items_per_page
 
     def _retrieve_preferences(self):
         while True:
@@ -113,10 +115,9 @@ class Adidas(threading.Thread):
                 self.events.should_load_settings.clear()
                 self.events.should_update_settings.set()
 
-            index = self.calculate_new_items_offset()
-            if index
-                Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
-                                                                          Adidas.assigned_items_indices, items)
+            new_index, gotten_index, new_items, removed_items = self.get_changed_items()
+            # TODO use returned items to decide whether terminate all threads or other thing
+
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
@@ -146,6 +147,7 @@ class Adidas(threading.Thread):
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
+
     def _download_reviews(self, url: str) -> dict | None:
         try:
             response = requests.get(url)
@@ -155,6 +157,7 @@ class Adidas(threading.Thread):
             return response.json()
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
+
 
     def _retrieve_reviews(self, product_id, model_id, limit=5, offset=0) -> dict[str, list[Any] | Any]:
         data = {"product_id": product_id, "reviews": []}
@@ -169,11 +172,13 @@ class Adidas(threading.Thread):
         # self.save_data(data, "reviews.json")
         return data
 
+
     def _get_links(self, item_data: dict) -> list[str]:
         links = [item_data["image"]["src"], item_data["secondaryImage"]["src"]]
         for image in item_data["image"]:
             links.append(image["src"])
         return links
+
 
     def _download_images(self, item_data: dict):
         links = self._get_links(item_data)
@@ -183,12 +188,14 @@ class Adidas(threading.Thread):
             with open(name + "." + extension, "wb") as f1:
                 f1.write(response.content)
 
+
     def read_file_contents(self, file_name):
         with threading.Lock():
             with open(str(self.thread_id) + file_name, "r") as f:
                 file_contents = json.loads(f.read())
                 f.close()
             return file_contents
+
 
     def save_data(self, data, file_name):
         loaded = {
@@ -203,6 +210,7 @@ class Adidas(threading.Thread):
                 json.dump(loaded, f)
         return
 
+
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
@@ -214,6 +222,7 @@ class Adidas(threading.Thread):
                 self._retrieve_reviews(0, 0, 0)
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
+
 
     class Settings:
         """
