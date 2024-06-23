@@ -56,6 +56,8 @@ class Adidas(threading.Thread):
         self.thread_type = thread_type
         self.item_start: int = 0
         self.item_end: int = 0
+        self.downloaded_items: list[dict] = list()
+        self.downloaded_items_info: dict[tuple[str, str]: ItemInfo] = dict()
 
     def __eq__(self, other: Union['Adidas', TYPES, dict]):
         if isinstance(other, enum.Enum):
@@ -102,7 +104,7 @@ class Adidas(threading.Thread):
             for new_index, item in enumerate(items):
                 obj = (item["modelId"], item["productId"])
                 if obj in list(Adidas.items_info.keys()):
-                    gotten_index = Adidas.items_info.keys().index(obj)
+                    gotten_index = list(Adidas.items_info.keys()).index(obj)
                     self.item_start = 0
                     return new_index, gotten_index, items[:new_index + 1], dict(
                         list(Adidas.items_info.items())[:gotten_index + 1])
