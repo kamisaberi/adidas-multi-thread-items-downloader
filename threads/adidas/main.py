@@ -1,8 +1,6 @@
 import adidas as ad
 
-import  preset
-# sys.stdout = open("logs/" + str(int(time.time())) + ".txt", "wt")
-
+import preset
 
 if __name__ == "__main__":
     ad.Adidas.Settings.load_settings()

@@ -79,8 +79,14 @@ class Adidas(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
-    def _download_items(self, url: str, headers: dict = None, params: dict = None) -> (dict, dict):
+    def create_params(self):
+        params = copy.deepcopy(preset.TEMPLATES.params)
+        params["start"] = self.item_start
+        return params
+
+    def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
         try:
+            params = self.create_params()
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             data = response.json()["raw"]["itemList"]
@@ -89,15 +95,28 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
 
+    def get_new_items_offset(self) -> (int, int, list, list):
+        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
+        for new_index, item in enumerate(items):
+            obj = (item["modelId"], item["productId"])
+            if obj in list(Adidas.items_info.keys()):
+                gotten_index = Adidas.items_info.keys().index(obj)
+                return (new_index,
+                        gotten_index,
+                        items[:new_index + 1],
+                        dict(list(Adidas.items_info.items())[:gotten_index + 1])
+                        )
+
     def _retrieve_preferences(self):
         while True:
             if self.events.should_load_settings.is_set():
                 self.events.should_load_settings.clear()
                 self.events.should_update_settings.set()
 
-            info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, preset.TEMPLATES.params)
-            Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
-                                                                      Adidas.assigned_items_indices, items)
+            index = self.calculate_new_items_offset()
+            if index
+                Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
+                                                                          Adidas.assigned_items_indices, items)
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
@@ -109,7 +128,7 @@ class Adidas(threading.Thread):
         Adidas.assigned_items_indices.append((self.item_start, self.item_end))
         Adidas.next_start_point += Adidas.items_per_page
         # print(AdidasThread.Globals.gotten_items_list)
-        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, params)
+        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
         if info is None and items is None:
             Adidas.assigned_items_indices.remove((self.item_start, self.item_end))
             # TODO BUG-#10
