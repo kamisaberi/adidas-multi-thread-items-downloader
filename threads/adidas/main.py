@@ -1,5 +1,6 @@
-from threads import adidas as ad
+import adidas as ad
 
+import  preset
 # sys.stdout = open("logs/" + str(int(time.time())) + ".txt", "wt")
 
 
@@ -7,10 +8,9 @@ if __name__ == "__main__":
     ad.Adidas.Settings.load_settings()
     # print(ad.AdidasThread.Globals.assigned_items_indices)
     # exit(0)
-
-    thread = ad.Adidas(0, ad.TYPES.GET_PREFERENCES, daemon=True)
+    thread = ad.Adidas(0, ad.TYPES.CHECK_PREFERENCES, daemon=True)
     thread.start()
-    thread.join()
+    thread.join(preset.INITIAL_CHECK_PREFERENCES_DELAY)
     threads: [ad.Adidas] = []
     while True:
         if len(ad.Adidas.model_product_objects) < ad.Adidas.items_count:

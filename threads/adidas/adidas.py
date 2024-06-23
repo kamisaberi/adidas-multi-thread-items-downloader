@@ -8,13 +8,14 @@ from typing import Union, Any
 from collections import namedtuple
 from threads.base.types import ItemInfo
 import preset
+import time
 
 lock = threading.Lock()
 
 
 class TYPES(enum.Enum):
     NONE = 0
-    GET_PREFERENCES = 1
+    CHECK_PREFERENCES = 1
     GET_ITEMS_LIST = 2
     GET_REVIEWS = 3
     DOWNLOAD_PRODUCT_MEDIA = 4
@@ -89,13 +90,15 @@ class Adidas(threading.Thread):
             return None, None
 
     def _retrieve_preferences(self):
-        if self.events.should_load_settings.is_set():
-            self.events.should_load_settings.clear()
-            self.events.should_update_settings.set()
+        while True:
+            if self.events.should_load_settings.is_set():
+                self.events.should_load_settings.clear()
+                self.events.should_update_settings.set()
 
-        info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, preset.TEMPLATES.params)
-        Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
-                                                                  Adidas.assigned_items_indices, items)
+            info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers, preset.TEMPLATES.params)
+            Adidas.assigned_items_indices = Helper.update_items_count(Adidas.model_product_objects,
+                                                                      Adidas.assigned_items_indices, items)
+            time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
         self.item_start = Adidas.next_start_point
@@ -184,7 +187,7 @@ class Adidas(threading.Thread):
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
-            case TYPES.GET_PREFERENCES:
+            case TYPES.CHECK_PREFERENCES:
                 self._retrieve_preferences()
             case TYPES.GET_ITEMS_LIST:
                 self._retrieve_items()
@@ -193,44 +196,43 @@ class Adidas(threading.Thread):
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
 
+    class Settings:
+        """
+            Static Methods :
+                load_settings :
+                update_settings :
+                save_settings :
+        """
 
-class Settings:
-    """
-        Static Methods :
-            load_settings :
-            update_settings :
-            save_settings :
-    """
+        @staticmethod
+        def load_settings():
+            with open(preset.PATHS.settings_file_path, "rt") as f1:
+                settings = json.loads(f1.read())
+                Adidas.items_per_page = settings["items_per_page"]
+                Adidas.items_count = settings["items_count"]
+                Adidas.next_start_point = settings["start_from"]
+                Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
+                Adidas.items_threads_count = settings["items_threads_count"]
+                Adidas.reviews_threads_count = settings["reviews_threads_count"]
+                Adidas.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
 
-    @staticmethod
-    def load_settings():
-        with open(preset.PATHS.settings_file_path, "rt") as f1:
-            settings = json.loads(f1.read())
-            Adidas.items_per_page = settings["items_per_page"]
-            Adidas.items_count = settings["items_count"]
-            Adidas.next_start_point = settings["start_from"]
-            Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
-            Adidas.items_threads_count = settings["items_threads_count"]
-            Adidas.reviews_threads_count = settings["reviews_threads_count"]
-            Adidas.assigned_items_indices = [tuple(pair) for pair in settings["assigned_items_indices"]]
+        @staticmethod
+        def update_settings(data):
+            Adidas.items_count = data["count"]
+            Adidas.reminder_from_last_check = data["count"] - Adidas.items_count
+            Adidas.items_per_page = data["viewSize"]
+            # AdidasThread.Globals.start_from += data["viewSize"]
 
-    @staticmethod
-    def update_settings(data):
-        Adidas.items_count = data["count"]
-        Adidas.reminder_from_last_check = data["count"] - Adidas.items_count
-        Adidas.items_per_page = data["viewSize"]
-        # AdidasThread.Globals.start_from += data["viewSize"]
-
-    @staticmethod
-    def save_settings():
-        with open(preset.PATHS.settings_file_path, "wt") as f1:
-            settings = {
-                "items_per_page": Adidas.items_per_page,
-                "items_count": Adidas.items_count,
-                "reminder_from_last_check": Adidas.reminder_from_last_check,
-                "assigned_items_indices": Adidas.assigned_items_indices
-            }
-            f1.write(json.dumps(settings))
+        @staticmethod
+        def save_settings():
+            with open(preset.PATHS.settings_file_path, "wt") as f1:
+                settings = {
+                    "items_per_page": Adidas.items_per_page,
+                    "items_count": Adidas.items_count,
+                    "reminder_from_last_check": Adidas.reminder_from_last_check,
+                    "assigned_items_indices": Adidas.assigned_items_indices
+                }
+                f1.write(json.dumps(settings))
 
 
 class Helper:
