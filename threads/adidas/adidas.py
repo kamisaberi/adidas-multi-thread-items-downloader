@@ -91,6 +91,18 @@ class Adidas(threading.Thread):
         params["start"] = self.item_start
         return params
 
+    def _reorder_items_info(self, items_info: dict[tuple[str, str]: ItemInfo]) -> dict[tuple[str, str]: ItemInfo]:
+        return dict(list(sorted(list(items_info.items()), key=lambda item: item[1].order)))
+    def _get_next_start_point(self) -> (int, int):
+        Adidas.items_info = self._reorder_items_info(Adidas.items_info)
+        first_order = Adidas.items_info.items()[0][1].order
+        last_order = Adidas.items_info.items()[-1][1].order
+        if first_order != 0:
+            return 0, first_order - 1
+        for order in range(first_order , last_order+1):
+
+
+
     def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
         try:
             params = self._create_params()
