@@ -6,11 +6,15 @@ import os
 import json
 from typing import Union, Any
 from collections import namedtuple
+
 from threads.base.types import ItemInfo
 import preset
 import time
 
 lock = threading.Lock()
+
+items_should_update = threading.Event()
+items_should_update.clear()
 
 
 class TYPES(enum.Enum):
@@ -38,6 +42,8 @@ class Adidas(threading.Thread):
                 {(item["modelId"], item["productId"]): ItemInfo(order=item_start + offset)}
                 for offset, item in enumerate(items))
 
+    items_should_update = threading.Event()
+
     events: namedtuple = initialize_events()
 
     items: list[dict] = list()
@@ -48,8 +54,9 @@ class Adidas(threading.Thread):
     reminder_from_last_check: int = 0
     items_threads_count: int = 0
     reviews_threads_count: int = 0
+    threads: list['Adidas'] = list()
 
-    def __init__(self, thread_id, thread_type, group=None, target=None, name=None, args=(), kwargs=None, *,
+    def __init__(self, thread_id, thread_type: TYPES, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
         self.thread_id = thread_id
@@ -112,8 +119,20 @@ class Adidas(threading.Thread):
 
     def _retrieve_preferences(self):
         while True:
-            new_index, gotten_index, new_items, removed_items = self._get_changed_items()
+            if not Adidas.items_should_update.set():
+                new_index, gotten_index, new_items, removed_items = self._get_changed_items()
+                if new_index != -1 or gotten_index != -1:
+                    Adidas.items_should_update.set()
+
+            while True:
+                if Adidas.threads.count({"is_alive": True}) != 0:
+                    time.sleep(0.2)
+                    continue
+                break
+
             # TODO use returned items to decide whether terminate all threads or other thing
+            Adidas.items_should_update.clear()
+
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
