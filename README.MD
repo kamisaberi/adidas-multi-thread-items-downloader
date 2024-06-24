@@ -7,6 +7,7 @@
 - `ACCEPTED`(IMPORTANT) when check_preferences found uot new items has been added to the store it should create a flag for main.py to prevent it to create new get_items thread and after all get_items thread finished it can update the data eg items_info and ...
   `REJECTED`(OR)(IMPORTANT) when check_preferences found uot new items has been added to the store it should create a flag for get_items threads to should not update items_info and items until update proccess finished . the main problem is that we should change all items_start properies of all running threads so they update items_info an items correctly  
 - `IMPORTANT` i should remove next_start_index and solve it using trace items_info and get the next order value
+- `IMPORTANT` i should reorder items_info after any time thread retrieve items
 
 ## Changes : 
 - `AdidasThread.Globals.gotten_items_list` changed to `AdidasThread.Globals.assigned_items_indices`
