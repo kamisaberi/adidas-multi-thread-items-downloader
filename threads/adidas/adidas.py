@@ -102,6 +102,10 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
 
+    def _update_items_info(self, count):
+        for key in Adidas.items_info.keys():
+            Adidas.items_info[key].order += count
+
     def _get_changed_items(self) -> (int, int, list[dict], dict[tuple[str, str]: ItemInfo]):
         if len(list(Adidas.items_info.keys())) == 0:
             info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
@@ -118,6 +122,7 @@ class Adidas(threading.Thread):
                 self.item_start += Adidas.items_per_page
 
     def _retrieve_preferences(self):
+        new_index, gotten_index, new_items, removed_items = -1, -1, [], []
         while True:
             if not Adidas.items_should_update.set():
                 new_index, gotten_index, new_items, removed_items = self._get_changed_items()
@@ -131,6 +136,7 @@ class Adidas(threading.Thread):
                 break
 
             # TODO use returned items to decide whether terminate all threads or other thing
+            self._update_items_info(new_index + 1)
             Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
