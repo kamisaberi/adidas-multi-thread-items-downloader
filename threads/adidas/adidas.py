@@ -11,7 +11,6 @@ import preset
 import time
 import math
 
-
 lock = threading.Lock()
 items_should_update = threading.Event()
 items_should_update.clear()
@@ -48,10 +47,8 @@ class Adidas(threading.Thread):
 
     items: list[dict] = list()
     items_info: dict[tuple[str, str]: ItemInfo] = dict()
-    next_start_point: int = 0
     items_per_page: int = 0
     items_count: int = 0
-    reminder_from_last_check: int = 0
     items_threads_count: int = 0
     reviews_threads_count: int = 0
     threads: list['Adidas'] = list()
@@ -59,8 +56,8 @@ class Adidas(threading.Thread):
     def __init__(self, thread_id, thread_type: TYPES, group=None, target=None, name=None, args=(), kwargs=None, *,
                  daemon=None):
         super().__init__(group, target, name, args, kwargs, daemon=daemon)
-        self.thread_id = thread_id
-        self.thread_type = thread_type
+        self.thread_id: int = thread_id
+        self.thread_type: TYPES = thread_type
         self.item_start: int = 0
         self.item_end: int = 0
         self.downloaded_items: list[dict] = list()
@@ -94,13 +91,18 @@ class Adidas(threading.Thread):
     def _reorder_items_info(self, items_info: dict[tuple[str, str]: ItemInfo]) -> dict[tuple[str, str]: ItemInfo]:
         return dict(list(sorted(list(items_info.items()), key=lambda item: item[1].order)))
 
-    def get_orders(self, items_info: dict[tuple[str, str]: ItemInfo]) -> list[int]:
+    def get_items_info_orders(self, items_info: dict[tuple[str, str]: ItemInfo]) -> list[int]:
         items_info = self._reorder_items_info(items_info)
         orders = [item.order for key, item in items_info.items()]
         return sorted(orders)
 
+    def fill_bulk_data(self, item_start, limit) -> dict:
+        for i in range(item_start, item_start + limit + 1):
+            Adidas.items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
+        return Adidas.items_info
+
     def _get_next_start_point(self) -> (int, int):
-        orders = self.get_orders(Adidas.items_info)
+        orders = self.get_items_info_orders(Adidas.items_info)
         if orders[0] != 0:
             return 0, orders[0] - 1
         try:
@@ -108,7 +110,7 @@ class Adidas(threading.Thread):
                 if orders[i] + 1 != orders[i + 1]:
                     return orders[i], orders[i + 1] - orders[i] - 1
         except:
-            return orders[-1], math.inf
+            return orders[-1], Adidas.items_per_page
 
     def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
         try:
@@ -154,16 +156,18 @@ class Adidas(threading.Thread):
                     continue
                 break
 
-            # TODO use returned items to decide whether terminate all threads or other thing
             self._update_items_info(new_index + 1)
             Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
-        self.item_start = Adidas.next_start_point
-        self.item_end = min(Adidas.next_start_point + Adidas.items_per_page, Adidas.items_count)
-        Adidas.next_start_point += Adidas.items_per_page
+        self.item_start, limit = self._get_next_start_point()
+        self.item_end = self.item_start + limit
+        # TODO I should create null data in items_info to keep orders taken here
+        with lock:
+            Adidas.items_info = self.fill_bulk_data(self.item_start, limit)
+
         info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
         if info is None and items is None:
             # TODO BUG-#10
