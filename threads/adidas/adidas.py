@@ -101,6 +101,11 @@ class Adidas(threading.Thread):
             Adidas.items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
         return Adidas.items_info
 
+    def remove_bulk_data(self, item_start, limit) -> dict:
+        for i in range(item_start, item_start + limit + 1):
+            Adidas.items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
+        return Adidas.items_info
+
     def _get_next_start_point(self) -> (int, int):
         orders = self.get_items_info_orders(Adidas.items_info)
         if orders[0] != 0:
@@ -164,13 +169,15 @@ class Adidas(threading.Thread):
     def _retrieve_items(self) -> bool:
         self.item_start, limit = self._get_next_start_point()
         self.item_end = self.item_start + limit
-        # TODO I should create null data in items_info to keep orders taken here
+
+        # fill bulk data to items_info
         with lock:
             Adidas.items_info = self.fill_bulk_data(self.item_start, limit)
 
         info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
         if info is None and items is None:
-            # TODO BUG-#10
+            with lock:
+                Adidas.items_info = self.remove_bulk_data(self.item_start, limit)
             return False
 
         Adidas.items.extend(items)
