@@ -34,13 +34,6 @@ class Adidas(threading.Thread):
         return (namedtuple("events", ["should_load_settings", "should_update_settings"])
                 (should_load_settings, should_update_settings))
 
-    @staticmethod
-    def update_items_info(item_start: int, items: list):
-        with lock:
-            Adidas.items_info.update(
-                {(item["modelId"], item["productId"]): ItemInfo(order=item_start + offset)}
-                for offset, item in enumerate(items))
-
     items_should_update = threading.Event()
 
     events: namedtuple = initialize_events()
@@ -89,6 +82,7 @@ class Adidas(threading.Thread):
         return params
 
     def _reorder_items_info(self, items_info: dict[tuple[str, str]: ItemInfo]) -> dict[tuple[str, str]: ItemInfo]:
+
         return dict(list(sorted(list(items_info.items()), key=lambda item: item[1].order)))
 
     def get_items_info_orders(self, items_info: dict[tuple[str, str]: ItemInfo]) -> list[int]:
@@ -97,14 +91,24 @@ class Adidas(threading.Thread):
         return sorted(orders)
 
     def fill_bulk_data(self, item_start, limit) -> dict:
+        items_info = copy.deepcopy(Adidas.items_info)
         for i in range(item_start, item_start + limit + 1):
-            Adidas.items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
-        return Adidas.items_info
+            items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
+        return items_info
 
     def remove_bulk_data(self, item_start, limit) -> dict:
+        items_info = copy.deepcopy(Adidas.items_info)
         for i in range(item_start, item_start + limit + 1):
-            Adidas.items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
-        return Adidas.items_info
+            items_info.pop((f"M{i}", f"P{i}"))
+        return items_info
+
+    def update_items_info(self, item_start: int, limit: int, items: list, remove_bulk=False) -> dict:
+        items_info = copy.deepcopy(Adidas.items_info)
+        for index, order in enumerate(list(range(item_start, item_start + limit + 1))):
+            Adidas.items_info.update(
+                {(item["modelId"], item["productId"]): ItemInfo(order=item_start + offset)}
+                for offset, item in enumerate(items))
+        items_info
 
     def _get_next_start_point(self) -> (int, int):
         orders = self.get_items_info_orders(Adidas.items_info)
@@ -161,7 +165,7 @@ class Adidas(threading.Thread):
                     continue
                 break
 
-            self._update_items_info(new_index + 1)
+            Adidas.items_info = self._update_items_info(new_index + 1)
             Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
@@ -181,7 +185,7 @@ class Adidas(threading.Thread):
             return False
 
         Adidas.items.extend(items)
-        Adidas.update_items_info(self.item_start, items)
+        self.update_items_info(self.item_start, limit, items)
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
