@@ -173,7 +173,6 @@ class Adidas(threading.Thread):
             # TODO BUG-#10
             return False
 
-        Adidas.next_start_point += preset["viewSize"]
         Adidas.items.extend(items)
         Adidas.update_items_info(self.item_start, items)
         print(self.thread_id, len(list(Adidas.items_info.keys())))
@@ -240,7 +239,6 @@ class Adidas(threading.Thread):
                 settings = json.loads(f1.read())
                 Adidas.items_per_page = settings["items_per_page"]
                 Adidas.items_count = settings["items_count"]
-                Adidas.next_start_point = settings["start_from"]
                 Adidas.reminder_from_last_check = settings["reminder_from_last_check"]
                 Adidas.items_threads_count = settings["items_threads_count"]
                 Adidas.reviews_threads_count = settings["reviews_threads_count"]
