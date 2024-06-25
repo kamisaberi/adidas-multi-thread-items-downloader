@@ -10,6 +10,7 @@ from collections import namedtuple
 from threads.base.types import ItemInfo
 import preset
 import time
+import math
 
 lock = threading.Lock()
 
@@ -93,15 +94,22 @@ class Adidas(threading.Thread):
 
     def _reorder_items_info(self, items_info: dict[tuple[str, str]: ItemInfo]) -> dict[tuple[str, str]: ItemInfo]:
         return dict(list(sorted(list(items_info.items()), key=lambda item: item[1].order)))
+
+    def get_orders(self, items_info: dict[tuple[str, str]: ItemInfo]) -> list[int]:
+        items_info = self._reorder_items_info(items_info)
+        orders = [item.order for key, item in items_info.items()]
+        return sorted(orders)
+
     def _get_next_start_point(self) -> (int, int):
-        Adidas.items_info = self._reorder_items_info(Adidas.items_info)
-        first_order = Adidas.items_info.items()[0][1].order
-        last_order = Adidas.items_info.items()[-1][1].order
-        if first_order != 0:
-            return 0, first_order - 1
-        for order in range(first_order , last_order+1):
-
-
+        orders = self.get_orders(Adidas.items_info)
+        if  orders[0] != 0:
+            return 0,  orders[0] - 1
+        try:
+            for i, order in enumerate(orders):
+                if orders[i] + 1 != orders[i + 1]:
+                    return orders[i], orders[i + 1] - orders[i] - 1
+        except:
+            return orders[-1], math.inf
 
     def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
         try:
