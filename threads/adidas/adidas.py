@@ -6,14 +6,13 @@ import os
 import json
 from typing import Union, Any
 from collections import namedtuple
-
 from threads.base.types import ItemInfo
 import preset
 import time
 import math
 
-lock = threading.Lock()
 
+lock = threading.Lock()
 items_should_update = threading.Event()
 items_should_update.clear()
 
@@ -102,8 +101,8 @@ class Adidas(threading.Thread):
 
     def _get_next_start_point(self) -> (int, int):
         orders = self.get_orders(Adidas.items_info)
-        if  orders[0] != 0:
-            return 0,  orders[0] - 1
+        if orders[0] != 0:
+            return 0, orders[0] - 1
         try:
             for i, order in enumerate(orders):
                 if orders[i] + 1 != orders[i + 1]:

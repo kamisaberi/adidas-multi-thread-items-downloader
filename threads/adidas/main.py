@@ -2,6 +2,8 @@ import adidas as ad
 
 import preset
 
+
+
 if __name__ == "__main__":
     ad.Adidas.Settings.load_settings()
     # print(ad.AdidasThread.Globals.assigned_items_indices)
