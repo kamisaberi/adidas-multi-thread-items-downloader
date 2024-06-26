@@ -165,8 +165,9 @@ class Adidas(threading.Thread):
                         continue
                     break
 
-                Adidas.items_info = self._update_items_info_orders(new_index + 1)
-                Adidas.items_should_update.clear()
+                with lock:
+                    Adidas.items_info = self._update_items_info_orders(new_index + 1)
+                    Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
