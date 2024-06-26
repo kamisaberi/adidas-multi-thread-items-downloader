@@ -154,19 +154,19 @@ class Adidas(threading.Thread):
     def _retrieve_preferences(self):
         new_index, gotten_index, new_items, removed_items = -1, -1, [], []
         while True:
-            if not Adidas.items_should_update.set():
+            if not Adidas.items_should_update.is_set():
                 new_index, gotten_index, new_items, removed_items = self._get_changed_items()
                 if new_index != -1 or gotten_index != -1:
                     Adidas.items_should_update.set()
+            if Adidas.items_should_update.is_set():
+                while True:
+                    if Adidas.threads.count({"is_alive": True}) != 0:
+                        time.sleep(0.2)
+                        continue
+                    break
 
-            while True:
-                if Adidas.threads.count({"is_alive": True}) != 0:
-                    time.sleep(0.2)
-                    continue
-                break
-
-            Adidas.items_info = self._update_items_info(new_index + 1)
-            Adidas.items_should_update.clear()
+                Adidas.items_info = self._update_items_info(new_index + 1)
+                Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
