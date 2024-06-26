@@ -187,7 +187,7 @@ class Adidas(threading.Thread):
 
         with lock:
             Adidas.items.extend(items)
-            self._replace_bulk_using_data(self.item_start, limit, items)
+            Adidas.items_info = self._replace_bulk_using_data(self.item_start, limit, items)
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
