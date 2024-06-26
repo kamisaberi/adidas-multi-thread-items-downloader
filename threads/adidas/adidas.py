@@ -132,7 +132,7 @@ class Adidas(threading.Thread):
         except (requests.exceptions.RequestException, KeyError, ValueError):
             return None, None
 
-    def _update_items_info(self, count):
+    def _update_items_info_orders(self, count):
         for key in Adidas.items_info.keys():
             Adidas.items_info[key].order += count
 
@@ -165,7 +165,7 @@ class Adidas(threading.Thread):
                         continue
                     break
 
-                Adidas.items_info = self._update_items_info(new_index + 1)
+                Adidas.items_info = self._update_items_info_orders(new_index + 1)
                 Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
