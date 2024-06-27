@@ -25,18 +25,8 @@ class TYPES(enum.Enum):
 
 
 class Adidas(threading.Thread):
-    @staticmethod
-    def initialize_events():
-        should_load_settings = threading.Event()
-        should_load_settings.set()
-        should_update_settings = threading.Event()
-        should_update_settings.clear()
-        return (namedtuple("events", ["should_load_settings", "should_update_settings"])
-                (should_load_settings, should_update_settings))
 
     items_should_update = threading.Event()
-
-    events: namedtuple = initialize_events()
 
     items: list[dict] = list()
     items_info: dict[tuple[str, str]: ItemInfo] = dict()
