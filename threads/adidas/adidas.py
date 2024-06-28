@@ -22,6 +22,7 @@ class TYPES(enum.Enum):
     GET_ITEMS_LIST = 2
     GET_REVIEWS = 3
     DOWNLOAD_PRODUCT_MEDIA = 4
+    CHECK_NEW_REVIEWS = 5
 
 
 class Adidas(threading.Thread):
@@ -214,6 +215,8 @@ class Adidas(threading.Thread):
             with open(name + "." + extension, "wb") as f1:
                 f1.write(response.content)
 
+    def _check_reviews(self):
+        pass
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
@@ -225,6 +228,8 @@ class Adidas(threading.Thread):
                 self._retrieve_reviews(0, 0, 0)
             case TYPES.DOWNLOAD_PRODUCT_MEDIA:
                 self._download_images(dict())
+            case TYPES.CHECK_NEW_REVIEWS:
+                self._check_reviews()
 
     class Settings:
         """
