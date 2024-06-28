@@ -12,5 +12,8 @@ TEMPLATES = NamedTuple("templates", [("params", dict[str:Any]), ("headers", dict
     {"authority": "www.adidas.at", "accept": "*/*", "accept-language": "en-US,en;q=0.9,fa;q=0.8",
      "content-type": "application/json", "user-agent": "PostmanRuntime/7.35.0"})
 
+SORT_NEWEST = "newest-to-oldest"
+SORT_TOP_SELLERS = "top-sellers"
+
 CHECK_PREFERENCES_INTERVAL = 60  # in seconds
 INITIAL_CHECK_PREFERENCES_DELAY = 2  # in seconds

@@ -63,9 +63,10 @@ class Adidas(threading.Thread):
     def __hash__(self):
         return hash(self.thread_type)
 
-    def _create_params(self):
+    def _create_params(self, sort=preset.SORT_NEWEST):
         params = copy.deepcopy(preset.TEMPLATES.params)
         params["start"] = self.item_start
+        params["sort"] = sort
         return params
 
     def _sort_items_info_based_on_order(self) -> None:
