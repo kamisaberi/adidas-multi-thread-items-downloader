@@ -68,11 +68,11 @@ class Adidas(threading.Thread):
         params["start"] = self.item_start
         return params
 
-    def _reorder_items_info(self) -> None:
+    def _sort_items_info_based_on_order(self) -> None:
         Adidas.items_info = dict(list(sorted(list(Adidas.items_info.items()), key=lambda item: item[1].order)))
 
-    def _get_items_info_orders(self, ) -> list[int]:
-        self._reorder_items_info()
+    def _extract_orders_from_items_info(self, ) -> list[int]:
+        self._sort_items_info_based_on_order()
         orders = [item.order for key, item in Adidas.items_info.items()]
         return sorted(orders)
 
@@ -96,10 +96,10 @@ class Adidas(threading.Thread):
 
         Adidas.items_info = items_info
         if reorder:
-            self._reorder_items_info()
+            self._sort_items_info_based_on_order()
 
     def _get_next_start_point(self) -> (int, int):
-        orders = self._get_items_info_orders()
+        orders = self._extract_orders_from_items_info()
         if orders[0] != 0:
             return 0, orders[0] - 1
         try:
@@ -154,7 +154,7 @@ class Adidas(threading.Thread):
                     break
 
                 with lock:
-                    Adidas.items_info = self._update_items_info_orders(new_index + 1)
+                    self._update_items_info_orders(new_index + 1)
                     Adidas.items_should_update.clear()
 
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
@@ -209,7 +209,7 @@ class Adidas(threading.Thread):
         links = self._get_links(item_data)
         for link in links:
             response = requests.get(link)
-            name, extension = link.splite("/")[-1].split(".")
+            name, extension = link.split("/")[-1].split(".")
             with open(name + "." + extension, "wb") as f1:
                 f1.write(response.content)
 
