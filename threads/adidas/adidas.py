@@ -72,7 +72,7 @@ class Adidas(threading.Thread):
     def _sort_items_info_based_on_order(self) -> None:
         Adidas.items_info = dict(list(sorted(list(Adidas.items_info.items()), key=lambda item: item[1].order)))
 
-    def _extract_orders_from_items_info(self, ) -> list[int]:
+    def _extract_orders_from_items_info(self ) -> list[int]:
         self._sort_items_info_based_on_order()
         orders = [item.order for key, item in Adidas.items_info.items()]
         return sorted(orders)
