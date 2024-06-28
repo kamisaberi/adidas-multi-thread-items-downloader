@@ -220,8 +220,11 @@ class Adidas(threading.Thread):
             info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers,
                                                sort=preset.SORT_TOP_SELLERS)
             for item in items:
-                pass
-            time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
+                key = (item["modelId"], item["productId"])
+                if key in Adidas.items_info:
+                    pass
+
+            time.sleep(preset.CHECK_NEW_REVIEWS_INTERVAL)
 
     def run(self):
         print(self.thread_id, self.thread_type)

@@ -16,4 +16,5 @@ SORT_NEWEST = "newest-to-oldest"
 SORT_TOP_SELLERS = "top-sellers"
 
 CHECK_PREFERENCES_INTERVAL = 60  # in seconds
+CHECK_NEW_REVIEWS_INTERVAL = 60  # in seconds
 INITIAL_CHECK_PREFERENCES_DELAY = 2  # in seconds
