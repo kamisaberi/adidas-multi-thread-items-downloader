@@ -219,7 +219,8 @@ class Adidas(threading.Thread):
         while True:
             info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers,
                                                sort=preset.SORT_TOP_SELLERS)
-
+            for item in items:
+                pass
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def run(self):
