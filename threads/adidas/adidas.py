@@ -25,7 +25,6 @@ class TYPES(enum.Enum):
 
 
 class Adidas(threading.Thread):
-
     items_should_update = threading.Event()
 
     items: list[dict] = list()
@@ -42,9 +41,7 @@ class Adidas(threading.Thread):
         self.thread_id: int = thread_id
         self.thread_type: TYPES = thread_type
         self.item_start: int = 0
-        self.item_end: int = 0
-        self.downloaded_items: list[dict] = list()
-        self.downloaded_items_info: dict[tuple[str, str]: ItemInfo] = dict()
+        self.limit: int = 0
 
     def __eq__(self, other: Union['Adidas', TYPES, dict]):
         if isinstance(other, enum.Enum):
@@ -71,37 +68,38 @@ class Adidas(threading.Thread):
         params["start"] = self.item_start
         return params
 
-    def _reorder_items_info(self, items_info: dict[tuple[str, str]: ItemInfo]) -> dict[tuple[str, str]: ItemInfo]:
+    def _reorder_items_info(self) -> None:
+        Adidas.items_info = dict(list(sorted(list(Adidas.items_info.items()), key=lambda item: item[1].order)))
 
-        return dict(list(sorted(list(items_info.items()), key=lambda item: item[1].order)))
-
-    def _get_items_info_orders(self, items_info: dict[tuple[str, str]: ItemInfo]) -> list[int]:
-        items_info = self._reorder_items_info(items_info)
-        orders = [item.order for key, item in items_info.items()]
+    def _get_items_info_orders(self, ) -> list[int]:
+        self._reorder_items_info()
+        orders = [item.order for key, item in Adidas.items_info.items()]
         return sorted(orders)
 
-    def _fill_bulk_data(self, item_start, limit) -> dict:
+    def _fill_items_info_with_bulk_data(self) -> None:
         items_info = copy.deepcopy(Adidas.items_info)
-        for i in range(item_start, item_start + limit + 1):
+        for i in range(self.item_start, self.item_start + self.limit + 1):
             items_info[(f"M{i}", f"P{i}")] = ItemInfo(order=i)
-        return items_info
+        Adidas.items_info = items_info
 
-    def _remove_bulk_data(self, item_start, limit) -> dict:
+    def _remove_bulk_data_from_items_info(self) -> None:
         items_info = copy.deepcopy(Adidas.items_info)
-        for i in range(item_start, item_start + limit + 1):
+        for i in range(self.item_start, self.item_start + self.limit + 1):
             items_info.pop((f"M{i}", f"P{i}"))
-        return items_info
+        Adidas.items_info = items_info
 
-    def _replace_bulk_using_data(self, item_start: int, limit: int, items: list, remove_bulk=True,
-                                 reorder: bool = True) -> dict:
-        items_info = copy.deepcopy(Adidas.items_info) if not remove_bulk else self._remove_bulk_data(item_start, limit)
-        for index, order in enumerate(list(range(item_start, item_start + limit + 1))):
+    def _replace_bulk_using_data_in_items_info(self, items: list, reorder: bool = True) -> None:
+        self._remove_bulk_data_from_items_info()
+        items_info = copy.deepcopy(Adidas.items_info)
+        for index, order in enumerate(list(range(self.item_start, self.item_start + self.limit + 1))):
             items_info.items_info.update({(items[index]["modelId"], items[index]["productId"]): ItemInfo(order=order)})
 
-        return items_info if not reorder else self._reorder_items_info(items_info)
+        Adidas.items_info = items_info
+        if reorder:
+            self._reorder_items_info()
 
     def _get_next_start_point(self) -> (int, int):
-        orders = self._get_items_info_orders(Adidas.items_info)
+        orders = self._get_items_info_orders()
         if orders[0] != 0:
             return 0, orders[0] - 1
         try:
@@ -162,22 +160,21 @@ class Adidas(threading.Thread):
             time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
 
     def _retrieve_items(self) -> bool:
-        self.item_start, limit = self._get_next_start_point()
-        self.item_end = self.item_start + limit
+        self.item_start, self.limit = self._get_next_start_point()
 
         # fill bulk data to items_info
         with lock:
-            Adidas.items_info = self._fill_bulk_data(self.item_start, limit)
+            self._fill_items_info_with_bulk_data()
 
         info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers)
         if info is None and items is None:
             with lock:
-                Adidas.items_info = self._remove_bulk_data(self.item_start, limit)
+                self._remove_bulk_data_from_items_info()
             return False
 
         with lock:
             Adidas.items.extend(items)
-            Adidas.items_info = self._replace_bulk_using_data(self.item_start, limit, items)
+            self._replace_bulk_using_data_in_items_info(items)
         print(self.thread_id, len(list(Adidas.items_info.keys())))
         return True
 
