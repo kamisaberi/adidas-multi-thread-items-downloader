@@ -73,7 +73,7 @@ class Adidas(threading.Thread):
     def _sort_items_info_based_on_order(self) -> None:
         Adidas.items_info = dict(list(sorted(list(Adidas.items_info.items()), key=lambda item: item[1].order)))
 
-    def _extract_orders_from_items_info(self ) -> list[int]:
+    def _extract_orders_from_items_info(self) -> list[int]:
         self._sort_items_info_based_on_order()
         orders = [item.order for key, item in Adidas.items_info.items()]
         return sorted(orders)
@@ -111,7 +111,7 @@ class Adidas(threading.Thread):
         except:
             return orders[-1], Adidas.items_per_page
 
-    def _download_items(self, url: str, headers: dict = None) -> (dict, dict):
+    def _download_items(self, url: str, headers: dict = None, sort=preset.SORT_NEWEST) -> (dict, dict):
         try:
             params = self._create_params()
             response = requests.get(url, headers=headers, params=params)
@@ -216,7 +216,12 @@ class Adidas(threading.Thread):
                 f1.write(response.content)
 
     def _check_reviews(self):
-        pass
+        while True:
+            info, items = self._download_items(preset.URLS.items, preset.TEMPLATES.headers,
+                                               sort=preset.SORT_TOP_SELLERS)
+
+            time.sleep(preset.CHECK_PREFERENCES_INTERVAL)
+
     def run(self):
         print(self.thread_id, self.thread_type)
         match self.thread_type:
