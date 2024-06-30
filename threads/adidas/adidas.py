@@ -222,7 +222,9 @@ class Adidas(threading.Thread):
             for item in items:
                 key = (item["modelId"], item["productId"])
                 if key in Adidas.items_info:
-                    pass
+                    res = self._download_reviews(model_id=item["modelId"], limit=5, offset=0)
+                    if res["totalResults"] > Adidas.items_info[key].total_reviews_count:
+                        pass
 
             time.sleep(preset.CHECK_NEW_REVIEWS_INTERVAL)
 
